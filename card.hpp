@@ -1,8 +1,8 @@
 #include<stack>
-
-
 class Card
 {
+    public: //do zmiany
+    
     enum class Value
     {
         _2,
