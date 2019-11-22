@@ -4,10 +4,10 @@ Game::Game()
 {
     player_init(red_player);
     player_init(blue_player);
-
+    game_start(blue_player,red_player,my_board);
 }
 
-void Game::player_init(Player my_player) //ustawia początkowe karty gracza
+void Game::player_init(Player& my_player) //ustawia początkowe karty gracza
 {
     std::set<Card> possible_cards;
 
@@ -38,4 +38,47 @@ void Game::player_init(Player my_player) //ustawia początkowe karty gracza
         possible_cards.erase(it); //usunięcie wykorzystanej karty z drzewa
     }
 
+}
+
+void Game::game_start(Player& blue, Player& red, Board& table) //daje początkowo karty na stół i początkową karte z kosza, decyduje kto zaczyna
+//wersja gry za możliwością dania asa na stół przy otwarciu // możeliwe poźniej do zmiany
+{
+    //niebieski gracz wypełnia pierwsze cztery pola zewnętrzne a czerwony cztery ostatnie
+    for(short i=0; i<8; ++i)
+    {
+        if(i<4)
+        {
+            table.pola_zew[i].push(blue.deck.top());
+            blue.deck.pop();
+        }
+        else
+        {
+            table.pola_zew[i].push(red.deck.top());
+            red.deck.pop();
+        }
+    }
+
+    do //inicjacja koszy do momentu kiedy karty w koszach graczy będą różne
+    {
+        blue.trash.push(blue.deck.top());
+        blue.deck.pop();
+
+        red.trash.push(red.deck.top());
+        red.deck.pop();
+    } while (blue.trash.top().wartosc==red.trash.top().wartosc); //jeżeli karty będą miały tą samą wartośc, iteruj
+    
+    
+
+    if(static_cast<int>(blue.trash.top().wartosc) > static_cast<int>(red.trash.top().wartosc))//prawdzamy kto ma wyższą karte w koszu, kto zaczyna
+    {
+        whos_turn=&blue; //zaczyna niebieski
+    }
+    else if(static_cast<int>(blue.trash.top().wartosc)==static_cast<int>(red.trash.top().wartosc)) //karty  w koszach równe, dodajemy kolejną
+    {
+        throw std::runtime_error("Bład w inicjacji koszy");
+    }
+    else
+    {
+        whos_turn=&red; //zaczyna czerwony
+    }
 }

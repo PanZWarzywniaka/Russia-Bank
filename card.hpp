@@ -1,4 +1,5 @@
 #include<stack>
+
 class Card
 {
     public: //do zmiany
