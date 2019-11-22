@@ -33,6 +33,7 @@ class Card
     Colour kolor;
 
     public:
+    
     Card();
     Card(Value wart, Colour kol);
 
