@@ -22,3 +22,12 @@ Card::Value Card::get_value() const
 {
     return wartosc;
 }
+
+bool Card::operator<(const Card& cx) const
+{
+    if(cx.kolor>this->kolor)
+    {
+        return cx.wartosc>this->wartosc;
+    }
+    else return false;
+}
