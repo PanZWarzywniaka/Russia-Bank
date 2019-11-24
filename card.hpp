@@ -42,4 +42,5 @@ class Card
     Colour get_colour() const;
     Value get_value() const;
 
+    friend class Game;
 };
