@@ -88,6 +88,8 @@ void Game::players_move(Player* player_pointer, Board& table)
     bool end_of_turn = false; // przyjmie wartość prawda gry gracz odłoży na kupe
     while(!end_of_turn)
     {
+        
+
 
         
     }
