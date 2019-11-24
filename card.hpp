@@ -29,6 +29,8 @@ class Card
         clubs
     };
 
+    private:
+
     Value wartosc;
     Colour kolor;
 
@@ -36,5 +38,8 @@ class Card
     
     Card();
     Card(Value wart, Colour kol);
+
+    Colour get_colour() const;
+    Value get_value() const;
 
 };
