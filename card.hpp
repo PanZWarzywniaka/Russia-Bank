@@ -1,4 +1,8 @@
+#ifndef CARD_HPP
+#define CARD_HPP
+
 #include<stack>
+
 
 class Card
 {
@@ -44,3 +48,5 @@ class Card
 
     friend class Game;
 };
+
+#endif
