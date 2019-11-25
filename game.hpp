@@ -15,9 +15,7 @@ class Game
     Player* whos_turn;
     public:
 
-    Game();
-    void player_init(Player&); //inicjuje i tasuje talie graczy
-    void game_start(Player&, Player&, Board&); //daje początkowo karty na stół i początkową karte z kosza
+    Game(); //daje początkowo karty na stół i początkową karte z kosza
     void players_move(Player*, Board&); //funckja obsługująca ruchy gracza, do momentu zakończenia tury
 
 };

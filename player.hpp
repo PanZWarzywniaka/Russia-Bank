@@ -1,4 +1,6 @@
 #include<stack>
+#include<set>
+#include<random>
 #include"card.hpp"
 
 class Player

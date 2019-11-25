@@ -6,8 +6,6 @@ class Move
 private:
     std::unique_ptr<std::stack<Card>> skad; //skąd bierzemy karte
     std::unique_ptr<std::stack<Card>>  dokad;
-
-
 public:
 
     Move();
