@@ -7,8 +7,8 @@ Move::Move()
 }
 
 Move::Move(std::unique_ptr<std::stack<Card>> first, std::unique_ptr<std::stack<Card>> second)
-:skad(first),
-dokad(second)
+:skad(std::move(first)),
+dokad(std::move(second))
 {
     
 }
