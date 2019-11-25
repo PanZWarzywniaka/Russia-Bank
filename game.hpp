@@ -12,7 +12,7 @@ class Game
 
     Player blue_player, red_player;
     Board my_board;
-    Player* whos_turn;
+    Player* whose_turn;
     public:
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza

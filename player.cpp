@@ -32,3 +32,31 @@ Player::Player() //inicjuje i tasuje talie graczy
     }
     
 }
+
+
+Card Player::peek_trash_top() const
+{
+    return trash.top();
+}
+Card Player::peek_deck_top() const
+{
+    return deck.top();
+}
+void Player::push_trash(Card crd)
+{
+    trash.push(crd);
+}
+
+Card Player::draw_trash()
+{
+    auto ret = trash.top();
+    trash.pop();
+    return ret;
+}
+
+Card Player::draw_deck()
+{
+    auto ret = deck.top();
+    deck.pop();
+    return ret;
+}
