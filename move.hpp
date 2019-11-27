@@ -4,11 +4,12 @@
 class Move
 {
 private:
-    std::unique_ptr<std::stack<Card>> skad; //skąd bierzemy karte
-    std::unique_ptr<std::stack<Card>>  dokad;
+    const std::stack<Card>* skad; //skąd bierzemy karte
+    const std::stack<Card>*  dokad;
+    Card karta_w_reku;
 public:
 
-    Move();
-    Move(std::unique_ptr<std::stack<Card>> , std::unique_ptr<std::stack<Card>>);
+    Move() = delete;
+    Move( const std::stack<Card>*, const std::stack<Card>*,Card&&);
 
 };
