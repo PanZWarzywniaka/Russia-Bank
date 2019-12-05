@@ -15,10 +15,9 @@ class Game
     Board my_board;
     Player* whose_turn;
 
-    sf::RenderWindow okno;
-
-
     public:
+
+    sf::RenderWindow okno;
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     void players_move(Player*, Board&); //funckja obsługująca ruchy gracza, do momentu zakończenia tury

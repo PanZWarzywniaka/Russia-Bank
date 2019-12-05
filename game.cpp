@@ -39,6 +39,8 @@ Game::Game()
     {
         whose_turn=&red_player; //zaczyna czerwony
     }
+
+    okno.setFramerateLimit(60); //limit fps 60
 }
 
 
