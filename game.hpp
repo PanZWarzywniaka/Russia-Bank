@@ -2,6 +2,7 @@
 #include <random>
 #include <stdexcept>
 #include <iterator>
+#include <SFML/Graphics.hpp>
 #include"player.hpp"
 #include"board.hpp"
 #include"card.hpp"
@@ -13,6 +14,10 @@ class Game
     Player blue_player, red_player;
     Board my_board;
     Player* whose_turn;
+
+    sf::RenderWindow okno;
+
+
     public:
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza

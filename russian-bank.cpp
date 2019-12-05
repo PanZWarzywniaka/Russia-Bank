@@ -3,8 +3,7 @@
 
 int main()
 {
-
-
+    Game gra;
 
     return 0;
 }
