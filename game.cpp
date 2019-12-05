@@ -1,6 +1,7 @@
 #include"game.hpp"
 
 Game::Game()
+:okno(sf::VideoMode(800, 600), "Garibaldka 0.1")
 {
     //wersja gry za możliwością dania asa na stół przy otwarciu // możeliwe poźniej do zmiany
     //niebieski gracz wypełnia pierwsze cztery pola zewnętrzne a czerwony cztery ostatnie
@@ -44,9 +45,13 @@ Game::Game()
 void Game::players_move(Player* player_pointer, Board& table)
 {
     bool end_of_turn = false; // przyjmie wartość prawda gry gracz odłoży na kupe
+    Player* opponent_pointer = [this](Player* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(player_pointer); //ustawienie wskaźnika na obecnego przeciwnika
     while(!end_of_turn)
     {
-        
+        std::stack<Card>* players_card_pick=nullptr; //wskaźnik stosu z którego bierzemy
+        std::stack<Card>* players_card_destination=nullptr; //wskaźnik stosu do którego dajemy
+
+        //do zrobienia jak bedze okno
 
 
         
