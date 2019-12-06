@@ -3,6 +3,8 @@
 Game::Game()
 :okno(sf::VideoMode(800, 600), "Garibaldka 0.1")
 {
+    okno.setFramerateLimit(60); //limit fps 60
+
     //wersja gry za możliwością dania asa na stół przy otwarciu // możeliwe poźniej do zmiany
     //niebieski gracz wypełnia pierwsze cztery pola zewnętrzne a czerwony cztery ostatnie
     for(short i=0; i<8; ++i)
@@ -40,11 +42,10 @@ Game::Game()
         whose_turn=&red_player; //zaczyna czerwony
     }
 
-    okno.setFramerateLimit(60); //limit fps 60
 }
 
 
-void Game::players_move(Player* player_pointer, Board& table)
+void Game::players_turn(Player* player_pointer, Board& table)
 {
     bool end_of_turn = false; // przyjmie wartość prawda gry gracz odłoży na kupe
     Player* opponent_pointer = [this](Player* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(player_pointer); //ustawienie wskaźnika na obecnego przeciwnika
@@ -52,12 +53,39 @@ void Game::players_move(Player* player_pointer, Board& table)
     {
         std::stack<Card>* players_card_pick=nullptr; //wskaźnik stosu z którego bierzemy
         std::stack<Card>* players_card_destination=nullptr; //wskaźnik stosu do którego dajemy
-
+        
         //do zrobienia jak bedze okno
+        //tu będzie konstuowany obiekt Move dla gracza
+        //i przekazywany do players_move
 
 
         
     }
     
 
+}
+
+bool Game::players_move(Move& ruch)
+{
+
+
+}
+
+//gettery
+
+Player* Game::get_whose_turn() const
+{
+    if(whose_turn!=nullptr)
+    {
+        return whose_turn;
+    }
+    else
+    {
+        throw std::runtime_error("Error: Nie wiadomo czyja tura");
+    }
+}
+
+Board& Game::get_board()
+{
+    return my_board;
 }

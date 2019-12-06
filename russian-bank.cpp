@@ -12,21 +12,28 @@ int main()
         {
             switch (event.type)
             {
-                case sf::Event::Closed:
+            case sf::Event::Closed:
                 {
                     gra.okno.close();
                     break;
                 }
+            case sf::Event::MouseButtonPressed:
+                {
+
+                    break;
+                }
                 
-            
-                default:
-                break;
             }
 
 
 
 
         }
+
+        gra.players_turn(gra.get_whose_turn(),gra.get_board());
+        gra.okno.clear(sf::Color::Green);
+        //gra.okno.draw();
+        gra.okno.display();
         
 
     }
