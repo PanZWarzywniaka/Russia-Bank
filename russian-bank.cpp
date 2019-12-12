@@ -1,6 +1,8 @@
 #include<iostream>
 #include"game.hpp"
 
+bool is_card_taken = false;
+
 int main()
 {
     Game gra;
@@ -19,7 +21,14 @@ int main()
                 }
             case sf::Event::MouseButtonPressed:
                 {
+                    if()//sprawdz czy kliknąłeś karte
+                    {
+                        //weź karte
+                    }
+                    else
+                    {
 
+                    }
                     break;
                 }
                 
