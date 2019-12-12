@@ -1,11 +1,12 @@
 #include<iostream>
 #include"game.hpp"
 
-bool is_card_taken = false;
+
 
 int main()
 {
     Game gra;
+    bool is_card_taken = false;
 
     while(gra.okno.isOpen())
     {
@@ -28,6 +29,14 @@ int main()
                     else
                     {
 
+                    }
+                    break;
+                }
+            case sf::Event::MouseButtonReleased:
+                {
+                    if (is_card_taken)
+                    {
+                        //konstruktor move
                     }
                     break;
                 }
