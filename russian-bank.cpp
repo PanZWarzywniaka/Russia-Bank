@@ -25,10 +25,7 @@ int main()
                     if()//sprawdz czy kliknąłeś karte
                     {
                         //weź karte
-                    }
-                    else
-                    {
-
+                        is_card_taken=true;
                     }
                     break;
                 }
