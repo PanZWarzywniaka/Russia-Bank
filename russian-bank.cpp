@@ -22,12 +22,15 @@ int main()
                 }
             case sf::Event::MouseButtonPressed:
                 {
+                    /*
                     if()//sprawdz czy kliknąłeś karte
                     {
                         //weź karte
                         is_card_taken=true;
                     }
+                    */
                     break;
+                    
                 }
             case sf::Event::MouseButtonReleased:
                 {
