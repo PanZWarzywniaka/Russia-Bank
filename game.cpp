@@ -33,7 +33,7 @@ Game::Game()
     {
         whose_turn=&blue_player; //zaczyna niebieski
     }
-    else if(static_cast<int>(blue_player.peek_trash_top().get_value())==static_cast<int>(red_player.peek_trash_top().get_value())) //karty  w koszach równe, dodajemy kolejną
+    else if(static_cast<int>(blue_player.peek_trash_top().get_value())==static_cast<int>(red_player.peek_trash_top().get_value()))//wcześniej musiał być błąd
     {
         throw std::runtime_error("Bład w inicjacji koszy");
     }
@@ -44,30 +44,39 @@ Game::Game()
 
 }
 
-
-void Game::players_turn(Player* player_pointer, Board& table)
+bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch jest możliwy   
 {
-    bool end_of_turn = false; // przyjmie wartość prawda gry gracz odłoży na kupe
-    Player* opponent_pointer = [this](Player* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(player_pointer); //ustawienie wskaźnika na obecnego przeciwnika
-    while(!end_of_turn)
+    Player* opponents_pointer = [this](Player* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(player_pointer); //ustawienie wskaźnika na obecnego przeciwnika
+
+    //destynacje dzielimy na kategorie, środek, zewnętrzne, kupa, talia, nasza i przeciwnika
+
+    if(ruch.get_destination()==player_pointer->get_trash_pointer())//nasza kupa odłożenie karty na kupe->ruch przeciwnika
     {
-        std::stack<Card>* players_card_pick=nullptr; //wskaźnik stosu z którego bierzemy
-        std::stack<Card>* players_card_destination=nullptr; //wskaźnik stosu do którego dajemy
-        
-        //do zrobienia jak bedze okno
-        //tu będzie konstuowany obiekt Move dla gracza
-        //i przekazywany do players_move
-
-
+        player_pointer->push_trash(ruch.get_card()); 
+        //zamiana graczy 
+        this->whose_turn = opponents_pointer;
+        return true;
+    }
+    else if(ruch.get_destination()==opponents_pointer->get_trash_pointer())//kupa przeciwnika
+    {
         
     }
+    else if(ruch.get_destination()==player_pointer->get_deck_pointer() || ruch.get_destination()==opponents_pointer->get_deck_pointer())//nasza talia lub talia przeciwnika
+    {
+        return false; //nie dopuszczamy odłożenia karty do talli
+    }
+    else //albo bankowa albo zewnętrzna
+    {
+        
+
+
+
+
+
+
+
+    }
     
-
-}
-
-bool Game::players_move(Move& ruch)
-{
-
 
 }
 

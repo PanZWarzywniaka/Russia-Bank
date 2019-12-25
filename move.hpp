@@ -1,5 +1,5 @@
 #include"card.hpp"
-#include<memory>
+#include <stdexcept>
 
 class Move
 {
@@ -10,6 +10,9 @@ private:
 public:
 
     Move() = delete;
-    Move(const std::stack<Card>*, const std::stack<Card>*,Card&&);
-
+    Move(const std::stack<Card>*, const std::stack<Card>*, Card&&);//skąd, dokąd, co,
+    //getery
+    const std::stack<Card>* get_origin() const;
+    const std::stack<Card>* get_destination() const;
+    Card get_card() const;
 };

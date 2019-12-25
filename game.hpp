@@ -21,8 +21,8 @@ class Game
     sf::RenderWindow okno;
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
-    void players_turn(Player*, Board&); //funckja obsługująca ruchy gracza, do momentu zakończenia tury
-    bool players_move(Move&); //funkcja obsugująca pojedynczy ruch przeniesienie karty i sprawdzanie czy ruch jest dozwolony, zwraca true jeśli się udał
+    //jeszce nie wiem czy będzie potrzebna void players_turn(Player*, Board&); //funckja obsługująca ruchy gracza, do momentu zakończenia tury
+    bool players_move(Player*, Move&); //funkcja obsugująca pojedynczy ruch przeniesienie karty i sprawdzanie czy ruch jest dozwolony, zwraca true jeśli się udał
     //gettery
     Player* get_whose_turn() const;
     Board& get_board();

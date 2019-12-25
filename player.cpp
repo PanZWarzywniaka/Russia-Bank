@@ -33,6 +33,15 @@ Player::Player() //inicjuje i tasuje talie graczy
     
 }
 
+std::stack<Card>* Player::get_deck_pointer()
+{
+    return &deck;
+}
+
+std::stack<Card>* Player::get_trash_pointer()
+{
+    return &trash;
+}
 
 Card Player::peek_trash_top() const
 {
