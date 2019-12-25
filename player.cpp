@@ -9,8 +9,6 @@ Player::Player() //inicjuje i tasuje talie graczy
         for(short j=0; j<13; ++j) //13 iteracji dla każdej wartości karty
         {
             Card bufor(static_cast<Card::Value>(j), static_cast<Card::Colour>(i));
-            //bufor.kolor=Card::Colour(i);
-            //bufor.wartosc=Card::Value(j);
             possible_cards.insert(bufor);
         }
 

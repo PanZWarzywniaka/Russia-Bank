@@ -50,7 +50,7 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
 
     //destynacje dzielimy na kategorie, środek, zewnętrzne, kupa, talia, nasza i przeciwnika
 
-    if(ruch.get_destination()==player_pointer->get_trash_pointer())//nasza kupa odłożenie karty na kupe->ruch przeciwnika
+    if(ruch.get_destination()==player_pointer->get_trash_pointer()) //nasza kupa odłożenie karty na kupe->ruch przeciwnika
     {
         player_pointer->push_trash(ruch.get_card()); 
         //zamiana graczy 
@@ -59,7 +59,18 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
     }
     else if(ruch.get_destination()==opponents_pointer->get_trash_pointer())//kupa przeciwnika
     {
-        
+        int players_card_val = static_cast<int>(ruch.get_card().get_value()); //jezeli karta ma wartość AS, to card_val będzie równy 0, więc można położyć tylko większą
+        int opponents_card_val = static_cast<int>(opponents_pointer->peek_trash_top().get_value()); // program nie powinein zgłaszać także wyjątków przy królu bo nie ma karty z card_val==13
+
+        if(players_card_val==++opponents_card_val || players_card_val==--opponents_card_val) //jeżeli karta gracza ma wartość jeden mniejszą lub jeden większą od tego co ma przeciwnik w koszu to dopuszczamy taki ruch
+        {
+            opponents_pointer->push_trash(ruch.get_card());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     else if(ruch.get_destination()==player_pointer->get_deck_pointer() || ruch.get_destination()==opponents_pointer->get_deck_pointer())//nasza talia lub talia przeciwnika
     {
@@ -67,17 +78,100 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
     }
     else //albo bankowa albo zewnętrzna
     {
+        std::optional<int> possible_banks_array_addres = [this,ruch]() -> std::optional<int>
+        {
+            for(int i=0; i<8; ++i)
+            {
+                if(ruch.get_destination()==&my_board.pola_bank[i])
+                {
+                    return i;
+                }
+            }
+            return std::nullopt;
+        }(); //wywołanie lambdy na koniec
+
+        if(possible_banks_array_addres.has_value()) //jeżeli gracz chce dać karte na strefe bankową
+        {
+            if(my_board.pola_bank[possible_banks_array_addres.value()].empty()) //jeżeli na konkretnym polu bankowym nic nie ma
+            {
+                if(ruch.get_card().get_value()==Card::Value::Ace)//a trzymana karta w ręku to AS
+                {
+                    //tak w tedy dajemy asa na to puste miejsce
+                    my_board.pola_bank[possible_banks_array_addres.value()].push(ruch.get_card());
+                    return true;
+                }
+                else //jesli to nie jest as to nara
+                {
+                    return false;
+                }
+            }
+            else //jeżeli nie jest pusty
+            {
+                int players_card_val = static_cast<int>(ruch.get_card().get_value());
+
+                //sprawdzamy czy karta którą chcemy połozyć do banku jest tego samego koloru i plus jeden wartości
+                if(ruch.get_card().get_colour()==my_board.pola_bank[possible_banks_array_addres.value()].top().get_colour() && ++players_card_val==static_cast<int>(my_board.pola_bank[possible_banks_array_addres.value()].top().get_value()))
+                {
+                    //jeśli tak w tedy dajemy karte na to miejsce
+                    my_board.pola_bank[possible_banks_array_addres.value()].push(ruch.get_card());
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            
+        }
+
+        std::optional<int> possible_outer_fields_array_addres = [this,ruch]() -> std::optional<int>
+        {
+            for(int i=0; i<8; ++i)
+            {
+                if(ruch.get_destination()==&my_board.pola_zew[i])
+                {
+                    return i;
+                }
+            }
+            return std::nullopt;
+        }();
+
+        if(possible_outer_fields_array_addres.has_value()) //jeżeli klikną na strefe zewnątrzną
+        {
+            if(my_board.pola_zew[possible_outer_fields_array_addres.value()].empty()) //puste pole zew
+            {
+                my_board.pola_zew[possible_outer_fields_array_addres.value()].push(ruch.get_card()); //na puste miejsce w polach zewnętrznych można położyć każdą karte
+
+                return true;
+            }
+            else
+            {
+                int players_card_val = static_cast<int>(ruch.get_card().get_value());
+
+                 //sprawdzamy czy karta jest przeciwnego koloru i czy o jeden mniejsza
+                if(ruch.get_card().is_black() ^ my_board.pola_zew[possible_outer_fields_array_addres.value()].top().is_black() && --players_card_val==static_cast<int>(my_board.pola_zew[possible_outer_fields_array_addres.value()].top().get_value()))
+                {
+                    //jeśli tak w tedy dajemy karte na to miejsce
+                    my_board.pola_zew[possible_outer_fields_array_addres.value()].push(ruch.get_card());
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+        }
+        else
+        {
+            //gracz nie klikną na żadne konkretne pole a i tak funkcja zostala wykonana
+            throw std::runtime_error("Nie ma takiego ruchu, wszystkie możliwości zostały wyczerpane");
+            return false; //czy to jest konieczne?
+        }
         
-
-
-
-
-
-
-
+        
     }
     
-
 }
 
 //gettery

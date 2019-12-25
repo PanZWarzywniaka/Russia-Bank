@@ -31,3 +31,11 @@ bool Card::operator<(const Card& cx) const
     }
     else return false;
 }
+
+bool Card::is_black() const
+{
+    if(this->kolor==Card::Colour::spades || this->kolor==Card::Colour::clubs)
+        return true;
+    else
+        return false;
+}

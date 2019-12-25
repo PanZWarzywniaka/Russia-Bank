@@ -2,6 +2,7 @@
 #include <random>
 #include <stdexcept>
 #include <iterator>
+#include <optional>
 #include <SFML/Graphics.hpp>
 #include"player.hpp"
 #include"board.hpp"
@@ -22,7 +23,7 @@ class Game
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     //jeszce nie wiem czy będzie potrzebna void players_turn(Player*, Board&); //funckja obsługująca ruchy gracza, do momentu zakończenia tury
-    bool players_move(Player*, Move&); //funkcja obsugująca pojedynczy ruch przeniesienie karty i sprawdzanie czy ruch jest dozwolony, zwraca true jeśli się udał
+    bool players_move(Player*, Move&); //funkcja obsugująca pojedynczy ruch przeniesienie karty i sprawdzanie czy ruch jest dozwolony, zwraca true jeśli się ruch udał
     //gettery
     Player* get_whose_turn() const;
     Board& get_board();

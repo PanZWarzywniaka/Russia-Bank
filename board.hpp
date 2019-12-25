@@ -14,6 +14,7 @@ class Board
     public:
 
     Board();
+    
 
     friend class Game;
 };

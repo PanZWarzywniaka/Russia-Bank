@@ -10,6 +10,7 @@ class Card
     
     enum class Value
     {
+        Ace,
         _2,
         _3,
         _4,
@@ -21,8 +22,7 @@ class Card
         _10,
         J,
         Q,
-        K,
-        Ace
+        K
     };
 
     enum class Colour
@@ -40,11 +40,15 @@ class Card
 
     public:
     
-    Card();
+    Card() = delete;
     Card(Value wart, Colour kol);
+
     bool operator<(const Card&) const;
+
     Colour get_colour() const;
     Value get_value() const;
+
+    bool is_black() const; //poprawne politycznie?
 
 };
 

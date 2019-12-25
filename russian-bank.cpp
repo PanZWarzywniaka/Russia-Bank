@@ -9,7 +9,7 @@ int main()
     
     //bufory do move
     bool is_card_taken = false;
-    Card taken_card;
+    std::optional<Card> taken_card=std::nullopt;
     std::stack<Card>* wherefrom_card_is_taken=nullptr; //stos z którego bierzemy // foooking british english old use
     std::stack<Card>* whereto_card_is_taken=nullptr;
 
@@ -48,7 +48,7 @@ int main()
                         //weź karte
                         //whereto_card_is_taken=='stos na którym jest myszka'
                         //konstruktor move
-                        Move ruch(wherefrom_card_is_taken, whereto_card_is_taken, std::move(taken_card));
+                        Move ruch(wherefrom_card_is_taken, whereto_card_is_taken, std::move(taken_card.value()));
                         gra.players_move(gra.get_whose_turn(),ruch);
                     }
                     break;
