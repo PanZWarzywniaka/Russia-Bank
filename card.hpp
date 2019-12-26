@@ -38,17 +38,21 @@ class Card
     Value wartosc;
     Colour kolor;
 
+
     public:
-    
+
+    static sf::Texture card_sheet;
+    sf::Sprite card_sprite;
+
+
+    //funkcje
     Card() = delete;
     Card(Value wart, Colour kol);
-
     bool operator<(const Card&) const;
-
     Colour get_colour() const;
     Value get_value() const;
-
     bool is_black() const; //poprawne politycznie?
+    static void load_texuture();
 
 };
 

@@ -39,3 +39,8 @@ bool Card::is_black() const
     else
         return false;
 }
+
+void Card::load_texuture()
+{
+
+}
