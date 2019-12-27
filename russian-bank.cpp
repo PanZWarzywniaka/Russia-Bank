@@ -5,8 +5,9 @@
 
 int main()
 {
+    Card::load_texuture(); //ładowanie arkusza, dla wszystkich obiektów
     Game gra;
-    
+
     //bufory do move
     bool is_card_taken = false;
     std::optional<Card> taken_card=std::nullopt;

@@ -1,6 +1,7 @@
 #ifndef CARD_HPP
 #define CARD_HPP
 
+#include <SFML/Graphics.hpp>
 #include<stack>
 
 
@@ -38,12 +39,10 @@ class Card
     Value wartosc;
     Colour kolor;
 
-
     public:
 
     static sf::Texture card_sheet;
     sf::Sprite card_sprite;
-
 
     //funkcje
     Card() = delete;
