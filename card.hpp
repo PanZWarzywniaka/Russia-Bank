@@ -38,16 +38,18 @@ class Card
 
     Value wartosc;
     Colour kolor;
+    sf::Sprite card_sprite;
 
     public:
 
     static sf::Texture card_sheet;
-    sf::Sprite card_sprite;
+    
 
     //funkcje
     Card() = delete;
     Card(Value wart, Colour kol);
     Card(const Card&);
+    Card(Card&&);
     bool operator<(const Card&) const;
     Colour get_colour() const;
     Value get_value() const;
@@ -55,5 +57,7 @@ class Card
     static void load_texuture();
 
 };
+
+
 
 #endif
