@@ -16,6 +16,13 @@ Card::Card(Value wart, Colour kol)
     card_sprite.setTextureRect(sf::IntRect(static_cast<sf::Vector2i>(card_sheet_size),rect_positon)); //pierwsze dwa to rozmiar niezmienny
 }
 
+Card::Card(const Card& karta)
+{
+    this->wartosc=karta.wartosc;
+    this->kolor=karta.kolor;
+    this->card_sprite=karta.card_sprite;
+}
+
 Card::Colour Card::get_colour() const
 {
     return kolor;

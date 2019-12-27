@@ -34,9 +34,10 @@ int main()
                         //weź karte
                         //bufory
                         is_card_taken=true;
-                        //wherefrom_card_is_taken ='stos na którym jest myszka'
+                        //wherefrom_card_is_taken ='wkaźnik do stosu na którym jest myszka'
                         
-                        //taken_card=std::get('stos na którym jest myszka')
+                        //taken_card=std::move('stos na którym jest myszka')
+                        //trzeba sprawdzić czy karta na pewno została zabrana bo nie mam pewności
                         //zabieramy karte ztąd// 'stos na którym jest myszka'.pop()
                     }
 
@@ -47,7 +48,7 @@ int main()
                     if(is_card_taken)
                     {
                         //weź karte
-                        //whereto_card_is_taken=='stos na którym jest myszka'
+                        //whereto_card_is_taken='wkaźnik do stosu na którym jest myszka'
                         //konstruktor move
                         Move ruch(wherefrom_card_is_taken, whereto_card_is_taken, std::move(taken_card.value()));
                         gra.players_move(gra.get_whose_turn(),ruch);

@@ -47,6 +47,7 @@ class Card
     //funkcje
     Card() = delete;
     Card(Value wart, Colour kol);
+    Card(const Card&);
     bool operator<(const Card&) const;
     Colour get_colour() const;
     Value get_value() const;
