@@ -1,5 +1,7 @@
 #include"card.hpp"
 
+sf::Texture Card::card_sheet = sf::Texture();
+
 Card::Card(Value wart, Colour kol)
 {
     wartosc = wart;
@@ -22,6 +24,14 @@ Card::Card(const Card& karta)
     this->kolor=karta.kolor;
     this->card_sprite=karta.card_sprite;
 }
+
+Card::Card(Card&& kau)
+{
+    wartosc = std::move(kau.wartosc);
+    kolor = std::move(kau.kolor);
+    card_sprite = std::move(kau.card_sprite);
+}
+
 
 Card::Colour Card::get_colour() const
 {
@@ -53,5 +63,5 @@ bool Card::is_black() const
 
 void Card::load_texuture()
 {
-    card_sheet.loadFromFile("/home/olek/Projekty/Russian-Bank/Skany Kart/Docelowe/card_sheet.png");
+    card_sheet.loadFromFile("Skany Kart/Docelowe/card_sheet.png");
 }
