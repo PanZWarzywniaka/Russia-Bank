@@ -1,7 +1,9 @@
 #include"game.hpp"
 
 Game::Game()
-:okno(sf::VideoMode(800, 600), "Garibaldka 0.1")
+:okno(sf::VideoMode(1000, 1000), "Garibaldka 0.1"),
+blue_player(std::make_pair(sf::Vector2f((okno.getSize().x/2)-Card::single_card_size.x,0), sf::Vector2f((okno.getSize().x/2)+Card::single_card_size.x,0))),
+red_player(std::make_pair(sf::Vector2f((okno.getSize().x/2)-Card::single_card_size.x, okno.getSize().y-Card::single_card_size.y), sf::Vector2f((okno.getSize().x/2)+Card::single_card_size.x,0)))
 {
     okno.setFramerateLimit(60); //limit fps 60
 

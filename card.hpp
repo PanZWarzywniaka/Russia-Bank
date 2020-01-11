@@ -39,11 +39,12 @@ class Card
     Value wartosc;
     Colour kolor;
     sf::Sprite card_sprite;
+    
 
     public:
 
     static sf::Texture card_sheet;
-    
+    static sf::Vector2f single_card_size;
 
     //funkcje
     Card() = delete;
@@ -55,6 +56,7 @@ class Card
     Value get_value() const;
     bool is_black() const; //poprawne politycznie?
     static void load_texuture();
+    //static sf::Vector2f single_card_size(sf::View);
 
 };
 

@@ -1,6 +1,8 @@
 #include "player.hpp"
 
-Player::Player() //inicjuje i tasuje talie graczy
+Player::Player(std::pair<sf::Vector2f, sf::Vector2f> pos) //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
+:my_deck(sf::FloatRect(pos.first,Card::single_card_size)),
+trash(sf::FloatRect(pos.second,Card::single_card_size))
 {
     std::set<Card> possible_cards;
 
@@ -25,18 +27,18 @@ Player::Player() //inicjuje i tasuje talie graczy
         std::set<Card>::iterator it = possible_cards.begin();
         if(random_num>0) std::advance(it,random_num-1); //przesuwa iterator na wybrane miejsce jeżeli nie został wylosowany .begin()
 
-        this->deck.push(*it); //dodanie karty na stos gracza (talia)
+        this->my_deck.push(*it); //dodanie karty na stos gracza (talia)
         possible_cards.erase(it); //usunięcie wykorzystanej karty z drzewa
     }
     
 }
 
-std::stack<Card>* Player::get_deck_pointer()
+Deck* Player::get_deck_pointer()
 {
-    return &deck;
+    return &my_deck;
 }
 
-std::stack<Card>* Player::get_trash_pointer()
+Deck* Player::get_trash_pointer()
 {
     return &trash;
 }
@@ -47,7 +49,7 @@ Card Player::peek_trash_top() const
 }
 Card Player::peek_deck_top() const
 {
-    return deck.top();
+    return my_deck.top();
 }
 void Player::push_trash(Card crd)
 {
@@ -63,7 +65,7 @@ Card Player::draw_trash()
 
 Card Player::draw_deck()
 {
-    auto ret = deck.top();
-    deck.pop();
+    auto ret = my_deck.top();
+    my_deck.pop();
     return ret;
 }

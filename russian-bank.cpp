@@ -9,10 +9,9 @@ int main()
     Game gra;
 
     //bufory do move
-    bool is_card_taken = false;
     std::optional<Card> taken_card=std::nullopt;
-    std::stack<Card>* wherefrom_card_is_taken=nullptr; //stos z którego bierzemy // foooking british english old use
-    std::stack<Card>* whereto_card_is_taken=nullptr;
+    Deck* wherefrom_card_is_taken=nullptr; //stos z którego bierzemy // foooking british english old use
+    Deck* whereto_card_is_taken=nullptr;
 
     while(gra.okno.isOpen())
     {
@@ -29,11 +28,11 @@ int main()
             case sf::Event::MouseButtonPressed:
                 {
                     
+                    auto stack_checker = []() -> bool {}();
                     if(true)//sprawdz czy kliknąłeś karte i //sprawdzenie czy nie wzieliśmy karty od przeciwnika, ani ze strefy środkowej
                     {
-                        //weź karte
                         //bufory
-                        is_card_taken=true;
+                        //weź karte taken_card=true;
                         //wherefrom_card_is_taken ='wkaźnik do stosu na którym jest myszka'
                         
                         //taken_card=std::move('stos na którym jest myszka')
@@ -45,7 +44,7 @@ int main()
                 }
             case sf::Event::MouseButtonReleased:
                 {
-                    if(is_card_taken)
+                    if(taken_card.has_value())
                     {
                         //weź karte
                         //whereto_card_is_taken='wkaźnik do stosu na którym jest myszka'

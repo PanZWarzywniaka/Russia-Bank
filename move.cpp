@@ -1,6 +1,6 @@
 #include"move.hpp"
 
-Move::Move(const std::stack<Card>* lhs, const std::stack<Card>* rhs, Card&& karta) //karta zostaje zabrana, przejęta i w domyśle zabrana z miejsca w którym była 
+Move::Move(const Deck* lhs, const Deck* rhs, Card&& karta) //karta zostaje zabrana, przejęta i w domyśle zabrana z miejsca w którym była 
 :karta_w_reku(karta)
 {
     if(skad==nullptr || dokad==nullptr) throw std::runtime_error("Move nie ma wzkaźników miejsca");
@@ -8,12 +8,12 @@ Move::Move(const std::stack<Card>* lhs, const std::stack<Card>* rhs, Card&& kart
     dokad = rhs;
 }
 
-const std::stack<Card>* Move::get_origin() const
+const Deck* Move::get_origin() const
 {
     return skad;
 }
 
-const std::stack<Card>* Move::get_destination() const
+const Deck* Move::get_destination() const
 {
     return dokad;
 }

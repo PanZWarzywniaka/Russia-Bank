@@ -1,22 +1,30 @@
 #include"card.hpp"
 
-sf::Texture Card::card_sheet = sf::Texture();
-
-Card::Card(Value wart, Colour kol)
+Card::Card(Value wart, Colour kol) // za każdym razem
 {
     wartosc = wart;
     kolor = kol;
     
     card_sprite.setTexture(card_sheet); //card sprite nie przechowuje tekstury tylko trzyma do niej wskaźnik, card_sheet nie powinno być kopiowane
 
-    sf::Vector2u card_sheet_size = card_sheet.getSize();
-    card_sheet_size.x /=13; //dzielimy rozmiar przez 13 bo tyle jest kart w rzędzie
-    card_sheet_size.y /= 4; //4 kart w kolumnie
+    const sf::Vector2i rect_positon = sf::Vector2i{single_card_size.x*static_cast<int>(wartosc),single_card_size.y*static_cast<int>(kolor)}; //zwróci {0,0} dla asa kier
 
-    const sf::Vector2i rect_positon = sf::Vector2i{card_sheet_size.x*static_cast<int>(wartosc),card_sheet_size.y*static_cast<int>(kolor)}; //zwróci {0,0} dla asa kier
-
-    card_sprite.setTextureRect(sf::IntRect(static_cast<sf::Vector2i>(card_sheet_size),rect_positon)); //pierwsze dwa to rozmiar niezmienny
+    card_sprite.setTextureRect(sf::IntRect(rect_positon,static_cast<sf::Vector2i>(single_card_size))); //pierwsze dwa to rozmiar niezmienny
 }
+
+sf::Texture Card::card_sheet = sf::Texture();
+
+void Card::load_texuture() //wykona się raz
+{
+    card_sheet.loadFromFile("Skany Kart/Docelowe/card_sheet.png");
+
+    single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
+    single_card_size.x /=13; //dzielimy rozmiar przez 13 bo tyle jest kart w rzędzie
+    single_card_size.y /= 4; //4 kart w kolumnie
+}
+
+
+
 
 Card::Card(const Card& karta)
 {
@@ -25,11 +33,11 @@ Card::Card(const Card& karta)
     this->card_sprite=karta.card_sprite;
 }
 
-Card::Card(Card&& kau)
+Card::Card(Card&& karta)
 {
-    wartosc = std::move(kau.wartosc);
-    kolor = std::move(kau.kolor);
-    card_sprite = std::move(kau.card_sprite);
+    wartosc = std::move(karta.wartosc);
+    kolor = std::move(karta.kolor);
+    card_sprite = std::move(karta.card_sprite);
 }
 
 
@@ -61,7 +69,10 @@ bool Card::is_black() const
         return false;
 }
 
-void Card::load_texuture()
+
+/*
+sf::Vector2f Card::single_card_size(sf::View)
 {
-    card_sheet.loadFromFile("Skany Kart/Docelowe/card_sheet.png");
+    return card_sprite.;
 }
+*/
