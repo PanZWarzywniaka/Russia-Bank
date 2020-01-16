@@ -6,17 +6,17 @@ class Board
 {
     private:
 
-    Deck pola_bank[8]; //trzeba rozważyć czy warto użyć std::vector
+    Deck pola_bank[8]; 
     Deck pola_zew[8];
 
     
-    //tekstury
+    //tekstury, jeśli się zdecyduje na obramówki kart
 
     
 
     public:
 
-    Board() =delete;
+    Board() = delete;
     Board(std::pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>>); //pierwszy przechowuje pola bankowe drugi pola zewnetrzne
     
 

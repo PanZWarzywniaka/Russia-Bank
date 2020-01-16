@@ -26,12 +26,10 @@ my_board(std::make_pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> /*s
         if(i<4)
         {
             my_board.pola_zew[i].push(blue_player.draw_deck());
-            //blue_player.deck.pop();
         }
         else
         {
             my_board.pola_zew[i].push(red_player.draw_deck());
-            //red_player.deck.pop();
         }
     }
 

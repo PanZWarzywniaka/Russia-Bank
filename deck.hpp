@@ -16,6 +16,7 @@ class Deck
     public:
     Deck() = delete;
     Deck(sf::FloatRect);
+    
     bool empty() const;
     Card& top();
     const Card& top() const;

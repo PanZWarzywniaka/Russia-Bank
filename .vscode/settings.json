@@ -47,5 +47,6 @@
         "bit": "cpp",
         "ctime": "cpp",
         "map": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }
