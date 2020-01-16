@@ -10,6 +10,7 @@
 #include"move.hpp"
 #include"deck.hpp"
 #include<utility>
+#include<initializer_list>
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
     public:
 
     sf::RenderWindow okno;
+    static float scale;
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     const Deck* get_clicked_Deck_pointer(sf::Event) const;

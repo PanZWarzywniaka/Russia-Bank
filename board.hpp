@@ -1,4 +1,5 @@
 #include<stack>
+#include <vector>
 #include <SFML/Graphics.hpp>
 #include"deck.hpp"
 class Board
@@ -15,7 +16,8 @@ class Board
 
     public:
 
-    Board();
+    Board() =delete;
+    Board(std::pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>>); //pierwszy przechowuje pola bankowe drugi pola zewnetrzne
     
 
     friend class Game;
