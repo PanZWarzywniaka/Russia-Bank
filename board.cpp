@@ -22,3 +22,14 @@ Board::Board(std::pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> pos_
 {
 
 }
+
+void Board::draw(sf::RenderTarget &target, sf::RenderStates states) const
+{
+    for(size_t i=0; i<8; ++i)
+    {
+        target.draw(pola_bank[i],states);
+    }
+
+    //draw pol zewnetrznych
+    //do zrobienia debug
+}

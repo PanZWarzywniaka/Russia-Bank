@@ -70,9 +70,7 @@ bool Card::is_black() const
 }
 
 
-/*
-sf::Vector2f Card::single_card_size(sf::View)
+void Card::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    return card_sprite.;
+    target.draw(card_sprite,states);
 }
-*/

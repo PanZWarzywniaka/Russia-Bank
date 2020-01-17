@@ -12,7 +12,7 @@
 #include<utility>
 #include<initializer_list>
 
-class Game
+class Game: public sf::Drawable
 {
     private:
 
@@ -31,5 +31,7 @@ class Game
     //gettery
     Player* get_whose_turn() const;
     Board& get_board();
+
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 };

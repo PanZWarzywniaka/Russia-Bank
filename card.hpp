@@ -5,7 +5,7 @@
 #include<stack>
 
 
-class Card
+class Card: public sf::Drawable
 {
     public: //do zmiany
     
@@ -56,7 +56,7 @@ class Card
     Value get_value() const;
     bool is_black() const; //poprawne politycznie?
     static void load_texuture();
-    //static sf::Vector2f single_card_size(sf::View);
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
 
 };
 

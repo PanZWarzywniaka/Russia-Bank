@@ -69,3 +69,9 @@ Card Player::draw_deck()
     my_deck.pop();
     return ret;
 }
+
+void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
+{
+    target.draw(this->my_deck,states);
+    target.draw(this->trash,states);
+}

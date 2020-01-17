@@ -5,7 +5,7 @@
 #include <stack>
 #include "card.hpp"
 
-class Deck
+class Deck: public sf::Drawable
 {
     private:
 
@@ -24,6 +24,8 @@ class Deck
     void push(const Card& val);
     void push(Card&& val);
     void pop();
+
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
 
 };
 

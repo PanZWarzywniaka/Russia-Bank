@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include"deck.hpp"
 
-class Player
+class Player: public sf::Drawable
 {
     
 
@@ -30,5 +30,7 @@ class Player
     Card draw_deck(); //zwraca karte zwierzchu tali i uzuwa z niej
 
     void push_trash(Card); //dodaje karte do kosza
+
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
 
 };

@@ -40,3 +40,8 @@ void Deck::pop()
 {
     pile.pop();
 }
+
+void Deck::draw(sf::RenderTarget &target, sf::RenderStates states) const
+{
+    target.draw(this->top(),states);
+}
