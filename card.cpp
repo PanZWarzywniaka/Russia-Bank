@@ -1,5 +1,8 @@
 #include"card.hpp"
 
+sf::Texture Card::card_sheet = sf::Texture();
+sf::Vector2f Card::single_card_size = sf::Vector2f();
+
 Card::Card(Value wart, Colour kol) // za każdym razem
 {
     wartosc = wart;
@@ -12,7 +15,6 @@ Card::Card(Value wart, Colour kol) // za każdym razem
     card_sprite.setTextureRect(sf::IntRect(rect_positon,static_cast<sf::Vector2i>(single_card_size))); //pierwsze dwa to rozmiar niezmienny
 }
 
-sf::Texture Card::card_sheet = sf::Texture();
 
 void Card::load_texuture() //wykona się raz
 {
