@@ -34,6 +34,7 @@ void Deck::push(const Card& val)
 void Deck::push(Card&& val)
 {
     pile.push(val);
+    this->top().setPosition(this->rect.left,this->rect.top);
 }
 
 void Deck::pop()

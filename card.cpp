@@ -76,3 +76,8 @@ void Card::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(card_sprite,states);
 }
+
+void Card::setPosition(float x, float y)
+{
+    card_sprite.setPosition(x,y);
+}
