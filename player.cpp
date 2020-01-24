@@ -1,5 +1,6 @@
 #include "player.hpp"
 
+
 Player::Player(std::pair<sf::Vector2f, sf::Vector2f> pos) //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
 :my_deck(sf::FloatRect(pos.first,Card::single_card_size)),
 trash(sf::FloatRect(pos.second,Card::single_card_size))
@@ -16,16 +17,16 @@ trash(sf::FloatRect(pos.second,Card::single_card_size))
 
     }
 
-    std::default_random_engine generator; //przygotowanie do losowania
+    std::default_random_engine generator(std::chrono::high_resolution_clock::now().time_since_epoch().count()); //przygotowanie do losowania
 
 
     while(!possible_cards.empty())
     {
-        std::uniform_int_distribution<int> distribution(0,possible_cards.size());
+        std::uniform_int_distribution<int> distribution(0,possible_cards.size()-1);
         int random_num = distribution(generator);
         
         std::set<Card>::iterator it = possible_cards.begin();
-        if(random_num>0) std::advance(it,random_num-1); //przesuwa iterator na wybrane miejsce jeżeli nie został wylosowany .begin()
+        std::advance(it,random_num); //przesuwa iterator na wybrane miejsce jeżeli nie został wylosowany .begin()
 
         this->my_deck.push(*it); //dodanie karty na stos gracza (talia)
         possible_cards.erase(it); //usunięcie wykorzystanej karty z drzewa
