@@ -63,11 +63,11 @@ Card::Value Card::get_value() const
 
 bool Card::operator<(const Card& cx) const
 {
-    if(cx.kolor>this->kolor)
+    if(this->kolor==cx.kolor) 
     {
-        return cx.wartosc>this->wartosc;
+        return this->wartosc<cx.wartosc;
     }
-    else return false;
+    else return this->kolor<cx.kolor;
 }
 
 bool Card::is_black() const
