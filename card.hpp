@@ -39,11 +39,12 @@ class Card: public sf::Drawable
     Value wartosc;
     Colour kolor;
     sf::Sprite card_sprite;
+    sf::Texture card_texture;
     
 
     public:
 
-    static sf::Texture card_sheet;
+    static sf::Image card_sheet;
     static sf::Vector2f single_card_size;
 
     //funkcje

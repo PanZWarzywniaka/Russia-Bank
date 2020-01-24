@@ -1,6 +1,6 @@
 #include"card.hpp"
 
-sf::Texture Card::card_sheet = sf::Texture();
+sf::Image Card::card_sheet = sf::Image();
 sf::Vector2f Card::single_card_size = sf::Vector2f();
 
 Card::Card(Value wart, Colour kol) // za każdym razem
@@ -8,11 +8,18 @@ Card::Card(Value wart, Colour kol) // za każdym razem
     wartosc = wart;
     kolor = kol;
     
-    card_sprite.setTexture(card_sheet); //card sprite nie przechowuje tekstury tylko trzyma do niej wskaźnik, card_sheet nie powinno być kopiowane
-
     const sf::Vector2i rect_positon = sf::Vector2i{single_card_size.x*static_cast<int>(wartosc),single_card_size.y*static_cast<int>(kolor)}; //zwróci {0,0} dla asa kier
 
-    card_sprite.setTextureRect(sf::IntRect(rect_positon,static_cast<sf::Vector2i>(single_card_size))); //pierwsze dwa to rozmiar niezmienny
+    card_texture.loadFromImage(Card::card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(single_card_size)));
+    card_sprite.setTexture(card_texture); //card sprite nie przechowuje tekstury tylko trzyma do niej wskaźnik, card_sheet nie powinno być kopiowane
+
+    //skalowanie dla skali Game::scale = 1, rozmiar karty y=150
+    float ratio = single_card_size.x/single_card_size.y;  //x/y ratio
+
+    sf::Vector2f target_card_size(150*ratio,150); // x = 96.62 y = 150
+    sf::Vector2f factor(target_card_size.x/single_card_size.x,target_card_size.y/single_card_size.y); // skala dla x i y taka sama 0.07666
+
+    card_sprite.setScale(card_sprite.getScale().x*factor.x ,card_sprite.getScale().y*factor.y);
 }
 
 
