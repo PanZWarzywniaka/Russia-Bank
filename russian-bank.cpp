@@ -65,7 +65,7 @@ int main()
 
         //okno
         gra.okno.clear(sf::Color::Green);
-        //gra.okno.draw();
+        gra.okno.draw(gra);
         gra.okno.display();
         
 
