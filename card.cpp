@@ -12,7 +12,7 @@ Card::Card(Value wart, Colour kol) // za każdym razem
 
     card_texture.loadFromImage(Card::card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(single_card_size)));
     card_sprite.setTexture(card_texture); //card sprite nie przechowuje tekstury tylko trzyma do niej wskaźnik, card_sheet nie powinno być kopiowane
-
+    card_texture.setSmooth(true);
     //skalowanie dla skali Game::scale = 1, rozmiar karty y=150
     float ratio = single_card_size.x/single_card_size.y;  //x/y ratio
 
