@@ -51,13 +51,14 @@ Card Player::peek_deck_top() const
 {
     return my_deck.top();
 }
-void Player::push_trash(Card crd)
+void Player::push_trash(Card&& crd)
 {
     trash.push(crd);
 }
 
 Card Player::draw_trash()
 {
+    if(trash.empty()) throw std::runtime_error("Player's trash is empty! Unable to draw");
     auto ret = trash.top();
     trash.pop();
     return ret;
@@ -65,6 +66,7 @@ Card Player::draw_trash()
 
 Card Player::draw_deck()
 {
+    if(my_deck.empty()) throw std::runtime_error("Player's deck is empty! Unable to draw");
     auto ret = my_deck.top();
     my_deck.pop();
     return ret;
