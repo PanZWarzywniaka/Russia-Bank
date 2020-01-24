@@ -41,6 +41,7 @@ Card::Card(const Card& karta)
     this->kolor=karta.kolor;
     this->card_sprite=karta.card_sprite;
     this->card_texture=karta.card_texture;
+    this->card_sprite.setTexture(this->card_texture);
 }
 
 Card::Card(Card&& karta)
@@ -49,6 +50,7 @@ Card::Card(Card&& karta)
     kolor = std::move(karta.kolor);
     card_sprite = std::move(karta.card_sprite);
     card_texture = std::move(karta.card_texture);
+    card_sprite.setTexture(card_texture);
 }
 
 
