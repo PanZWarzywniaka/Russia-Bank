@@ -29,6 +29,7 @@ size_t Deck::size() const
 void Deck::push(const Card& val)
 {
     pile.push(val);
+    this->top().setPosition(this->rect.left,this->rect.top);
 }
 
 void Deck::push(Card&& val)
