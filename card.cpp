@@ -1,35 +1,36 @@
 #include"card.hpp"
 
 sf::Image Card::card_sheet = sf::Image();
-sf::Vector2f Card::single_card_size = sf::Vector2f();
+sf::Vector2f Card::original_single_card_size = sf::Vector2f();
+sf::Vector2f Card::actual_single_card_size = sf::Vector2f();
 
 Card::Card(Value wart, Colour kol) // za każdym razem
 {
     wartosc = wart;
     kolor = kol;
     
-    const sf::Vector2i rect_positon = sf::Vector2i{single_card_size.x*static_cast<int>(wartosc),single_card_size.y*static_cast<int>(kolor)}; //zwróci {0,0} dla asa kier
-
-    card_texture.loadFromImage(Card::card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(single_card_size)));
+    const sf::Vector2i rect_positon = sf::Vector2i{original_single_card_size.x*static_cast<int>(wartosc),original_single_card_size.y*static_cast<int>(kolor)}; //zwróci {0,0} dla asa kier
+    card_texture.loadFromImage(Card::card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(original_single_card_size)));
     card_sprite.setTexture(card_texture); //card sprite nie przechowuje tekstury tylko trzyma do niej wskaźnik, card_sheet nie powinno być kopiowane
-    card_texture.setSmooth(true);
+ 
+
     //skalowanie dla skali Game::scale = 1, rozmiar karty y=150
-    float ratio = single_card_size.x/single_card_size.y;  //x/y ratio
 
-    sf::Vector2f target_card_size(150*ratio,150); // x = 96.62 y = 150
-    sf::Vector2f factor(target_card_size.x/single_card_size.x,target_card_size.y/single_card_size.y); // skala dla x i y taka sama 0.07666
+    card_sprite.setScale(actual_single_card_size.x/original_single_card_size.x,actual_single_card_size.y/original_single_card_size.y); // skala dla x i y taka sama 0.07666
 
-    card_sprite.setScale(card_sprite.getScale().x*factor.x ,card_sprite.getScale().y*factor.y);
+    card_texture.setSmooth(true);
 }
 
 
-void Card::load_texuture() //wykona się raz
+void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem obietów
 {
     card_sheet.loadFromFile("Skany Kart/Docelowe/card_sheet.png");
 
-    single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
-    single_card_size.x /=13; //dzielimy rozmiar przez 13 bo tyle jest kart w rzędzie
-    single_card_size.y /= 4; //4 kart w kolumnie
+    Card::original_single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
+    Card::original_single_card_size.x /=13; //dzielimy rozmiar przez 13 bo tyle jest kart w rzędzie
+    Card::original_single_card_size.y /= 4; //4 kart w kolumnie
+
+    Card::actual_single_card_size = sf::Vector2f(150*(original_single_card_size.x/original_single_card_size.y),150); //x/y ratio
 }
 
 

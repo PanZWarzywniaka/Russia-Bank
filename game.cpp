@@ -43,7 +43,6 @@ my_board(std::make_pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> /*s
     } while (blue_player.peek_trash_top().get_value()==red_player.peek_trash_top().get_value()); //jeżeli karty będą miały tą samą wartośc, iteruj
     
     
-
     if(static_cast<int>(blue_player.peek_trash_top().get_value()) > static_cast<int>(red_player.peek_trash_top().get_value()))//prawdzamy kto ma wyższą karte w koszu, kto zaczyna
     {
         whose_turn=&blue_player; //zaczyna niebieski

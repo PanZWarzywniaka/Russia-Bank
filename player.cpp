@@ -2,8 +2,8 @@
 
 
 Player::Player(std::pair<sf::Vector2f, sf::Vector2f> pos) //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
-:my_deck(sf::FloatRect(pos.first,Card::single_card_size)),
-trash(sf::FloatRect(pos.second,Card::single_card_size))
+:my_deck(sf::FloatRect(pos.first,Card::actual_single_card_size)),
+trash(sf::FloatRect(pos.second,Card::actual_single_card_size))
 {
     std::set<Card> possible_cards;
 
