@@ -60,8 +60,7 @@ my_board(std::make_pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> /*s
 
 bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch jest możliwy   
 {
-    Player* opponents_pointer = [this](Player* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(player_pointer); //ustawienie wskaźnika na obecnego przeciwnika
-
+    Player* opponents_pointer = get_opponents_pointer();
     //destynacje dzielimy na kategorie, środek, zewnętrzne, kupa, talia, nasza i przeciwnika
 
     if(ruch.get_destination()==player_pointer->get_trash_pointer()) //nasza kupa odłożenie karty na kupe->ruch przeciwnika
@@ -190,11 +189,25 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
 
 //gettery
 
-Player* Game::get_whose_turn() const
+Player* Game::get_players_pointer() const
 {
     if(whose_turn!=nullptr)
     {
         return whose_turn;
+    }
+    else
+    {
+        throw std::runtime_error("Error: Nie wiadomo czyja tura");
+    }
+}
+
+Player* Game::get_opponents_pointer()  //ta funkcja powinna być const ale nie moge tam tego wsadzić
+{
+    if(whose_turn!=nullptr)
+    {
+        Player* opponents_pointer = [this](Player* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(whose_turn); //ustawienie wskaźnika na obecnego przeciwnika
+
+        return opponents_pointer;
     }
     else
     {

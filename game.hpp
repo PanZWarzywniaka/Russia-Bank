@@ -29,7 +29,9 @@ class Game: public sf::Drawable
     const Deck* get_clicked_Deck_pointer(sf::Event) const;
     bool players_move(Player*, Move&); //funkcja obsugująca pojedynczy ruch przeniesienie karty i sprawdzanie czy ruch jest dozwolony, zwraca true jeśli się ruch udał
     //gettery
-    Player* get_whose_turn() const;
+    Player* get_players_pointer() const;
+    Player* get_opponents_pointer(); //ta funkcja powinna być const ale nie moge tam tego wsadzić
+
     Board& get_board();
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;

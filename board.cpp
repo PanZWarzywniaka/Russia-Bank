@@ -27,6 +27,11 @@ pola_zew{
 
 }
 
+std::pair<std::array<Deck,8>,std::array<Deck,8>> Board::get_decks_arrays() const
+{
+    return std::make_pair(pola_bank,pola_zew);
+}
+
 void Board::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     for(size_t i=0; i<8; ++i)

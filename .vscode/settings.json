@@ -47,7 +47,9 @@
         "bit": "cpp",
         "ctime": "cpp",
         "map": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

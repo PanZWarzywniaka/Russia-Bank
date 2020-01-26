@@ -47,3 +47,8 @@ void Deck::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     if(!this->empty()) target.draw(this->top(),states);
 }
+
+sf::FloatRect Deck::get_rect() const
+{
+    return this->rect;
+}

@@ -12,7 +12,6 @@ class Deck: public sf::Drawable
     std::stack<Card> pile;
     sf::FloatRect rect; //Rect<float>
 
-
     public:
     Deck() = delete;
     Deck(sf::FloatRect);
@@ -26,6 +25,7 @@ class Deck: public sf::Drawable
     void pop();
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
+    sf::FloatRect get_rect() const; //get rekt XD
 
 };
 
