@@ -39,7 +39,11 @@ int main()
 
                         for(/*const*/Deck deck: gra.get_board().get_decks_arrays().second) //pola zew sprawdzamy, zawsze można wziąć karty
                         {
-                            if(deck.get_rect().contains(point)) return &deck;
+                            if(deck.get_rect().contains(point))
+                            {
+                                Deck* wskaznik = &deck;//tu jest bug ale niew wiem jak go naprawić wherefrome_car_is_taken nie dostaje dobrego wskaźnika
+                                return wskaznik;
+                            }
                         }
 
                         if(gra.get_players_pointer()->get_deck_pointer()->get_rect().contains(point)) return gra.get_players_pointer()->get_deck_pointer(); //pozwalamy na dobranie karty ze swojej tali
@@ -65,11 +69,18 @@ int main()
 
                         //trzeba sprawdzić czy karta na pewno została zabrana bo nie mam pewności
                         if(wherefrom_card_is_taken->top()==taken_card.value()) throw std::runtime_error("Card obtaining Error");
-                        std::cout<<"Siema";
                     }
                     
                     break;
                 }
+            case sf::Event::MouseMoved:
+				{
+					if(taken_card.has_value() && wherefrom_card_is_taken!=nullptr)
+					{
+						taken_card.value().setPosition(event.mouseButton.x,event.mouseButton.y);
+						break;
+					}
+				}
             case sf::Event::MouseButtonReleased:
                 {
                     if(taken_card.has_value() && wherefrom_card_is_taken!=nullptr)
