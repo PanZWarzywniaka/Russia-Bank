@@ -54,16 +54,18 @@ int main()
 
                     if(wherefrom_card_is_taken.has_value())//sprawdz czy kliknąłeś karte i //sprawdzenie czy nie wzieliśmy karty od przeciwnika, ani ze strefy środkowej
                     {
-                        taken_card = std::move(wherefrom_card_is_taken.value()->top());
-                        taken_card = wherefrom_card_is_taken.value()->top();
-                        taken_card.emplace(wherefrom_card_is_taken.value()->top());
-                        //bufory
-                        //weź karte taken_card=true;
-                        //wherefrom_card_is_taken ='wkaźnik do stosu na którym jest myszka'
+                        //taken_card = std::move(wherefrom_card_is_taken.value()->top());
+                        //taken_card = wherefrom_card_is_taken.value()->top();
+                        //nie wiem czemu wywala błąd w tych linijkach
+
+                        taken_card.emplace(wherefrom_card_is_taken.value()->top()); //tu błędu nie ma
+                        wherefrom_card_is_taken.value()->pop(); //usuwa karte ze stosu 
+                        taken_card.value().setPosition(event.mouseButton.x,event.mouseButton.y);
                         
-                        //taken_card=std::move('stos na którym jest myszka')
+
                         //trzeba sprawdzić czy karta na pewno została zabrana bo nie mam pewności
-                        //zabieramy karte ztąd// 'stos na którym jest myszka'.pop()
+                        if(wherefrom_card_is_taken.value()->top()==taken_card.value()) throw std::runtime_error("Card obtaining Error");
+                        std::cout<<"Siema";
                     }
                     
                     break;
@@ -75,8 +77,8 @@ int main()
                         //weź karte
                         //whereto_card_is_taken='wkaźnik do stosu na którym jest myszka'
                         //konstruktor move
-                        Move ruch(wherefrom_card_is_taken.value(), whereto_card_is_taken, std::move(taken_card.value()));
-                        gra.players_move(gra.get_players_pointer(),ruch);
+                        //Move ruch(wherefrom_card_is_taken.value(), whereto_card_is_taken, std::move(taken_card.value()));
+                        //gra.players_move(gra.get_players_pointer(),ruch);
                     }
                     break;
                 }
@@ -91,7 +93,10 @@ int main()
 
         //okno
         gra.okno.clear(sf::Color::Green);
+
         gra.okno.draw(gra);
+        if(taken_card.has_value()) gra.okno.draw(taken_card.value());
+
         gra.okno.display();
         
 

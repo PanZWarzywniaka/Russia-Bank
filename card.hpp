@@ -55,7 +55,10 @@ class Card: public sf::Drawable
     Card(Value wart, Colour kol);
     Card(const Card&);
     Card(Card&&);
+    
     bool operator<(const Card&) const;
+    bool operator==(const Card&) const;
+
     Colour get_colour() const;
     Value get_value() const;
     bool is_black() const; //poprawne politycznie?

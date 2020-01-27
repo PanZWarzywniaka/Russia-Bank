@@ -75,6 +75,12 @@ bool Card::operator<(const Card& cx) const
     else return this->kolor<cx.kolor;
 }
 
+bool Card::operator==(const Card& card) const
+{
+    if(this->kolor==card.kolor&&this->wartosc==card.wartosc) return true;
+        else return false;        
+}
+
 bool Card::is_black() const
 {
     if(this->kolor==Card::Colour::spades || this->kolor==Card::Colour::clubs)

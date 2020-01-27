@@ -41,6 +41,7 @@ void Deck::push(Card&& val)
 void Deck::pop()
 {
     pile.pop();
+    if(!this->empty()) this->top().setPosition(this->rect.left,this->rect.top); //jeśli coś jest pod spodem to niech, deck da karcie pod spodem swoją pozycje
 }
 
 void Deck::draw(sf::RenderTarget &target, sf::RenderStates states) const
