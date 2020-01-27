@@ -10,7 +10,7 @@ int main()
 
     //bufory do move
     std::optional<Card> taken_card=std::nullopt;
-    Deck* wherefrom_card_is_taken=nullptr; //stos z którego bierzemy // foooking british english old use
+    std::optional<Deck*> wherefrom_card_is_taken=std::nullopt; //stos z którego bierzemy // foooking british english old use
     Deck* whereto_card_is_taken=nullptr;
 
     while(gra.okno.isOpen())
@@ -28,32 +28,33 @@ int main()
             case sf::Event::MouseButtonPressed:
                 {
                     
-                    auto deck_checker = [&]() -> bool 
+                    wherefrom_card_is_taken = [&]() -> std::optional<Deck*>
                     {
                         sf::Vector2f point (event.mouseButton.x,event.mouseButton.y);
 
-                        for(const Deck deck: gra.get_board().get_decks_arrays().first) //pola bankowe sprawdzamy, nigdy nie można wziąć karty z banku
+                        for(/*const*/Deck deck: gra.get_board().get_decks_arrays().first) //pola bankowe sprawdzamy, nigdy nie można wziąć karty z banku
                         {
-                            if(deck.get_rect().contains(point)) return false;
+                            if(deck.get_rect().contains(point)) return std::nullopt;
                         }
 
-                        for(const Deck deck: gra.get_board().get_decks_arrays().second) //pola zew sprawdzamy, zawsze można wziąć karty
+                        for(/*const*/Deck deck: gra.get_board().get_decks_arrays().second) //pola zew sprawdzamy, zawsze można wziąć karty
                         {
-                            if(deck.get_rect().contains(point)) return true;
+                            if(deck.get_rect().contains(point)) return &deck;
                         }
 
-                        if(gra.get_players_pointer()->get_deck_pointer()->get_rect().contains(point)) return true; //pozwalamy na dobranie karty ze swojej tali
-                        if(gra.get_players_pointer()->get_trash_pointer()->get_rect().contains(point)) return true; //pozwalamy na dobranie karty ze swojego kosza
-                        if(gra.get_opponents_pointer()->get_deck_pointer()->get_rect().contains(point)) return false; //nie pozwalamy na dobranie karty z tali przeciwnika
-                        if(gra.get_opponents_pointer()->get_trash_pointer()->get_rect().contains(point)) return false; //nie pozwalamy na dobranie karty z kosza przeciwnika
+                        if(gra.get_players_pointer()->get_deck_pointer()->get_rect().contains(point)) return gra.get_players_pointer()->get_deck_pointer(); //pozwalamy na dobranie karty ze swojej tali
+                        if(gra.get_players_pointer()->get_trash_pointer()->get_rect().contains(point)) return gra.get_players_pointer()->get_trash_pointer(); //pozwalamy na dobranie karty ze swojego kosza
+                        if(gra.get_opponents_pointer()->get_deck_pointer()->get_rect().contains(point)) return std::nullopt; //nie pozwalamy na dobranie karty z tali przeciwnika
+                        if(gra.get_opponents_pointer()->get_trash_pointer()->get_rect().contains(point)) return std::nullopt; //nie pozwalamy na dobranie karty z kosza przeciwnika
 
                         //jeżeli gdzie kolwiek indziej klikneliśmy
-                        return false;
+                        return std::nullopt;
                     }();
                     
 
-                    if(deck_checker)//sprawdz czy kliknąłeś karte i //sprawdzenie czy nie wzieliśmy karty od przeciwnika, ani ze strefy środkowej
+                    if(wherefrom_card_is_taken.has_value())//sprawdz czy kliknąłeś karte i //sprawdzenie czy nie wzieliśmy karty od przeciwnika, ani ze strefy środkowej
                     {
+                        std::cout<<"Klikanie na talie działa"<<"\n";
                         //bufory
                         //weź karte taken_card=true;
                         //wherefrom_card_is_taken ='wkaźnik do stosu na którym jest myszka'
@@ -67,12 +68,12 @@ int main()
                 }
             case sf::Event::MouseButtonReleased:
                 {
-                    if(taken_card.has_value())
+                    if(taken_card.has_value() && wherefrom_card_is_taken.has_value())
                     {
                         //weź karte
                         //whereto_card_is_taken='wkaźnik do stosu na którym jest myszka'
                         //konstruktor move
-                        Move ruch(wherefrom_card_is_taken, whereto_card_is_taken, std::move(taken_card.value()));
+                        Move ruch(wherefrom_card_is_taken.value(), whereto_card_is_taken, std::move(taken_card.value()));
                         gra.players_move(gra.get_players_pointer(),ruch);
                     }
                     break;
