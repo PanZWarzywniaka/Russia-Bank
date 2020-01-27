@@ -54,6 +54,9 @@ int main()
 
                     if(wherefrom_card_is_taken.has_value())//sprawdz czy kliknąłeś karte i //sprawdzenie czy nie wzieliśmy karty od przeciwnika, ani ze strefy środkowej
                     {
+                        taken_card = std::move(wherefrom_card_is_taken.value()->top());
+                        taken_card = wherefrom_card_is_taken.value()->top();
+                        taken_card.emplace(wherefrom_card_is_taken.value()->top());
                         //bufory
                         //weź karte taken_card=true;
                         //wherefrom_card_is_taken ='wkaźnik do stosu na którym jest myszka'
