@@ -26,7 +26,6 @@ class Game: public sf::Drawable
     static float scale;
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
-    const Deck* get_clicked_Deck_pointer(sf::Event) const;
     bool players_move(Player*, Move&); //funkcja obsugująca pojedynczy ruch przeniesienie karty i sprawdzanie czy ruch jest dozwolony, zwraca true jeśli się ruch udał
     //gettery
     Player* get_players_pointer() const;

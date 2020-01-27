@@ -54,7 +54,6 @@ int main()
 
                     if(wherefrom_card_is_taken.has_value())//sprawdz czy kliknąłeś karte i //sprawdzenie czy nie wzieliśmy karty od przeciwnika, ani ze strefy środkowej
                     {
-                        std::cout<<"Klikanie na talie działa"<<"\n";
                         //bufory
                         //weź karte taken_card=true;
                         //wherefrom_card_is_taken ='wkaźnik do stosu na którym jest myszka'
