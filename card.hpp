@@ -40,7 +40,7 @@ class Card: public sf::Drawable
     Colour kolor;
     sf::Sprite card_sprite;
     sf::Texture card_texture;
-    
+    float x, y;
 
     public:
     //zaraz przerobie na consty

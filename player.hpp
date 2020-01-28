@@ -1,6 +1,7 @@
 #include<stack>
 #include<set>
 #include<random>
+#include<memory>
 #include <chrono>
 #include <SFML/Graphics.hpp>
 #include"deck.hpp"
@@ -11,8 +12,8 @@ class Player: public sf::Drawable
 
     private: //do zmienienia prywatnosc
 
-    Deck my_deck;
-    Deck trash;
+    std::shared_ptr<Deck> my_deck;
+    std::shared_ptr<Deck> trash;
 
     std::pair<sf::Vector2u,sf::Vector2u> decks_position;
 
@@ -21,8 +22,8 @@ class Player: public sf::Drawable
     Player(std::pair<sf::Vector2f,sf::Vector2f>); //konstruktor dostaje od game pierwszy dla decku i drugi dla trasha //inicjuje i tasuje talie graczy
 
     //gettery potrzebne do Game::player_move()
-    Deck* get_deck_pointer(); //zwraca wskaźnik do talii
-    Deck* get_trash_pointer(); //zwraca wskaźnik do kosza
+    std::shared_ptr<Deck> get_deck_pointer(); //zwraca wskaźnik do talii
+    std::shared_ptr<Deck> get_trash_pointer(); //zwraca wskaźnik do kosza
 
     Card peek_trash_top() const; //zwraca karte zwierzchu kosza
     Card peek_deck_top() const; //zwraca karte zwierzchu tali
