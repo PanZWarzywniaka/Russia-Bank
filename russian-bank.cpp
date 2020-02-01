@@ -35,7 +35,7 @@ int main()
                             Card the_victim = target->top();
                             target->pop();
                             taken_card.emplace(the_victim);
-                            taken_card.value().setPosition(event.mouseButton.x,event.mouseButton.y);
+                            taken_card.value().setPosition(event.mouseButton.x-(Card::actual_single_card_size.x/2),event.mouseButton.y-(Card::actual_single_card_size.y/2));
                         };
 
                         sf::Vector2f point (event.mouseButton.x,event.mouseButton.y);
