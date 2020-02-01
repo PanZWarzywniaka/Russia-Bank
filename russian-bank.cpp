@@ -136,20 +136,17 @@ int main()
 
                         if(whereto_card_is_taken && whereto_card_is_taken != wherefrom_card_is_taken) //karta została położona na jakimś decku
                         {
-                            whereto_card_is_taken->push(taken_card.value());
 
-                            taken_card = std::nullopt;
-                            wherefrom_card_is_taken = nullptr;
-                            whereto_card_is_taken = nullptr;
+                            whereto_card_is_taken->push(taken_card.value());
                         }
                         else //karta została puszczona ale źle, nie na żaden deck, została położona na tle, cofamy ruch
                         {
                             wherefrom_card_is_taken->push(taken_card.value());
-                            
-                            taken_card = std::nullopt;
-                            wherefrom_card_is_taken = nullptr;
-                            whereto_card_is_taken = nullptr;
                         }
+
+                        taken_card = std::nullopt;
+                        wherefrom_card_is_taken = nullptr;
+                        whereto_card_is_taken = nullptr;
                         
                     }
                     break;
