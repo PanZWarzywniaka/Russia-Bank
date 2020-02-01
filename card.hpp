@@ -41,6 +41,8 @@ class Card: public sf::Drawable
     sf::Sprite card_sprite;
     sf::Texture card_texture;
     float x, y;
+    
+    friend std::ostream &operator<<(std::ostream&,const Card&);
 
     public:
     //zaraz przerobie na consty
@@ -58,6 +60,7 @@ class Card: public sf::Drawable
     
     bool operator<(const Card&) const;
     bool operator==(const Card&) const;
+    
 
     Colour get_colour() const;
     Value get_value() const;

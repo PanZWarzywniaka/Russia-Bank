@@ -58,16 +58,17 @@ my_board(std::make_pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> /*s
 
 }
 
-bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch jest możliwy   
+bool Game::check_move(const Player* player_pointer, Move& ruch) const //sprawdzamy czy ruch jest możliwy   
 {
-    Player* opponents_pointer = get_opponents_pointer();
+    const Player* opponents_pointer = get_opponents_pointer();
     //destynacje dzielimy na kategorie, środek, zewnętrzne, kupa, talia, nasza i przeciwnika
-
-    if(ruch.get_destination().get()==player_pointer->get_trash_pointer().get()) //nasza kupa odłożenie karty na kupe->ruch przeciwnika
+    if(ruch.get_destination()==ruch.get_origin() || ruch.get_destination()==nullptr)
     {
-        player_pointer->push_trash(ruch.get_card()); 
+        return false;
+    }
+    else if(ruch.get_destination().get()==player_pointer->get_trash_pointer().get()) //nasza kupa odłożenie karty na kupe->ruch przeciwnika
+    {
         //zamiana graczy 
-        this->whose_turn = opponents_pointer;
         return true;
     }
     else if(ruch.get_destination().get()==opponents_pointer->get_trash_pointer().get())//kupa przeciwnika
@@ -77,7 +78,6 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
 
         if(players_card_val==++opponents_card_val || players_card_val==--opponents_card_val) //jeżeli karta gracza ma wartość jeden mniejszą lub jeden większą od tego co ma przeciwnik w koszu to dopuszczamy taki ruch
         {
-            opponents_pointer->push_trash(ruch.get_card());
             return true;
         }
         else
@@ -110,7 +110,6 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
                 if(ruch.get_card().get_value()==Card::Value::Ace)//a trzymana karta w ręku to AS
                 {
                     //tak w tedy dajemy asa na to puste miejsce
-                    my_board.pola_bank[possible_banks_array_addres.value()]->push(ruch.get_card());
                     return true;
                 }
                 else //jesli to nie jest as to nara
@@ -123,10 +122,9 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
                 int players_card_val = static_cast<int>(ruch.get_card().get_value());
 
                 //sprawdzamy czy karta którą chcemy połozyć do banku jest tego samego koloru i plus jeden wartości
-                if(ruch.get_card().get_colour()==my_board.pola_bank[possible_banks_array_addres.value()]->top().get_colour() && ++players_card_val==static_cast<int>(my_board.pola_bank[possible_banks_array_addres.value()]->top().get_value()))
+                if(ruch.get_card().get_colour()==my_board.pola_bank[possible_banks_array_addres.value()]->top().get_colour() && --players_card_val==static_cast<int>(my_board.pola_bank[possible_banks_array_addres.value()]->top().get_value()))
                 {
                     //jeśli tak w tedy dajemy karte na to miejsce
-                    my_board.pola_bank[possible_banks_array_addres.value()]->push(ruch.get_card());
                     return true;
                 }
                 else
@@ -153,8 +151,7 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
         {
             if(my_board.pola_zew[possible_outer_fields_array_addres.value()]->empty()) //puste pole zew
             {
-                my_board.pola_zew[possible_outer_fields_array_addres.value()]->push(ruch.get_card()); //na puste miejsce w polach zewnętrznych można położyć każdą karte
-
+                //na puste miejsce w polach zewnętrznych można położyć każdą karte
                 return true;
             }
             else
@@ -162,10 +159,9 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
                 int players_card_val = static_cast<int>(ruch.get_card().get_value());
 
                  //sprawdzamy czy karta jest przeciwnego koloru i czy o jeden mniejsza
-                if(ruch.get_card().is_black() ^ my_board.pola_zew[possible_outer_fields_array_addres.value()]->top().is_black() && --players_card_val==static_cast<int>(my_board.pola_zew[possible_outer_fields_array_addres.value()]->top().get_value()))
+                if(ruch.get_card().is_black() ^ my_board.pola_zew[possible_outer_fields_array_addres.value()]->top().is_black() && ++players_card_val==static_cast<int>(my_board.pola_zew[possible_outer_fields_array_addres.value()]->top().get_value()))
                 {
                     //jeśli tak w tedy dajemy karte na to miejsce
-                    my_board.pola_zew[possible_outer_fields_array_addres.value()]->push(ruch.get_card());
                     return true;
                 }
                 else
@@ -187,9 +183,47 @@ bool Game::players_move(Player* player_pointer,Move& ruch) //sprawdzamy czy ruch
     
 }
 
+void Game::players_move(Move& ruch)
+{
+    if(this->check_move(this->get_players_pointer(),ruch))
+    {
+        ruch.get_destination()->push(ruch.get_card());
+        std::cout<<"Ruch pomyślny "<<ruch.get_card()<<"\n"; 
+    }
+    else //karta została puszczona ale źle, nie na żaden deck, została położona na tle, cofamy ruch
+    {
+        ruch.get_origin()->push(ruch.get_card());
+        std::cout<<"Ruch zabroniony "<<ruch.get_card()<<"\n";   
+    }
+
+    //event handling
+
+    if(ruch.get_destination().get()==this->get_players_pointer()->get_trash_pointer().get()) //jeżeli odłożyliśmy do siebie to zamiana tury
+        this->whose_turn = this->get_opponents_pointer();
+
+    if(this->get_players_pointer()->get_deck_pointer()->empty()) //karta na górze kosza, staje się koszem, kosz obracamy i staje się dekiem
+    {//to rozwiązanie jest lepsze niż zmiana konstów
+        if(whose_turn==&blue_player)
+            blue_player.take_trash_and_rotate();
+        else
+            red_player.take_trash_and_rotate();
+    }
+        
+    if(this->get_players_pointer()->get_trash_pointer()->empty()) //
+    {//to rozwiązanie jest lepsze niż zmiana konstów
+        std::cout<<"Empty trash handling \n";
+        if(whose_turn==&blue_player)
+            blue_player.empty_trash_handle();
+        else
+            red_player.empty_trash_handle();
+    }
+
+}
+
+
 //gettery
 
-Player* Game::get_players_pointer() const
+Player const* Game::get_players_pointer() const
 {
     if(whose_turn!=nullptr)
     {
@@ -201,12 +235,11 @@ Player* Game::get_players_pointer() const
     }
 }
 
-Player* Game::get_opponents_pointer()  //ta funkcja powinna być const ale nie moge tam tego wsadzić
+Player const*  Game::get_opponents_pointer() const
 {
     if(whose_turn!=nullptr)
     {
-        Player* opponents_pointer = [this](Player* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(whose_turn); //ustawienie wskaźnika na obecnego przeciwnika
-
+        Player const* opponents_pointer = [&](Player const* gracz){if(gracz==&blue_player) return &red_player; else return &blue_player;}(whose_turn); //ustawienie wskaźnika na obecnego przeciwnika
         return opponents_pointer;
     }
     else

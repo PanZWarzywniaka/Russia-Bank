@@ -34,12 +34,12 @@ trash(new Deck(sf::FloatRect(pos.second,Card::actual_single_card_size)))
     
 }
 
-std::shared_ptr<Deck> Player::get_deck_pointer()
+std::shared_ptr<Deck> Player::get_deck_pointer() const
 {
     return my_deck;
 }
 
-std::shared_ptr<Deck> Player::get_trash_pointer()
+std::shared_ptr<Deck> Player::get_trash_pointer() const
 {
     return trash;
 }
@@ -77,4 +77,55 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(*this->my_deck,states);
     target.draw(*this->trash,states);
+}
+
+void Player::take_trash_and_rotate()
+{
+    
+    Card buf_card(std::move(trash->top()));
+
+    Deck* buf_stack = new Deck(*(trash));
+    std::list<Card> buf_ls;
+
+    while(!buf_stack->empty())
+    {
+        buf_ls.push_back(buf_stack->top());
+        buf_stack->pop();
+    }
+
+    while (!buf_ls.empty())
+    {
+        buf_stack->push(*(buf_ls.begin()));
+        buf_ls.pop_front();
+    }
+    
+    trash->clear();
+    trash->push(std::move(buf_card));
+
+    this->my_deck.reset(buf_stack);
+
+}
+
+void Player::empty_trash_handle()
+{
+    Deck* buf_stack = new Deck(*(my_deck));
+    std::list<Card> buf_ls;
+
+    while(!buf_stack->empty())
+    {
+        buf_ls.push_back(buf_stack->top());
+        buf_stack->pop();
+    }
+
+    Card buf_card(std::move(*(buf_ls.rbegin()))); //ostatnia karta
+    trash->push(std::move(buf_card));
+
+    while (!buf_ls.empty())
+    {
+        buf_stack->push(*(buf_ls.rbegin()));
+        buf_ls.pop_back();
+    }
+
+    this->my_deck.reset(buf_stack);
+
 }

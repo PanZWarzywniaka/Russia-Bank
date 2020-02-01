@@ -5,7 +5,7 @@ Move::Move(const std::shared_ptr<Deck> lhs, const std::shared_ptr<Deck> rhs, Car
 skad(lhs),
 dokad(rhs)
 {
-    if(skad==nullptr || dokad==nullptr) throw std::runtime_error("Move nie ma wzkaźników miejsca");
+    if(skad==nullptr) throw std::runtime_error("Move nie ma wzkaźnika skad");
 }
 
 const std::shared_ptr<Deck> Move::get_origin() const

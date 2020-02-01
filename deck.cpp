@@ -4,6 +4,11 @@ Deck::Deck(sf::FloatRect prostokat)
 :pile(std::stack<Card>())
 {
     rect=prostokat;
+    frame.setPosition(prostokat.left,prostokat.top);
+    frame.setSize({prostokat.width,prostokat.height});
+    frame.setFillColor(sf::Color::Transparent);
+    frame.setOutlineColor(sf::Color::Black);
+    frame.setOutlineThickness(2);
 }
 
 bool Deck::empty() const
@@ -46,8 +51,23 @@ void Deck::pop()
 
 void Deck::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+    
     if(!this->empty()) target.draw(this->top(),states);
+    else
+        target.draw(frame);
+    
+    
 }
+
+void Deck::clear()
+{
+    while (!this->empty())
+    {
+        this->pop();
+    }
+    
+}
+
 
 sf::FloatRect Deck::get_rect() const
 {

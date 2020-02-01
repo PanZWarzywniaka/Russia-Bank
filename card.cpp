@@ -101,3 +101,85 @@ void Card::setPosition(float x, float y)
     this-> y = y;
     card_sprite.setPosition(x,y);
 }
+
+std::ostream &operator<<(std::ostream& strumien,const Card& karta)
+{
+    auto pisz = [&](const char* a){
+        strumien<<a<<' ';
+    };
+
+    switch (karta.get_colour())
+    {
+        case Card::Colour::spades:
+            {
+                pisz("pik");    
+            }
+            break;
+        case Card::Colour::clubs:
+            {
+                pisz("trefl");    
+            }
+            break;
+        case Card::Colour::hearths:
+            {
+                pisz("kier");    
+            }
+            break;
+        case Card::Colour::dimonds:
+            {
+                pisz("karo");    
+            }
+            break;
+        default:
+            pisz("Halo coś coś się popsuło i nie było mnie słychać");
+            break;
+    }
+
+    switch (karta.get_value())
+    {
+        case Card::Value::_2:
+            pisz("2");
+            break;
+        case Card::Value::_3:
+            pisz("3");
+            break;
+        case Card::Value::_4:
+            pisz("4");
+            break;
+        case Card::Value::_5:
+            pisz("5");
+            break;
+        case Card::Value::_6:
+            pisz("6");
+            break;
+        case Card::Value::_7:
+            pisz("7");
+            break;
+        case Card::Value::_8:
+            pisz("8");
+            break;
+        case Card::Value::_9:
+            pisz("9");
+            break;
+        case Card::Value::_10:
+            pisz("10");
+            break;
+        case Card::Value::J:
+            pisz("J");
+            break;
+        case Card::Value::Q:
+            pisz("Q");
+            break;
+        case Card::Value::K:
+            pisz("K");
+            break;
+        case Card::Value::Ace:
+            pisz("As");
+            break;
+        default:
+            pisz("Error");
+            break;
+    }
+
+    return strumien;
+}
