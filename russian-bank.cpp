@@ -101,7 +101,7 @@ int main()
 				{
 					if(taken_card && wherefrom_card_is_taken)
 					{
-						taken_card.value().setPosition(event.mouseButton.x,event.mouseButton.y);
+						taken_card.value().setPosition(event.mouseMove.x,event.mouseMove.y);
 						break;
 					}
 				}
