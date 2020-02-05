@@ -10,7 +10,3 @@ pub use std::collections::*;
 
 pub mod card;
 pub mod game;
-
-fn main() {
-    println!("Hello, world!");
-}
