@@ -9,6 +9,7 @@
 #include"card.hpp"
 #include"move.hpp"
 #include"deck.hpp"
+#include"server_client.hpp"
 #include<utility>
 #include<initializer_list>
 #include<iostream>

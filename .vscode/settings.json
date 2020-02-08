@@ -50,7 +50,11 @@
         "stack": "cpp",
         "chrono": "cpp",
         "ratio": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "rust_server_ffi.h": "c",
+        "rust_server_binding.h": "c",
+        "c_server_ffi.h": "c",
+        "cstring": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

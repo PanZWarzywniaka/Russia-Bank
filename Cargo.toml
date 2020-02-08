@@ -10,3 +10,13 @@ edition = "2018"
 futures = "*"
 rand = "*"
 serde_json = "*"
+lazy_static = "*"
+
+[[bin]]
+name = "garibaldka_server"
+path = "src/main.rs"
+
+[lib]
+name = "server_client"
+path = "src/server_client.rs"
+crate-type = ["staticlib"]
