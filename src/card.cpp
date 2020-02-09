@@ -24,7 +24,7 @@ Card::Card(Value wart, Colour kol) // za każdym razem
 
 void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem obietów
 {
-    card_sheet.loadFromFile("Skany Kart/Docelowe/card_sheet.png");
+    card_sheet.loadFromFile("resources/card_sheet.png");
 
     Card::original_single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
     Card::original_single_card_size.x /=13; //dzielimy rozmiar przez 13 bo tyle jest kart w rzędzie
