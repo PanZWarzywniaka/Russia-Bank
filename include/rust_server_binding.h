@@ -1,7 +1,10 @@
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
 
+void bye(void);
 
+void foo(void);
 
-
-void foo();
-
-void bye();
+extern void hello_c(void);
