@@ -46,4 +46,5 @@ build_rust_lib: c_server_binding
 clean:
 	-rm $(BIN)/*
 	-rm *.o
+	-rm $(LIB)/*.a
 	-echo folder_keeper > bin/folder_keeper
