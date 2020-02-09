@@ -18,7 +18,7 @@ LINK_C_LIBRARIES   := -lserver_client -lpthread -ldl
 
 all: build_rust_lib $(BIN)/$(EXECUTABLE)
 
-run: clean all
+run: clean_run all
 	clear
 	./$(BIN)/$(EXECUTABLE)
 
@@ -42,10 +42,12 @@ build_rust_lib: c_server_binding
 	cargo build --release
 	cbindgen --lang C  src/server_client.rs > include/rust_server_binding.h
 
-
-clean:
-	-cargo clean
+clean_run:
 	-rm $(BIN)/*
 	-rm *.o
 	-rm $(LIB)/*.a
 	-echo folder_keeper > bin/folder_keeper
+
+clean: clean_run
+	-cargo clean
+	
