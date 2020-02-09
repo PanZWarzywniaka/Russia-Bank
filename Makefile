@@ -44,6 +44,7 @@ build_rust_lib: c_server_binding
 
 
 clean:
+	-cargo clean
 	-rm $(BIN)/*
 	-rm *.o
 	-rm $(LIB)/*.a
