@@ -2,6 +2,8 @@
 #include"game.hpp"
 #include <utility>
 
+#include <thread>
+
 
 int main()
 {
@@ -169,7 +171,7 @@ int main()
             }
 
         gra.okno.display();
-
+        std::this_thread::yield();
 
     }
 
