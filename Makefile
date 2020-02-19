@@ -37,7 +37,7 @@ c_server_binding.o : c_server_binding
 $(BIN)/$(EXECUTABLE): $(OBJS) 
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) -L$(RUST_LIB) $^ -o $@ $(LINK_CXX_LIBRARIES) $(LINK_C_LIBRARIES)
 
-c_server_binding: $(SRC)/c_server_binding.c $(INCLUDE)/c_server_binding.h $(SRC) common_ffi.o
+c_server_binding: $(SRC)/c_server_binding.c $(INCLUDE)/c_server_binding.h common_ffi.o
 	$(CC) -c $(C_FLAGS) -I$(INCLUDE) $< -o $@.o
 	ar rcs $(LIB)/lib$@.a $@.o common_ffi.o
 
