@@ -15,13 +15,13 @@ pub use std::collections::*;
 pub use std::sync::*;
 pub use std::thread::*;
 
-pub mod server_state;
+pub mod client_state;
 pub mod card;
 pub mod game;
-use server_state::*;
+use client_state::*;
 
 lazy_static! {
-    static ref SERVER: Mutex<Option<ServerState>> = Mutex::from(None);
+    static ref SERVER: Mutex<Option<ClientState>> = Mutex::from(None);
 }
 
 
@@ -39,17 +39,15 @@ pub extern fn foo() {
     }
 }
 
-#[no_mangle]
-pub extern fn bye() {
-    println!("Deconstruction of the server object. Hello from Rust btw.")
-}
 
 #[no_mangle]
 pub extern fn init_server() {
-    let s = SERVER.lock().unwrap();
+    let mut s = SERVER.lock().unwrap();
+    *s = Some(ClientState::new());
 }
 
 #[no_mangle]
 pub extern fn drop_server() {
-
+    let mut s = SERVER.lock().unwrap();
+    *s = None;
 }

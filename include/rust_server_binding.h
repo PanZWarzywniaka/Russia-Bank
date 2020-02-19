@@ -3,8 +3,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-void bye(void);
-
 void drop_server(void);
 
 void foo(void);

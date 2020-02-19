@@ -1,5 +1,6 @@
 
 pub enum CardValue {
+    A,
     _2,
     _3,
     _4,
@@ -11,16 +12,15 @@ pub enum CardValue {
     _10,
     J,
     Q,
-    K,
-    A
+    K
 }
 
 
 pub enum CardColor {
-    Clubs, //żołądź / trefl
-    Diamonds,
     Hearts,
-    Spades
+    Diamonds,
+    Spades,
+    Clubs //żołądź / trefl
 }
 
 
