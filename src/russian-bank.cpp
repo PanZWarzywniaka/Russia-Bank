@@ -32,6 +32,19 @@ int main()
                     gra.okno.close();
                     break;
                 }
+            case sf::Event::Resized:
+                {   
+                    //set scale
+                    auto win_size = gra.okno.getSize();
+
+                    if(win_size.x>win_size.y) win_size = {win_size.y,win_size.y};
+                    else win_size = {win_size.x,win_size.x};
+
+                    Game::scale = win_size.x/1000; //to działa tylko w tedy gdy skala 1 = winsize{1000,1000}
+                    gra.window_refresh(); //seting up window according to scale 
+
+                    break;
+                }
             case sf::Event::MouseButtonPressed:
                 {
                     

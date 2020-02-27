@@ -259,3 +259,13 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(red_player,states);
     target.draw(my_board,states);
 }
+
+void Game::window_refresh()
+{
+    //blue_player.get_deck_pointer()->setPosition();
+
+
+
+
+
+}

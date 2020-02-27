@@ -20,7 +20,7 @@ class Game: public sf::Drawable
 
     Player blue_player, red_player;
     Board my_board;
-    Player const* whose_turn;   //wskaźnik do konsta
+    Player const* whose_turn;   //wskaźnik do consta
 
     bool check_move(const Player* player_pointer, Move& ruch) const;// sprawdza legalność ruchu
 
@@ -32,13 +32,10 @@ class Game: public sf::Drawable
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     void players_move(Move&); //obsługuje ruch
-
+    void window_refresh();
     //gettery
     Player const* get_players_pointer() const;
     Player const* get_opponents_pointer() const; //ta funkcja powinna być const ale nie moge tam tego wsadzić
-
-    // Player* get_mutable_opponents_pointer() const;
-
     Board& get_board();
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;

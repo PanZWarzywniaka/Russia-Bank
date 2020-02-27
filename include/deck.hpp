@@ -10,7 +10,7 @@ class Deck: public sf::Drawable
     private:
 
     std::stack<Card> pile;
-    sf::FloatRect rect; //Rect<float>
+    sf::FloatRect rect; //Rect<float> pozycja potem rozmiar
     sf::RectangleShape frame;
     public:
     Deck() = delete;
