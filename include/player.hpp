@@ -16,8 +16,6 @@ class Player: public sf::Drawable
     std::shared_ptr<Deck> my_deck;
     std::shared_ptr<Deck> trash;
 
-    //std::pair<sf::Vector2u,sf::Vector2u> decks_position;
-
     public:
 
     Player(std::pair<sf::Vector2f,sf::Vector2f>); //konstruktor dostaje od game pierwszy dla decku i drugi dla trasha //inicjuje i tasuje talie graczy

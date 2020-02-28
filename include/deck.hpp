@@ -9,7 +9,7 @@ class Deck: public sf::Drawable
 {
     private:
 
-    std::stack<Card> pile;
+    std::vector<Card> pile;
     sf::FloatRect rect; //Rect<float> pozycja potem rozmiar
     sf::RectangleShape frame;
     public:
@@ -24,9 +24,11 @@ class Deck: public sf::Drawable
     void push(Card&& val);
     void pop();
     void clear();
-
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
     sf::FloatRect get_rect() const; //get rekt XD
+
+    void deck_scaling();
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
+
 
 };
 

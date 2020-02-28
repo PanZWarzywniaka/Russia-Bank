@@ -76,9 +76,8 @@ Card Player::draw_deck()
 
 void Player::player_scaling()
 {
-    
-
-
+    my_deck->deck_scaling();
+    trash->deck_scaling();
 }
 
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
