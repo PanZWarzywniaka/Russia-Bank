@@ -101,7 +101,7 @@ void Card::card_scaling()
     auto buf = card_sprite.getPosition();
     card_sprite.setPosition(buf.x*Game::scale,buf.y*Game::scale);
 
-    buf = card_sprite.getScale;
+    buf = card_sprite.getScale();
     card_sprite.setScale(buf.x*Game::scale,buf.y*Game::scale);
 }
 
