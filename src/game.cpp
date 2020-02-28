@@ -260,12 +260,9 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(my_board,states);
 }
 
-void Game::window_refresh()
+void Game::window_scaling()
 {
-    //blue_player.get_deck_pointer()->setPosition();
-
-
-
-
-
+    blue_player.player_scaling();
+    red_player.player_scaling();
+    //my_board.board_scaling();
 }

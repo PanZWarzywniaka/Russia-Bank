@@ -1,7 +1,6 @@
 #include<iostream>
 #include"game.hpp"
 #include <utility>
-
 #include <thread>
 
 
@@ -41,7 +40,7 @@ int main()
                     else win_size = {win_size.x,win_size.x};
 
                     Game::scale = win_size.x/1000; //to działa tylko w tedy gdy skala 1 = winsize{1000,1000}
-                    gra.window_refresh(); //seting up window according to scale 
+                    gra.window_scaling(); //seting up window according to scale 
 
                     break;
                 }

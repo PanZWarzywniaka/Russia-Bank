@@ -16,7 +16,7 @@ class Player: public sf::Drawable
     std::shared_ptr<Deck> my_deck;
     std::shared_ptr<Deck> trash;
 
-    std::pair<sf::Vector2u,sf::Vector2u> decks_position;
+    //std::pair<sf::Vector2u,sf::Vector2u> decks_position;
 
     public:
 
@@ -37,6 +37,7 @@ class Player: public sf::Drawable
     void take_trash_and_rotate(); //obsługa pustego decku
     void empty_trash_handle();//obsługa pustego trasha //obróć raz weź karte z góry do kosza i potem znowu obróć
 
+    void player_scaling();
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
 
 };

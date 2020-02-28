@@ -32,7 +32,7 @@ class Game: public sf::Drawable
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     void players_move(Move&); //obsługuje ruch
-    void window_refresh();
+    void window_scaling();
     //gettery
     Player const* get_players_pointer() const;
     Player const* get_opponents_pointer() const; //ta funkcja powinna być const ale nie moge tam tego wsadzić

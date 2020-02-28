@@ -73,6 +73,14 @@ Card Player::draw_deck()
     return ret;
 }
 
+
+void Player::player_scaling()
+{
+    
+
+
+}
+
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(*this->my_deck,states);
