@@ -1,4 +1,5 @@
 #include "deck.hpp"
+#include "game.hpp"
 
 Deck::Deck(sf::FloatRect prostokat)
 :pile(std::vector<Card>())
@@ -51,14 +52,17 @@ void Deck::pop()
 
 void Deck::deck_scaling()
 {
-    rect = Game::scale*rect;
+    rect.left *= Game::scale;
+    rect.top *= Game::scale;
+    rect.width *= Game::scale;
+    rect.height *= Game::scale;
 
     frame.setPosition(rect.left, rect.top);
     frame.setSize({rect.width, rect.height});
 
     for(Card& x: pile)
     {
-        x.card_scale();
+        x.card_scaling();
     }
 
 }

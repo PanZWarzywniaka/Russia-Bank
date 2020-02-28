@@ -1,4 +1,5 @@
 #include"card.hpp"
+#include"game.hpp"
 
 sf::Image Card::card_sheet = sf::Image();
 sf::Vector2f Card::original_single_card_size = sf::Vector2f();
@@ -95,10 +96,17 @@ void Card::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(card_sprite,states);
 }
 
+void Card::card_scaling()
+{
+    auto buf = card_sprite.getPosition();
+    card_sprite.setPosition(buf.x*Game::scale,buf.y*Game::scale);
+
+    buf = card_sprite.getScale;
+    card_sprite.setScale(buf.x*Game::scale,buf.y*Game::scale);
+}
+
 void Card::setPosition(float x, float y)
 {
-    this-> x = x;
-    this-> y = y;
     card_sprite.setPosition(x,y);
 }
 
