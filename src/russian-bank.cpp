@@ -35,17 +35,14 @@ int main()
             case sf::Event::Resized:
                 {   
                     //set scale
-                    auto win_size = gra.okno.getSize();
-
-                    if(win_size.x>win_size.y) win_size = {win_size.y,win_size.y};
-                    else win_size = {win_size.x,win_size.x};
-
+                    auto new_size = event.size; //sf::Event::Sizeevent
+                    sf::Vector2u win_size = {std::min(new_size.height,new_size.width),std::min(new_size.height,new_size.width)};
+                    
                     Game::scale = win_size.x/1000; //to działa tylko w tedy gdy skala 1 = winsize{1000,1000}
                     gra.okno.setSize(win_size);
                     gra.okno.setView(gra.okno.getDefaultView());
                     //gra.window_scaling(); //seting up window according to scale 
-                    gra.clear_and_draw_all(taken_card); //rysowanie
-
+                    gra.clear_and_draw_all(taken_card);
                     break;
                 }
             case sf::Event::MouseButtonPressed:

@@ -57,7 +57,7 @@ void Deck::deck_scaling()
     rect.width *= Game::scale;
     rect.height *= Game::scale;
 
-    frame.setPosition(rect.left, rect.top);
+    frame.setPosition({rect.left, rect.top});
     frame.setSize({rect.width, rect.height});
 
     for(Card& x: pile)
