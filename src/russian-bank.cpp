@@ -4,6 +4,7 @@
 #include <thread>
 
 
+
 int main()
 {
     std::cout<<"Hello from main. Loading textures...\n";
@@ -40,6 +41,7 @@ int main()
                     else win_size = {win_size.x,win_size.x};
 
                     Game::scale = win_size.x/1000; //to działa tylko w tedy gdy skala 1 = winsize{1000,1000}
+                    gra.okno.setSize(win_size);
                     gra.window_scaling(); //seting up window according to scale 
 
                     break;
@@ -173,16 +175,7 @@ int main()
 
 
         //okno
-        gra.okno.clear(sf::Color::Green);
-
-        gra.okno.draw(gra);
-        if(taken_card)
-            { 
-                const Card& card = taken_card.value();
-                gra.okno.draw(card);
-            }
-
-        gra.okno.display();
+        gra.clear_and_draw_all(taken_card); //rysuje okno z ewentualnym taken_card
         std::this_thread::yield();
 
     }

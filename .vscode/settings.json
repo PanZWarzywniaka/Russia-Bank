@@ -55,7 +55,8 @@
         "rust_server_binding.h": "c",
         "c_server_ffi.h": "c",
         "cstring": "cpp",
-        "common_ffi.h": "c"
+        "common_ffi.h": "c",
+        "thread": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

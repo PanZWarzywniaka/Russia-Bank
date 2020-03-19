@@ -199,7 +199,15 @@ void Game::players_move(Move& ruch)
     //event handling
 
     if(ruch.get_destination().get()==this->get_players_pointer()->get_trash_pointer().get()) //jeżeli odłożyliśmy do siebie to zamiana tury
+    {
+        std::cout<<"\nZmiana tury!\nTeraz gra ";
         this->whose_turn = this->get_opponents_pointer();
+        if(whose_turn==&blue_player)
+            std::cout<<"niebieski\n\n";
+        else
+            std::cout<<"czerwony\n\n";
+    }
+        
 
     if(this->get_players_pointer()->get_deck_pointer()->empty()) //karta na górze kosza, staje się koszem, kosz obracamy i staje się dekiem
     {//to rozwiązanie jest lepsze niż zmiana konstów
@@ -258,6 +266,20 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(blue_player,states);
     target.draw(red_player,states);
     target.draw(my_board,states);
+}
+
+void Game::clear_and_draw_all(const std::optional<Card>& taken_card)
+{
+    this->okno.clear(sf::Color::Green);
+
+        this->okno.draw(*this);
+        if(taken_card)
+            { 
+                const Card& card = taken_card.value();
+                this->okno.draw(card);
+            }
+
+        this->okno.display();
 }
 
 void Game::window_scaling()

@@ -38,6 +38,7 @@ class Game: public sf::Drawable
     Player const* get_opponents_pointer() const; //ta funkcja powinna być const ale nie moge tam tego wsadzić
     Board& get_board();
 
+    void clear_and_draw_all(const std::optional<Card>& taken_card);
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 };
