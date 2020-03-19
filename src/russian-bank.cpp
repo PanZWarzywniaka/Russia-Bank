@@ -42,7 +42,9 @@ int main()
 
                     Game::scale = win_size.x/1000; //to działa tylko w tedy gdy skala 1 = winsize{1000,1000}
                     gra.okno.setSize(win_size);
-                    gra.window_scaling(); //seting up window according to scale 
+                    gra.okno.setView(gra.okno.getDefaultView());
+                    //gra.window_scaling(); //seting up window according to scale 
+                    gra.clear_and_draw_all(taken_card); //rysowanie
 
                     break;
                 }
