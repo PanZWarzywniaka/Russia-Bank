@@ -118,6 +118,7 @@ void Player::empty_trash_handle() //wyciągnięcie karty z pod spodu decku i dod
     Deck* buf_deck = new Deck(*my_deck);
     
     Card buf_card (std::move(buf_deck->begin()));
+    std::cout<<"Karta rozpoczynająca kosz to: "<<buf_card<<"\n\n";
     trash->push(std::move(buf_card));
     this->my_deck.reset(buf_deck);
 }

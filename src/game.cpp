@@ -219,7 +219,7 @@ void Game::players_move(Move& ruch)
         
     if(this->get_players_pointer()->get_trash_pointer()->empty()) //wyciągnięcie karty z pod spodu decku i dodanie ją do kosza
     {//to rozwiązanie jest lepsze niż zmiana konstów
-        std::cout<<"Empty trash handling \n";
+        std::cout<<"\nPusty kosz!\n";
         if(whose_turn==&blue_player)
             blue_player.empty_trash_handle();
         else
