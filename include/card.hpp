@@ -45,7 +45,6 @@ class Card: public sf::Drawable
 
     public:
     //zaraz przerobie na consty
-    static sf::Image card_sheet;
     static sf::Vector2f original_single_card_size;
     static sf::Vector2f actual_single_card_size;
     static std::array<sf::Texture, 52> texture_array; //ewntualnie rozszerze do 54 gdy będę miał tekstury rewersów kart
