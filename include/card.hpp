@@ -2,7 +2,8 @@
 #define CARD_HPP
 
 #include <SFML/Graphics.hpp>
-#include<stack>
+#include <stack>
+#include <array>
 
 
 class Card: public sf::Drawable
@@ -39,7 +40,6 @@ class Card: public sf::Drawable
     Value wartosc;
     Colour kolor;
     sf::Sprite card_sprite;
-    sf::Texture card_texture;
     
     friend std::ostream &operator<<(std::ostream&,const Card&);
 
@@ -48,6 +48,7 @@ class Card: public sf::Drawable
     static sf::Image card_sheet;
     static sf::Vector2f original_single_card_size;
     static sf::Vector2f actual_single_card_size;
+    static std::array<sf::Texture, 52> texture_array; //ewntualnie rozszerze do 54 gdy będę miał tekstury rewersów kart
     
 
 

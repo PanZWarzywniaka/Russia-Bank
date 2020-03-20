@@ -9,17 +9,12 @@ Card::Card(Value wart, Colour kol) // za każdym razem
 {
     wartosc = wart;
     kolor = kol;
-    
-    const sf::Vector2i rect_positon = sf::Vector2i{original_single_card_size.x*static_cast<int>(wartosc),original_single_card_size.y*static_cast<int>(kolor)}; //zwróci {0,0} dla asa kier
-    card_texture.loadFromImage(Card::card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(original_single_card_size)));
-    card_sprite.setTexture(card_texture); //card sprite nie przechowuje tekstury tylko trzyma do niej wskaźnik, card_sheet nie powinno być kopiowane
+
+    auto get_right_texture_addres = [wart,kol]() -> size_t{return 13*static_cast<int>(kol)+static_cast<int>(wart);};
+    card_sprite.setTexture(Card::texture_array[get_right_texture_addres()]);
  
-
     //skalowanie dla skali Game::scale = 1, rozmiar karty y=150
-
     card_sprite.setScale(actual_single_card_size.x/original_single_card_size.x,actual_single_card_size.y/original_single_card_size.y); // skala dla x i y taka sama 0.07666
-
-    card_texture.setSmooth(true);
 }
 
 
@@ -32,6 +27,24 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
     Card::original_single_card_size.y /= 4; //4 kart w kolumnie
 
     Card::actual_single_card_size = sf::Vector2f(150*(original_single_card_size.x/original_single_card_size.y),150); //x/y ratio
+
+    //ładowanie wszystkich kart do tablicy
+
+    size_t array_counter = 0;
+
+    for(short kolor=0; kolor<4; ++kolor) //4 iteracje dla każdego koloru, każdy kolor to wiersz
+    {
+        for(short wartosc=0; wartosc<13; ++wartosc) //13 iteracji dla każdej wartości karty, każda wartość to kolumna
+        {
+            const sf::Vector2i rect_positon = sf::Vector2i{original_single_card_size.x*wartosc,original_single_card_size.y*kolor}; //zwróci {0,0} dla asa kier
+            sf::Texture card_texture;
+            card_texture.loadFromImage(Card::card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(original_single_card_size)));
+            card_texture.setSmooth(true);
+            texture_array[array_counter] = card_texture;
+            ++array_counter;
+        }
+
+    }
 }
 
 
