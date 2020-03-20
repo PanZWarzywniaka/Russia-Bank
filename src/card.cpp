@@ -4,6 +4,7 @@
 sf::Image Card::card_sheet = sf::Image();
 sf::Vector2f Card::original_single_card_size = sf::Vector2f();
 sf::Vector2f Card::actual_single_card_size = sf::Vector2f();
+std::array<sf::Texture, 52> Card::texture_array;
 
 Card::Card(Value wart, Colour kol) // za każdym razem
 {
@@ -47,25 +48,22 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
     }
 }
 
-
-
-
-Card::Card(const Card& karta)
+Card::Card(const Card& karta) //kopiujący
 {
     this->wartosc=karta.wartosc;
     this->kolor=karta.kolor;
     this->card_sprite=karta.card_sprite;
-    this->card_texture=karta.card_texture;
-    this->card_sprite.setTexture(this->card_texture);
+    //this->card_texture=karta.card_texture;
+    //this->card_sprite.setTexture(this->card_texture);
 }
 
-Card::Card(Card&& karta)
+Card::Card(Card&& karta) //przenoszący
 {
     wartosc = std::move(karta.wartosc);
     kolor = std::move(karta.kolor);
     card_sprite = std::move(karta.card_sprite);
-    card_texture = std::move(karta.card_texture);
-    card_sprite.setTexture(card_texture);
+    //card_texture = std::move(karta.card_texture);
+    //card_sprite.setTexture(card_texture);
 }
 
 

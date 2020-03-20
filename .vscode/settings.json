@@ -56,7 +56,9 @@
         "c_server_ffi.h": "c",
         "cstring": "cpp",
         "common_ffi.h": "c",
-        "thread": "cpp"
+        "thread": "cpp",
+        "condition_variable": "cpp",
+        "mutex": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }
