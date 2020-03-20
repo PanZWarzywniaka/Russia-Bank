@@ -3,13 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <stack>
+#include <list>
 #include "card.hpp"
 
 class Deck: public sf::Drawable
 {
     private:
 
-    std::vector<Card> pile;
+    std::list<Card> pile;
     sf::FloatRect rect; //Rect<float> pozycja potem rozmiar
     sf::RectangleShape frame;
     public:
@@ -19,10 +20,13 @@ class Deck: public sf::Drawable
     bool empty() const;
     Card& top();
     const Card& top() const;
+    Card& begin();
+    const Card& begin() const;
     size_t size() const;
     void push(const Card& val);
     void push(Card&& val);
     void pop();
+    void pop_front();
     void clear();
     sf::FloatRect get_rect() const; //get rekt XD
 

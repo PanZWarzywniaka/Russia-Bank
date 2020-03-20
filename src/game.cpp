@@ -190,7 +190,7 @@ void Game::players_move(Move& ruch)
         ruch.get_destination()->push(ruch.get_card());
         std::cout<<"Ruch pomyślny "<<ruch.get_card()<<"\n"; 
     }
-    else //karta została puszczona ale źle, nie na żaden deck, została położona na tle, cofamy ruch
+    else //karta została puszczona ale źle lub została położona na tle, cofamy ruch
     {
         ruch.get_origin()->push(ruch.get_card());
         std::cout<<"Ruch zabroniony "<<ruch.get_card()<<"\n";   
@@ -217,7 +217,7 @@ void Game::players_move(Move& ruch)
             red_player.take_trash_and_rotate();
     }
         
-    if(this->get_players_pointer()->get_trash_pointer()->empty()) //
+    if(this->get_players_pointer()->get_trash_pointer()->empty()) //wyciągnięcie karty z pod spodu decku i dodanie ją do kosza
     {//to rozwiązanie jest lepsze niż zmiana konstów
         std::cout<<"Empty trash handling \n";
         if(whose_turn==&blue_player)

@@ -113,26 +113,11 @@ void Player::take_trash_and_rotate()
 
 }
 
-void Player::empty_trash_handle()
+void Player::empty_trash_handle() //wyciągnięcie karty z pod spodu decku i dodanie ją do kosza
 {
-    Deck* buf_stack = new Deck(*(my_deck));
-    std::list<Card> buf_ls;
-
-    while(!buf_stack->empty())
-    {
-        buf_ls.push_back(buf_stack->top());
-        buf_stack->pop();
-    }
-
-    Card buf_card(std::move(*(buf_ls.rbegin()))); //ostatnia karta
+    Deck* buf_deck = new Deck(*my_deck);
+    
+    Card buf_card (std::move(buf_deck->begin()));
     trash->push(std::move(buf_card));
-
-    while (!buf_ls.empty())
-    {
-        buf_stack->push(*(buf_ls.rbegin()));
-        buf_ls.pop_back();
-    }
-
-    this->my_deck.reset(buf_stack);
-
+    this->my_deck.reset(buf_deck);
 }
