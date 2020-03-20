@@ -1,11 +1,12 @@
-#include<stack>
-#include<set>
-#include<random>
-#include<memory>
-#include<list>
+#include <stack>
+#include <set>
+#include <random>
+#include <memory>
+#include <list>
 #include <chrono>
+#include <iostream>
 #include <SFML/Graphics.hpp>
-#include"deck.hpp"
+#include "deck.hpp"
 
 class Player: public sf::Drawable
 {

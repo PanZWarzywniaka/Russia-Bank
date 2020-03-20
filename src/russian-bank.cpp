@@ -42,7 +42,7 @@ int main()
                     gra.okno.setSize(win_size);
                     gra.okno.setView(gra.okno.getDefaultView());
                     //gra.window_scaling(); //seting up window according to scale 
-                    gra.clear_and_draw_all(taken_card);
+                    //gra.clear_and_draw_all(taken_card); //nie wiem czemu ta linijka powoduje błąd wiec lepiej ją wykomentować jak jest niepotrzebna
                     break;
                 }
             case sf::Event::MouseButtonPressed:

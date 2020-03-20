@@ -2,7 +2,7 @@
 #include "game.hpp"
 
 Deck::Deck(sf::FloatRect prostokat)
-:pile(std::vector<Card>())
+:pile(std::list<Card>())
 {
     rect=prostokat;
     frame.setPosition(prostokat.left,prostokat.top);
@@ -27,6 +27,18 @@ const Card& Deck::top() const
     return *(pile.rbegin());
 }
 
+Card& Deck::begin()
+{
+    return *(pile.begin());
+
+}
+
+const Card& Deck::begin() const
+{
+    return *(pile.begin());
+}
+
+
 size_t Deck::size() const
 {
     return pile.size();
@@ -48,6 +60,16 @@ void Deck::pop()
 {
     pile.pop_back();
     if(!this->empty()) this->top().setPosition(this->rect.left,this->rect.top); //jeśli coś jest pod spodem to niech, deck da karcie pod spodem swoją pozycje
+}
+
+void Deck::pop_front()
+{
+    pile.pop_front();
+}
+
+void Deck::reverse()
+{
+    pile.reverse();
 }
 
 void Deck::deck_scaling()

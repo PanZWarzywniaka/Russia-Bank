@@ -1,7 +1,6 @@
 #include"card.hpp"
 #include"game.hpp"
 
-sf::Image Card::card_sheet = sf::Image();
 sf::Vector2f Card::original_single_card_size = sf::Vector2f();
 sf::Vector2f Card::actual_single_card_size = sf::Vector2f();
 std::array<sf::Texture, 52> Card::texture_array;
@@ -21,6 +20,7 @@ Card::Card(Value wart, Colour kol) // za każdym razem
 
 void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem obietów
 {
+    sf::Image card_sheet;
     card_sheet.loadFromFile("resources/card_sheet.png");
 
     Card::original_single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
@@ -39,7 +39,7 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
         {
             const sf::Vector2i rect_positon = sf::Vector2i{original_single_card_size.x*wartosc,original_single_card_size.y*kolor}; //zwróci {0,0} dla asa kier
             sf::Texture card_texture;
-            card_texture.loadFromImage(Card::card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(original_single_card_size)));
+            card_texture.loadFromImage(card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(original_single_card_size)));
             card_texture.setSmooth(true);
             texture_array[array_counter] = card_texture;
             ++array_counter;
