@@ -27,6 +27,7 @@ class Deck: public sf::Drawable
     void push(Card&& val);
     void pop();
     void pop_front();
+    void reverse();
     void clear();
     sf::FloatRect get_rect() const; //get rekt XD
 

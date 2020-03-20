@@ -88,29 +88,15 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void Player::take_trash_and_rotate()
 {
-    
-    Card buf_card(std::move(trash->top()));
+    Card buf_card(std::move(trash->top())); //odkładamy karte na bok
 
-    Deck* buf_stack = new Deck(*(trash));
-    std::list<Card> buf_ls;
+    trash->reverse(); //obracamy kosz
+    Deck* buf_deck = new Deck(*(trash));
+    this->my_deck.reset(buf_deck); //tworzymy nową talje z obruconego kosza
 
-    while(!buf_stack->empty())
-    {
-        buf_ls.push_back(buf_stack->top());
-        buf_stack->pop();
-    }
-
-    while (!buf_ls.empty())
-    {
-        buf_stack->push(*(buf_ls.begin()));
-        buf_ls.pop_front();
-    }
-    
-    trash->clear();
-    trash->push(std::move(buf_card));
-
-    this->my_deck.reset(buf_stack);
-
+    trash->clear(); //czyścimy stary kosz
+    std::cout<<"Obrucony kosz staje się talją, w koszu zostaje jedna karta: "<<buf_card<<"\n\n";
+    trash->push(std::move(buf_card)); //wrzucamy tam odłożoną karte
 }
 
 void Player::empty_trash_handle() //wyciągnięcie karty z pod spodu decku i dodanie ją do kosza

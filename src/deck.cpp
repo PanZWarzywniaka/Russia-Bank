@@ -67,6 +67,11 @@ void Deck::pop_front()
     pile.pop_front();
 }
 
+void Deck::reverse()
+{
+    pile.reverse();
+}
+
 void Deck::deck_scaling()
 {
     rect.left *= Game::scale;

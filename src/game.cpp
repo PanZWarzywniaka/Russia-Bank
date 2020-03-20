@@ -210,7 +210,8 @@ void Game::players_move(Move& ruch)
         
 
     if(this->get_players_pointer()->get_deck_pointer()->empty()) //karta na górze kosza, staje się koszem, kosz obracamy i staje się dekiem
-    {//to rozwiązanie jest lepsze niż zmiana konstów
+    {
+        std::cout<<"\nPusta talia!\n";
         if(whose_turn==&blue_player)
             blue_player.take_trash_and_rotate();
         else
@@ -218,7 +219,7 @@ void Game::players_move(Move& ruch)
     }
         
     if(this->get_players_pointer()->get_trash_pointer()->empty()) //wyciągnięcie karty z pod spodu decku i dodanie ją do kosza
-    {//to rozwiązanie jest lepsze niż zmiana konstów
+    {
         std::cout<<"\nPusty kosz!\n";
         if(whose_turn==&blue_player)
             blue_player.empty_trash_handle();
