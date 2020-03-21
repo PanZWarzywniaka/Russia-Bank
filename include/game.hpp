@@ -14,6 +14,7 @@
 #include<initializer_list>
 #include<iostream>
 
+
 class Game: public sf::Drawable
 {
     private:
@@ -21,6 +22,7 @@ class Game: public sf::Drawable
     Player blue_player, red_player;
     Board my_board;
     Player const* whose_turn;   //wskaźnik do consta
+    std::optional<server_client> server_conenction;
 
     bool check_move(const Player* player_pointer, Move& ruch) const;// sprawdza legalność ruchu
 

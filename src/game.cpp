@@ -189,6 +189,44 @@ void Game::players_move(Move& ruch)
     {
         ruch.get_destination()->push(ruch.get_card());
         std::cout<<"Ruch pomyślny "<<ruch.get_card()<<"\n"; 
+        //event handling
+
+        if(server_conenction) 
+        {
+
+        }
+        else
+        {
+            if(ruch.get_destination().get()==this->get_players_pointer()->get_trash_pointer().get()) //jeżeli odłożyliśmy do siebie to zamiana tury
+            {
+                std::cout<<"\nZmiana tury!\nTeraz gra ";
+                this->whose_turn = this->get_opponents_pointer();
+                if(whose_turn==&blue_player)
+                    std::cout<<"niebieski\n\n";
+                else
+                    std::cout<<"czerwony\n\n";
+            }
+                
+
+            if(this->get_players_pointer()->get_deck_pointer()->empty()) //karta na górze kosza, staje się koszem, kosz obracamy i staje się dekiem
+            {
+                std::cout<<"\nPusta talia!\n";
+                if(whose_turn==&blue_player)
+                    blue_player.take_trash_and_rotate();
+                else
+                    red_player.take_trash_and_rotate();
+            }
+                
+            if(this->get_players_pointer()->get_trash_pointer()->empty()) //wyciągnięcie karty z pod spodu decku i dodanie ją do kosza
+            {
+                std::cout<<"\nPusty kosz!\n";
+                if(whose_turn==&blue_player)
+                    blue_player.empty_trash_handle();
+                else
+                    red_player.empty_trash_handle();
+            }
+        }
+        
     }
     else //karta została puszczona ale źle lub została położona na tle, cofamy ruch
     {
@@ -196,36 +234,7 @@ void Game::players_move(Move& ruch)
         std::cout<<"Ruch zabroniony "<<ruch.get_card()<<"\n";   
     }
 
-    //event handling
-
-    if(ruch.get_destination().get()==this->get_players_pointer()->get_trash_pointer().get()) //jeżeli odłożyliśmy do siebie to zamiana tury
-    {
-        std::cout<<"\nZmiana tury!\nTeraz gra ";
-        this->whose_turn = this->get_opponents_pointer();
-        if(whose_turn==&blue_player)
-            std::cout<<"niebieski\n\n";
-        else
-            std::cout<<"czerwony\n\n";
-    }
-        
-
-    if(this->get_players_pointer()->get_deck_pointer()->empty()) //karta na górze kosza, staje się koszem, kosz obracamy i staje się dekiem
-    {
-        std::cout<<"\nPusta talia!\n";
-        if(whose_turn==&blue_player)
-            blue_player.take_trash_and_rotate();
-        else
-            red_player.take_trash_and_rotate();
-    }
-        
-    if(this->get_players_pointer()->get_trash_pointer()->empty()) //wyciągnięcie karty z pod spodu decku i dodanie ją do kosza
-    {
-        std::cout<<"\nPusty kosz!\n";
-        if(whose_turn==&blue_player)
-            blue_player.empty_trash_handle();
-        else
-            red_player.empty_trash_handle();
-    }
+    
 
 }
 
