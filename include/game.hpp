@@ -24,7 +24,7 @@ class Game: public sf::Drawable
     Player const* whose_turn;   //wskaźnik do consta
     std::optional<server_client> server_conenction;
 
-    bool check_move(const Player* player_pointer, Move& ruch) const;// sprawdza legalność ruchu
+    bool check_move(const Player* player_pointer, Move& ruch) const; // sprawdza legalność ruchu
 
 
     public:
@@ -34,10 +34,10 @@ class Game: public sf::Drawable
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     void players_move(Move&); //obsługuje ruch
-    void window_scaling();
+    void window_scaling(); //to be implemented
     //gettery
     Player const* get_players_pointer() const;
-    Player const* get_opponents_pointer() const; //ta funkcja powinna być const ale nie moge tam tego wsadzić
+    Player const* get_opponents_pointer() const;
     Board& get_board();
 
     void clear_and_draw_all(const std::optional<Card>& taken_card);

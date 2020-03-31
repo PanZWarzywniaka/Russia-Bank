@@ -193,7 +193,7 @@ void Game::players_move(Move& ruch)
 
         if(server_conenction) 
         {
-
+            //to be implemented
         }
         else
         {
