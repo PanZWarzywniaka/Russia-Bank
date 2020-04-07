@@ -1,8 +1,8 @@
-#include<iostream>
-#include"game.hpp"
+#include <iostream>
+#include "game.hpp"
 #include <utility>
 #include <thread>
-
+#include <mutex>
 
 
 int main()
@@ -34,6 +34,52 @@ int main()
                 }
             case sf::Event::Resized:
                 {   
+                    
+                    static std::chrono::system_clock::time_point lastresize;
+                    static std::mutex lr_mut;
+
+                    lr_mut.lock();
+                    lastresize = std::chrono::system_clock::now();
+                    lr_mut.unlock();
+
+                    sf::Event::SizeEvent size = event.size;
+                    unsigned int edge = std::min(size.height,size.width);
+                    while(edge%32!=0) edge--;
+
+                    auto defer_resize = [&gra,edge](std::chrono::system_clock::time_point& lastresize, std::mutex& lr_mut)
+                    {
+
+                        lr_mut.lock();
+                        std::chrono::system_clock::time_point invoke_time = lastresize;
+                        lr_mut.unlock();
+
+                        std::this_thread::sleep_for(std::chrono::milliseconds(100)); //the time
+
+                        lr_mut.lock();
+                        std::chrono::system_clock::time_point final_time = lastresize;
+                        lr_mut.unlock();
+
+                        if(invoke_time == final_time) //make sure that the last window resize happened 200ms ago in order to prevent the window from not maintaining its' aspect ratio 
+                        { 
+                            //std::lock_guard lo(window_mut); //prevent raid with drawing
+                            gra.okno.setSize({edge,edge});
+                            sf::View new_view;
+                            new_view.setSize(edge,edge);
+                            new_view.setCenter(edge/2,edge/2);
+                            gra.okno.setView(new_view);
+
+                        }
+
+                    };
+                    //std::lock_guard lo(window_mut);
+
+
+                    std::thread deferred_resize(defer_resize,std::ref(lastresize),std::ref(lr_mut));
+                    deferred_resize.detach();
+
+                    /*
+                    STARY KOD 
+
                     //set scale
                     auto new_size = event.size; //sf::Event::Sizeevent
                     sf::Vector2u win_size = {std::min(new_size.height,new_size.width),std::min(new_size.height,new_size.width)};
@@ -42,7 +88,7 @@ int main()
                     gra.okno.setSize(win_size);
                     gra.okno.setView(gra.okno.getDefaultView());
                     //gra.window_scaling(); //seting up window according to scale 
-                    //gra.clear_and_draw_all(taken_card); //nie wiem czemu ta linijka powoduje błąd wiec lepiej ją wykomentować jak jest niepotrzebna
+                    //gra.clear_and_draw_all(taken_card); //nie wiem czemu ta linijka powoduje błąd wiec lepiej ją wykomentować jak jest niepotrzebna */
                     break;
                 }
             case sf::Event::MouseButtonPressed:
