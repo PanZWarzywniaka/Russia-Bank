@@ -67,15 +67,15 @@ int main()
                             new_view.setSize(edge,edge);
                             new_view.setCenter(edge/2,edge/2);
                             gra.okno.setView(new_view);
-
+                            
                         }
 
                     };
                     //std::lock_guard lo(window_mut);
 
 
-                    std::thread deferred_resize(defer_resize,std::ref(lastresize),std::ref(lr_mut));
-                    deferred_resize.detach();
+                    std::thread defer_thread(defer_resize,std::ref(lastresize),std::ref(lr_mut));
+                    defer_thread.detach();
 
                     /*
                     STARY KOD 
