@@ -295,6 +295,6 @@ void Game::clear_and_draw_all(const std::optional<Card>& taken_card)
 void Game::window_scaling()
 {
     blue_player.player_scaling();
-    red_player.player_scaling();
+    //red_player.player_scaling();
     //my_board.board_scaling();
 }

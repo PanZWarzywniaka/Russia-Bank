@@ -46,7 +46,7 @@ int main()
                     unsigned int edge = std::min(size.height,size.width);
                     while(edge%32!=0) edge--;
 
-                    auto defer_resize = [&gra,edge](std::chrono::system_clock::time_point& lastresize, std::mutex& lr_mut)
+                    auto defer_resize = [&gra](std::chrono::system_clock::time_point& lastresize, std::mutex& lr_mut, unsigned int edge)
                     {
 
                         lr_mut.lock();
@@ -60,13 +60,17 @@ int main()
                         lr_mut.unlock();
 
                         if(invoke_time == final_time) //make sure that the last window resize happened 200ms ago in order to prevent the window from not maintaining its' aspect ratio 
-                        { 
+                        {
+                                //OKNO
                             //std::lock_guard lo(window_mut); //prevent raid with drawing
                             gra.okno.setSize({edge,edge});
                             sf::View new_view;
                             new_view.setSize(edge,edge);
                             new_view.setCenter(edge/2,edge/2);
                             gra.okno.setView(new_view);
+                                //GRA
+                            Game::scale = edge/1000; //ustawienie odpowiedniej skali
+                            gra.window_scaling();
                             
                         }
 
@@ -74,7 +78,7 @@ int main()
                     //std::lock_guard lo(window_mut);
 
 
-                    std::thread defer_thread(defer_resize,std::ref(lastresize),std::ref(lr_mut));
+                    std::thread defer_thread(defer_resize,std::ref(lastresize),std::ref(lr_mut),edge);
                     defer_thread.detach();
 
                     /*
