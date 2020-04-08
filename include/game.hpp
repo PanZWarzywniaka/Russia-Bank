@@ -4,15 +4,16 @@
 #include <iterator>
 #include <optional>
 #include <SFML/Graphics.hpp>
-#include"player.hpp"
-#include"board.hpp"
-#include"card.hpp"
-#include"move.hpp"
-#include"deck.hpp"
-#include"server_client.hpp"
-#include<utility>
-#include<initializer_list>
-#include<iostream>
+#include <utility>
+#include <initializer_list>
+#include <iostream>
+#include <mutex>
+#include "player.hpp"
+#include "board.hpp"
+#include "card.hpp"
+#include "move.hpp"
+#include "deck.hpp"
+#include "server_client.hpp"
 
 
 class Game: public sf::Drawable
@@ -31,7 +32,7 @@ class Game: public sf::Drawable
     public:
 
     sf::RenderWindow okno;
-    
+    std::mutex game_mutex;
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     void players_move(Move&); //obsługuje ruch

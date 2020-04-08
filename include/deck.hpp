@@ -31,7 +31,7 @@ class Deck: public sf::Drawable
     void clear();
     sf::FloatRect get_rect() const; //get rekt XD
 
-    void deck_scaling();
+    void deck_scaling(sf::Vector2u);
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
 
 

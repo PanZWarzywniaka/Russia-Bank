@@ -72,19 +72,19 @@ void Deck::reverse()
     pile.reverse();
 }
 
-void Deck::deck_scaling()
+void Deck::deck_scaling(sf::Vector2u position)
 {
-    rect.left *= Game::get_scale();
-    rect.top *= Game::get_scale();
-    rect.width *= Game::get_scale();
-    rect.height *= Game::get_scale();
+    rect.left = position.x*Game::get_scale();
+    rect.top = position.y*Game::get_scale();
+    rect.width = Card::actual_single_card_size.x*Game::get_scale();
+    rect.height = Card::actual_single_card_size.y*Game::get_scale();
 
     frame.setPosition({rect.left, rect.top});
     frame.setSize({rect.width, rect.height});
 
     for(Card& x: pile)
     {
-        x.card_scaling();
+        x.card_scaling(position);
     }
 
 }

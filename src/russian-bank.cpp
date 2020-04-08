@@ -62,7 +62,7 @@ int main()
                         if(invoke_time == final_time) //make sure that the last window resize happened 200ms ago in order to prevent the window from not maintaining its' aspect ratio 
                         {
                                 //OKNO
-                            //std::lock_guard lo(window_mut); //prevent raid with drawing
+                            std::lock_guard my_lock(gra.game_mutex); //prevent raid with drawing
                             gra.okno.setSize({edge,edge});
                             sf::View new_view;
                             new_view.setSize(edge,edge);
@@ -75,7 +75,7 @@ int main()
                         }
 
                     };
-                    //std::lock_guard lo(window_mut);
+                    std::lock_guard my_lock(gra.game_mutex);
 
 
                     std::thread defer_thread(defer_resize,std::ref(lastresize),std::ref(lr_mut),edge);

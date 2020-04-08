@@ -107,12 +107,11 @@ void Card::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(card_sprite,states);
 }
 
-void Card::card_scaling()
+void Card::card_scaling(sf::Vector2u position)
 {
-    auto buf = card_sprite.getPosition();
-    card_sprite.setPosition(buf.x*Game::get_scale(),buf.y*Game::get_scale());
+    card_sprite.setPosition(position.x*Game::get_scale(),position.y*Game::get_scale());
 
-    buf = card_sprite.getScale();
+    auto buf = card_sprite.getScale();
     card_sprite.setScale(buf.x*Game::get_scale(),buf.y*Game::get_scale());
 }
 

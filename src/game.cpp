@@ -279,7 +279,8 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 }
 
 void Game::clear_and_draw_all(const std::optional<Card>& taken_card)
-{
+{   
+    std::lock_guard my_lock(game_mutex);
     this->okno.clear(sf::Color::Green);
 
         this->okno.draw(*this);
@@ -304,7 +305,36 @@ void Game::set_scale(double new_scale)
 
 void Game::window_scaling()
 {
-    blue_player.player_scaling();
-    red_player.player_scaling();
-    //my_board.board_scaling();
+    //skalowanie blue playera (290,20), (610,20)
+    blue_player.get_deck_pointer()->deck_scaling({290,20}); 
+    blue_player.get_deck_pointer()->deck_scaling({610,20});
+
+    //skalowanie red playera (290,830), (610,830)
+    red_player.get_deck_pointer()->deck_scaling({290,830}); 
+    red_player.get_deck_pointer()->deck_scaling({610,830});
+    
+    //skalowanie lewa kolumna bakowych {390,180},{390,340},{390,500},{390,660}
+    my_board.pola_bank[0]->deck_scaling({390,180});
+    my_board.pola_bank[1]->deck_scaling({390,340});
+    my_board.pola_bank[2]->deck_scaling({390,500});
+    my_board.pola_bank[3]->deck_scaling({390,660});
+
+    //skalowanie prawa kolumna bakowych {510,180},{510,340},{510,500},{510,660}
+    my_board.pola_bank[4]->deck_scaling({510,180});
+    my_board.pola_bank[5]->deck_scaling({510,340});
+    my_board.pola_bank[6]->deck_scaling({510,500});
+    my_board.pola_bank[7]->deck_scaling({510,660});
+
+    //skalowanie lewa kolumna zewnetrznych {240,180},{240,340},{240,500},{240,660} 
+    my_board.pola_zew[0]->deck_scaling({240,180});
+    my_board.pola_zew[1]->deck_scaling({240,340});
+    my_board.pola_zew[2]->deck_scaling({240,500});
+    my_board.pola_zew[3]->deck_scaling({240,660});
+
+    //skalowanie prawa kolumna zewnetrznych {660,180},{660,340},{660,500},{660,660}
+    my_board.pola_zew[4]->deck_scaling({660,180});
+    my_board.pola_zew[5]->deck_scaling({660,340});
+    my_board.pola_zew[6]->deck_scaling({660,500});
+    my_board.pola_zew[7]->deck_scaling({660,660});
+
 }

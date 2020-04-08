@@ -66,7 +66,7 @@ class Card: public sf::Drawable
     bool is_black() const; //poprawne politycznie?
     static void load_texuture();
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
-    void card_scaling();
+    void card_scaling(sf::Vector2u position);
     void setPosition(float,float);
 
 };
