@@ -110,10 +110,10 @@ void Card::draw(sf::RenderTarget &target, sf::RenderStates states) const
 void Card::card_scaling()
 {
     auto buf = card_sprite.getPosition();
-    card_sprite.setPosition(buf.x*Game::scale,buf.y*Game::scale);
+    card_sprite.setPosition(buf.x*Game::get_scale(),buf.y*Game::get_scale());
 
     buf = card_sprite.getScale();
-    card_sprite.setScale(buf.x*Game::scale,buf.y*Game::scale);
+    card_sprite.setScale(buf.x*Game::get_scale(),buf.y*Game::get_scale());
 }
 
 void Card::setPosition(float x, float y)

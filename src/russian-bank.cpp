@@ -69,7 +69,7 @@ int main()
                             new_view.setCenter(edge/2,edge/2);
                             gra.okno.setView(new_view);
                                 //GRA
-                            Game::scale = edge/1000; //ustawienie odpowiedniej skali
+                            gra.set_scale(static_cast<double>(edge)/1000); //ustawienie odpowiedniej skali
                             gra.window_scaling();
                             
                         }

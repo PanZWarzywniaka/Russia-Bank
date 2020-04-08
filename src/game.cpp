@@ -1,6 +1,6 @@
 #include"game.hpp"
 
-float Game::scale = 1;
+double Game::scale = 1;
 
 Game::Game()
 :okno(sf::VideoMode(1000, 1000), "Garibaldka 0.1"),
@@ -292,9 +292,19 @@ void Game::clear_and_draw_all(const std::optional<Card>& taken_card)
         this->okno.display();
 }
 
+const double Game::get_scale()
+{
+    return Game::scale;
+}
+
+void Game::set_scale(double new_scale)
+{
+    Game::scale = new_scale;
+}
+
 void Game::window_scaling()
 {
     blue_player.player_scaling();
-    //red_player.player_scaling();
+    red_player.player_scaling();
     //my_board.board_scaling();
 }

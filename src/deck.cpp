@@ -74,10 +74,10 @@ void Deck::reverse()
 
 void Deck::deck_scaling()
 {
-    rect.left *= Game::scale;
-    rect.top *= Game::scale;
-    rect.width *= Game::scale;
-    rect.height *= Game::scale;
+    rect.left *= Game::get_scale();
+    rect.top *= Game::get_scale();
+    rect.width *= Game::get_scale();
+    rect.height *= Game::get_scale();
 
     frame.setPosition({rect.left, rect.top});
     frame.setSize({rect.width, rect.height});
