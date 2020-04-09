@@ -1,7 +1,5 @@
 #include"game.hpp"
 
-double Game::scale = 1;
-
 Game::Game()
 :okno(sf::VideoMode(1000, 1000), "Garibaldka 0.1"),
 blue_player(std::make_pair(sf::Vector2f(290,20), sf::Vector2f(610,20))), //pierwszy dla decka drugi dla decka drugi dla trasha
@@ -293,7 +291,7 @@ void Game::clear_and_draw_all(const std::optional<Card>& taken_card)
         this->okno.display();
 }
 
-const double Game::get_scale()
+const double Game::get_scale() const
 {
     return Game::scale;
 }
