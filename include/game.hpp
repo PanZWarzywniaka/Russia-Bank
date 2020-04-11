@@ -7,6 +7,7 @@
 #include <utility>
 #include <initializer_list>
 #include <iostream>
+#include <thread>
 #include <mutex>
 #include "player.hpp"
 #include "board.hpp"
@@ -25,7 +26,7 @@ class Game: public sf::Drawable
     Player const* whose_turn;   //wskaźnik do consta
     static double scale;
     bool running;
-    std::optional<Card> taken_crd;
+    std::optional<Move> potential_move;
     std::optional<server_client> server_conenction;
 
     bool check_move(const Player* player_pointer, Move& ruch) const; // sprawdza legalność ruchu
@@ -40,6 +41,8 @@ class Game: public sf::Drawable
     void players_move(Move&); //obsługuje ruch
     void window_scaling(); //to be implemented
     //gettery
+
+    void event_handling();
     Player const* get_players_pointer() const;
     Player const* get_opponents_pointer() const;
     Board& get_board();
