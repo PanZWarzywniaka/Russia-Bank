@@ -24,6 +24,8 @@ class Game: public sf::Drawable
     Board my_board;
     Player const* whose_turn;   //wskaźnik do consta
     static double scale;
+    bool running;
+    std::optional<Card> taken_crd;
     std::optional<server_client> server_conenction;
 
     bool check_move(const Player* player_pointer, Move& ruch) const; // sprawdza legalność ruchu
@@ -43,6 +45,7 @@ class Game: public sf::Drawable
     Board& get_board();
     static const double get_scale();
     static void set_scale(double);
+    bool is_running() const;
 
     void clear_and_draw_all(const std::optional<Card>& taken_card);
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;

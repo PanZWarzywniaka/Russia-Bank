@@ -21,6 +21,7 @@ my_board(std::make_pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> /*s
 {
     okno.setFramerateLimit(60); //limit fps 60
     scale = 1;
+    running = true;
 
     //wersja gry za możliwością dania asa na stół przy otwarciu // możeliwe poźniej do zmiany
     //niebieski gracz wypełnia pierwsze cztery pola zewnętrzne a czerwony cztery ostatnie
@@ -337,4 +338,9 @@ void Game::window_scaling()
     my_board.pola_zew[6]->deck_scaling({660,500});
     my_board.pola_zew[7]->deck_scaling({660,660});
 
+}
+
+bool Game::is_running() const
+{
+    return running;
 }

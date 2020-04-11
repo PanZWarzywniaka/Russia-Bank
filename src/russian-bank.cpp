@@ -75,8 +75,6 @@ int main()
                         }
 
                     };
-                    std::lock_guard my_lock(gra.game_mutex);
-
 
                     std::thread defer_thread(defer_resize,std::ref(lastresize),std::ref(lr_mut),edge);
                     defer_thread.detach();
