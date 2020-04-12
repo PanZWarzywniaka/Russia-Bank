@@ -14,17 +14,13 @@ int main()
     Game gra;
     std::cout<<"Done.\n";
     server_client client; //test bindingu, siema elo, to nic nie robi w kodzie, ale se tym testuję binding
-    //bufory do move
-    std::optional<Card> taken_card=std::nullopt;
-    std::shared_ptr<Deck> wherefrom_card_is_taken=nullptr; //stos z którego bierzemy // foooking british english old use
-    std::shared_ptr<Deck> whereto_card_is_taken=nullptr; //pointer to const Deck
-
     std::cout<<"Starting event loop.\n";
+
     while(gra.is_running())
     {
         sf::Event event;
         gra.event_handling();
-        gra.clear_and_draw_all(taken_card); //rysuje okno z ewentualnym taken_card
+        gra.clear_and_draw_all(); //rysuje okno d
         std::this_thread::yield();
 
     }

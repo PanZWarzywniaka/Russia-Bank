@@ -50,7 +50,7 @@ class Game: public sf::Drawable
     static void set_scale(double);
     bool is_running() const;
 
-    void clear_and_draw_all(const std::optional<Card>& taken_card);
+    void clear_and_draw_all();
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 };

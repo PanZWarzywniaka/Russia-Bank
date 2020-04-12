@@ -279,15 +279,15 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(my_board,states);
 }
 
-void Game::clear_and_draw_all(const std::optional<Card>& taken_card)
+void Game::clear_and_draw_all()
 {   
     std::lock_guard my_lock(game_mutex);
     this->okno.clear(sf::Color::Green);
 
         this->okno.draw(*this);
-        if(taken_card)
+        if(potential_move)
             { 
-                const Card& card = taken_card.value();
+                const Card& card = potential_move.value().get_card();
                 this->okno.draw(card);
             }
 
@@ -362,7 +362,7 @@ void Game::event_handling()
                 }
             case sf::Event::Resized:
                 {   
-                    
+                    /*
                     static std::chrono::system_clock::time_point lastresize;
                     static std::mutex lr_mut;
 
@@ -390,7 +390,7 @@ void Game::event_handling()
                         if(invoke_time == final_time) //make sure that the last window resize happened 200ms ago in order to prevent the window from not maintaining its' aspect ratio 
                         {
                                 //OKNO
-                            std::lock_guard my_lock(game_mutex); //prevent raid with drawing
+                            //std::lock_guard my_lock(game_mutex); //prevent raid with drawing
                             okno.setSize({edge,edge});
                             sf::View new_view;
                             new_view.setSize(edge,edge);
@@ -475,9 +475,9 @@ void Game::event_handling()
                 }
             case sf::Event::MouseMoved:
 				{
-					if(taken_card && wherefrom_card_is_taken)
+					if(potential_move)
 					{
-						taken_card.value().setPosition(event.mouseMove.x-(Card::actual_single_card_size.x/2),event.mouseMove.y-(Card::actual_single_card_size.y/2));
+						potential_move.value().get_card().setPosition(event.mouseMove.x-(Card::actual_single_card_size.x/2),event.mouseMove.y-(Card::actual_single_card_size.y/2));
 						break;
 					}
 				}
@@ -486,36 +486,32 @@ void Game::event_handling()
 
                     if(potential_move)
                     {
-                        //ustalamy wskaźnik do decku na miejsce gdzie jest kursor
-                        potential_move.value = [&]() -> std::shared_ptr<Deck> /*tu NIE odbywa się walidacja dokąd możemy dać karte, sprawdzanie robie gra.players_move()*/
+                        potential_move.value().set_destination([&]()-> std::shared_ptr<Deck> //ustalamy wskaźnik do decku na miejsce gdzie jest kursor
                         {
                             sf::Vector2f point (event.mouseButton.x,event.mouseButton.y);
 
-                            for(std::shared_ptr<Deck> deck: gra.get_board().get_decks_arrays().first) //pola bankowe sprawdzamy
+                            for(std::shared_ptr<Deck> deck: my_board.get_decks_arrays().first) //pola bankowe sprawdzamy
                             {
                                 if(deck->get_rect().contains(point)) return deck;
                             }
 
-                            for(std::shared_ptr<Deck> deck: gra.get_board().get_decks_arrays().second) //pola zew sprawdzamy
+                            for(std::shared_ptr<Deck> deck: my_board.get_decks_arrays().second) //pola zew sprawdzamy
                             {
-                                if(deck->get_rect().contains(point)) return deck;//tu jest bug ale niew wiem jak go naprawić wherefrome_car_is_taken nie dostaje dobrego wskaźnika
+                                if(deck->get_rect().contains(point)) return deck;
                             }
 
-                            if(gra.get_players_pointer()->get_deck_pointer()->get_rect().contains(point)) return gra.get_players_pointer()->get_deck_pointer();
-                            if(gra.get_players_pointer()->get_trash_pointer()->get_rect().contains(point)) return gra.get_players_pointer()->get_trash_pointer(); 
-                            if(gra.get_opponents_pointer()->get_deck_pointer()->get_rect().contains(point)) return gra.get_opponents_pointer()->get_deck_pointer();
-                            if(gra.get_opponents_pointer()->get_trash_pointer()->get_rect().contains(point)) return gra.get_opponents_pointer()->get_trash_pointer(); 
+                            if(whose_turn->get_deck_pointer()->get_rect().contains(point)) return whose_turn->get_deck_pointer();
+                            if(whose_turn->get_trash_pointer()->get_rect().contains(point)) return whose_turn->get_trash_pointer(); 
+                            if(get_opponents_pointer()->get_deck_pointer()->get_rect().contains(point)) return get_opponents_pointer()->get_deck_pointer();
+                            if(get_opponents_pointer()->get_trash_pointer()->get_rect().contains(point)) return get_opponents_pointer()->get_trash_pointer(); 
 
                             //jeżeli gdziekolwiek indziej klikneliśmy
                             return nullptr;
-                        }();
-
-                        Move ruch(wherefrom_card_is_taken,whereto_card_is_taken,std::move(taken_card.value())); 
-                        gra.players_move(ruch);                                    
+                        }());
                         
-                        taken_card = std::nullopt;
-                        wherefrom_card_is_taken = nullptr;
-                        whereto_card_is_taken = nullptr;
+
+                        players_move(potential_move.value());                                    
+                        potential_move.reset();
                         
                     }
                     break;
