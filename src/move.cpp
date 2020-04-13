@@ -33,6 +33,5 @@ Card Move::get_card() const
 
 void Move::set_destination(std::shared_ptr<Deck> destination)
 {
-    if(destination==nullptr) throw std::runtime_error("Move's destination is nullptr");
-    else dokad = destination;
+    dokad = destination;
 }

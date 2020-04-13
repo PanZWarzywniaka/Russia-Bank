@@ -282,16 +282,17 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 void Game::clear_and_draw_all()
 {   
     std::lock_guard my_lock(game_mutex);
-    this->okno.clear(sf::Color::Green);
 
-        this->okno.draw(*this);
-        if(potential_move)
-            { 
-                const Card& card = potential_move.value().get_card();
-                this->okno.draw(card);
-            }
+    okno.clear(sf::Color::Green);
+    okno.draw(*this);
 
-        this->okno.display();
+    if(potential_move)
+        { 
+            const Card& card = potential_move.value().get_card();
+            okno.draw(card);
+        }
+        
+    okno.display();
 }
 
 const double Game::get_scale()
@@ -351,7 +352,7 @@ void Game::event_handling()
     sf::Event event;
 
     while (okno.pollEvent(event))
-        {
+    {
             switch (event.type)
             {
             case sf::Event::Closed:
@@ -487,7 +488,7 @@ void Game::event_handling()
                 }
             case sf::Event::MouseMoved:
 				{
-					if(potential_move)
+					if(potential_move.has_value())
 					{
 						potential_move.value().get_card().setPosition(event.mouseMove.x-(Card::actual_single_card_size.x/2),event.mouseMove.y-(Card::actual_single_card_size.y/2));
 						break;
@@ -534,7 +535,7 @@ void Game::event_handling()
 
 
 
-        }
+    }
 
 
 }
