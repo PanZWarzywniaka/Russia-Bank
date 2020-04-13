@@ -424,24 +424,36 @@ void Game::event_handling()
             case sf::Event::MouseButtonPressed:
                 {
                     
+                    
                     auto get_origin_and_taken_card = [&]() -> std::optional<std::pair<std::shared_ptr<Deck>,Card>> /*tu odbywa się walidacja skąd możemy zabrać karte*/ 
                     {
+                        
+                        auto get_card_and_set_its_pos = [&](const std::shared_ptr<Deck> deck) -> Card 
+                        {
+                            Card buf = deck->top();
+                            deck->pop();
+                            buf.setPosition(event.mouseButton.x-(Card::actual_single_card_size.x/2),event.mouseButton.y-(Card::actual_single_card_size.y/2));
+                            return buf;
+                        };
+
                         sf::Vector2f point (event.mouseButton.x,event.mouseButton.y);
 
                         for(const std::shared_ptr<Deck> deck: my_board.get_decks_arrays().first) //pola bankowe sprawdzamy, nigdy nie można wziąć karty z banku
                         {   
-                            return std::nullopt;
+                            if(deck->get_rect().contains(point))
+                            {
+                                return std::nullopt;
+                            }
+                            
                         }
 
-                        for(std::shared_ptr<Deck> deck: my_board.get_decks_arrays().second) //pola zew sprawdzamy, zawsze można wziąć karty
+                        for(const std::shared_ptr<Deck> deck: my_board.get_decks_arrays().second) //pola zew sprawdzamy, zawsze można wziąć karty
                         {
                             if(!deck->empty())
                             {
                                 if(deck->get_rect().contains(point))
                                 {
-                                    Card buf = std::move(deck->top());
-                                    buf.setPosition(event.mouseButton.x-(Card::actual_single_card_size.x/2),event.mouseButton.y-(Card::actual_single_card_size.y/2));
-                                    return std::make_pair(deck,buf);
+                                    return std::make_pair(deck,get_card_and_set_its_pos(deck));
                                 }
                             }
                         }
@@ -450,9 +462,8 @@ void Game::event_handling()
                         {
                             if(whose_turn->get_deck_pointer()->get_rect().contains(point))
                             {
-                                Card buf = std::move(whose_turn->get_deck_pointer()->top());
-                                buf.setPosition(event.mouseButton.x-(Card::actual_single_card_size.x/2),event.mouseButton.y-(Card::actual_single_card_size.y/2));
-                                return std::make_pair(whose_turn->get_deck_pointer(),buf);
+                                const std::shared_ptr<Deck> deck = whose_turn->get_deck_pointer();
+                                return std::make_pair(deck,get_card_and_set_its_pos(deck));
                             } 
                            
                         }
@@ -461,15 +472,16 @@ void Game::event_handling()
                         {
                             if(whose_turn->get_trash_pointer()->get_rect().contains(point)) 
                             {
-                                Card buf = std::move(whose_turn->get_trash_pointer()->top());
-                                buf.setPosition(event.mouseButton.x-(Card::actual_single_card_size.x/2),event.mouseButton.y-(Card::actual_single_card_size.y/2));
-                                return std::make_pair(whose_turn->get_trash_pointer(),buf);
+                                const std::shared_ptr<Deck> deck = whose_turn->get_trash_pointer();
+                                return std::make_pair(deck,get_card_and_set_its_pos(deck));
                             }
                         }
                         
                         return std::nullopt;
                     }();
-                    if(get_origin_and_taken_card)  potential_move.emplace(Move(get_origin_and_taken_card.value().first,get_origin_and_taken_card.value().second));
+
+                    if(get_origin_and_taken_card)  
+                        potential_move.emplace(Move(get_origin_and_taken_card.value().first,get_origin_and_taken_card.value().second));
 
                     break;
                 }
