@@ -26,7 +26,7 @@ const std::shared_ptr<Deck> Move::get_destination() const
     return dokad;
 }
 
-Card Move::get_card() const
+const Card Move::get_card() const
 {
     return karta_w_reku;
 }
@@ -34,4 +34,9 @@ Card Move::get_card() const
 void Move::set_destination(std::shared_ptr<Deck> destination)
 {
     dokad = destination;
+}
+
+void Move::set_cards_position(float x, float y)
+{
+    karta_w_reku.setPosition(x,y);
 }

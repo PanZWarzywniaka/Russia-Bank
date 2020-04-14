@@ -288,7 +288,7 @@ void Game::clear_and_draw_all()
 
     if(potential_move)
         { 
-            const Card& card = potential_move.value().get_card();
+            const Card card = potential_move.value().get_card();
             okno.draw(card);
         }
         
@@ -490,7 +490,7 @@ void Game::event_handling()
 				{
 					if(potential_move.has_value())
 					{
-						potential_move.value().get_card().setPosition(event.mouseMove.x-(Card::actual_single_card_size.x/2),event.mouseMove.y-(Card::actual_single_card_size.y/2));
+						potential_move.value().set_cards_position(event.mouseMove.x-(Card::actual_single_card_size.x/2),event.mouseMove.y-(Card::actual_single_card_size.y/2));
 						break;
 					}
 				}

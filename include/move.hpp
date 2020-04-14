@@ -20,7 +20,8 @@ public:
     //getery
     const std::shared_ptr<Deck> get_origin() const;
     const std::shared_ptr<Deck> get_destination() const;
-    Card get_card() const;
+    const Card get_card() const;
     //setery
     void set_destination(std::shared_ptr<Deck>);
+    void set_cards_position(float x, float y);
 };
