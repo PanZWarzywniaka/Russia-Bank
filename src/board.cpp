@@ -24,11 +24,7 @@ pola_zew{
             std::shared_ptr<Deck>(new Deck())
         }
 {
-        for(auto& x: pola_bank)
-        x->initial_setup();
 
-        for(auto& x: pola_zew)
-        x->initial_setup();
 }
 
 std::pair<std::array<std::shared_ptr<Deck>,8>,std::array<std::shared_ptr<Deck>,8>> Board::get_decks_arrays() const

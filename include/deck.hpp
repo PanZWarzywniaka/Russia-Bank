@@ -15,7 +15,6 @@ class Deck: public sf::Drawable
     sf::RectangleShape frame;
     public:
     Deck();
-    void initial_setup(); 
 
     
     bool empty() const;

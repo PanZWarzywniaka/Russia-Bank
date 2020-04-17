@@ -4,16 +4,10 @@
 Deck::Deck()
 :pile(std::list<Card>())
 {
-    
+        frame.setFillColor(sf::Color::Transparent);
+        frame.setOutlineColor(sf::Color::Black);
+        frame.setOutlineThickness(2);
 }
-
-void Deck::initial_setup()
-{
-    frame.setFillColor(sf::Color::Transparent);
-    frame.setOutlineColor(sf::Color::Black);
-    frame.setOutlineThickness(2);
-}
-
 bool Deck::empty() const
 {
     return pile.empty();    

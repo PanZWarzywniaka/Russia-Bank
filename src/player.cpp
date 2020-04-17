@@ -5,9 +5,6 @@ Player::Player() //inicjuje i tasuje talie graczy //pierwszy wektor pos dla deck
 :my_deck(new Deck()),
 trash(new Deck())
 {
-    my_deck->initial_setup();
-    trash->initial_setup();
-
     std::set<Card> possible_cards;
 
     for(short i=0; i<4; ++i) //4 iteracje dla każdego koloru
