@@ -1,30 +1,34 @@
 #include"board.hpp"
 
-Board::Board(std::pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> pos_pair) //przechowuje pozycje
+Board::Board() //przechowuje pozycje
 //pola bank
 :pola_bank{ 
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[0],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[1],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[2],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[3],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[4],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[5],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[6],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.first[7],sf::Vector2f(Card::get_default_single_card_size()))))
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck())
         },
 // pola zewnętrzne
 pola_zew{
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[0],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[1],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[2],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[3],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[4],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[5],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[6],sf::Vector2f(Card::get_default_single_card_size())))),
-            std::shared_ptr<Deck>(new Deck(sf::FloatRect(pos_pair.second[7],sf::Vector2f(Card::get_default_single_card_size()))))
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck()),
+            std::shared_ptr<Deck>(new Deck())
         }
 {
+        for(auto& x: pola_bank)
+        x->initial_setup();
 
+        for(auto& x: pola_zew)
+        x->initial_setup();
 }
 
 std::pair<std::array<std::shared_ptr<Deck>,8>,std::array<std::shared_ptr<Deck>,8>> Board::get_decks_arrays() const

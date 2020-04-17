@@ -14,8 +14,9 @@ class Deck: public sf::Drawable
     sf::FloatRect rect; //Rect<float> pozycja potem rozmiar
     sf::RectangleShape frame;
     public:
-    Deck() = delete;
-    Deck(sf::FloatRect);
+    Deck();
+    void initial_setup(); 
+
     
     bool empty() const;
     Card& top();

@@ -19,7 +19,7 @@ class Player: public sf::Drawable
 
     public:
 
-    Player(std::pair<sf::Vector2f,sf::Vector2f>); //konstruktor dostaje od game pierwszy dla decku i drugi dla trasha //inicjuje i tasuje talie graczy
+    Player(); //konstruktor dostaje od game pierwszy dla decku i drugi dla trasha //inicjuje i tasuje talie graczy
 
     //gettery potrzebne do Game::player_move()
     std::shared_ptr<Deck> get_deck_pointer() const; //zwraca wskaźnik do talii

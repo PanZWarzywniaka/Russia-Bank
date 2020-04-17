@@ -30,16 +30,16 @@ class Game: public sf::Drawable
     std::optional<server_client> server_conenction;
 
     bool check_move(const Player* player_pointer, Move& ruch) const; // sprawdza legalność ruchu
+    void window_setup();
 
 
     public:
 
-    sf::RenderWindow okno;
-    std::mutex game_mutex;
-
     Game(); //daje początkowo karty na stół i początkową karte z kosza
     void players_move(Move&); //obsługuje ruch
-    void window_scaling(); //to be implemented
+
+    sf::RenderWindow okno;
+    std::mutex game_mutex;
     //gettery
 
     void event_handling();

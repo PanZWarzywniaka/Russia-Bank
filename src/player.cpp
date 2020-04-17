@@ -1,10 +1,13 @@
 #include "player.hpp"
 
 
-Player::Player(std::pair<sf::Vector2f, sf::Vector2f> pos) //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
-:my_deck(new Deck(sf::FloatRect(pos.first,Card::get_default_single_card_size()))),
-trash(new Deck(sf::FloatRect(pos.second,Card::get_default_single_card_size())))
+Player::Player() //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
+:my_deck(new Deck()),
+trash(new Deck())
 {
+    my_deck->initial_setup();
+    trash->initial_setup();
+
     std::set<Card> possible_cards;
 
     for(short i=0; i<4; ++i) //4 iteracje dla każdego koloru

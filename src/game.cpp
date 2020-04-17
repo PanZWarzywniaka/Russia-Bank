@@ -4,23 +4,14 @@ double Game::scale = 1;
 
 Game::Game()
 :okno(sf::VideoMode(1000, 1000), "Garibaldka 0.1"),
-blue_player(std::make_pair(sf::Vector2f(290,20), sf::Vector2f(610,20))), //pierwszy dla decka drugi dla decka drugi dla trasha
-red_player(std::make_pair(sf::Vector2f(290,830), sf::Vector2f(610,830))),
-my_board(std::make_pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>> /*std::pair<std::vector<sf::Vector2f>,std::vector<sf::Vector2f>>*/
-        (
-            {
-                {390,180},{390,340},{390,500},{390,660}, /*lewa kolumna bakowych*/
-                {510,180},{510,340},{510,500},{510,660} /*prawa kolumna bakowych*/
-            },
-            {
-                {240,180},{240,340},{240,500},{240,660}, /*lewa kolumna zewnetrznych*/
-                {660,180},{660,340},{660,500},{660,660} /*prawa kolumna zewnetrznych*/
-            }
-        )
-    )
+blue_player(), //pierwszy dla decka drugi dla decka drugi dla trasha
+red_player(),
+my_board()
 {
     okno.setFramerateLimit(60); //limit fps 60
     scale = 1;
+    window_setup(); //initial setup
+
     running = true;
 
     //wersja gry za możliwością dania asa na stół przy otwarciu // możeliwe poźniej do zmiany
@@ -303,7 +294,7 @@ void Game::set_scale(double new_scale)
     Game::scale = new_scale;
 }
 
-void Game::window_scaling()
+void Game::window_setup()
 {
 
     //skalowanie blue playera (290,20), (610,20)
@@ -396,7 +387,7 @@ void Game::event_handling()
                             okno.setView(new_view);
                                 //GRA
                             set_scale(static_cast<double>(edge)/1000); //ustawienie odpowiedniej skali
-                            window_scaling();
+                            window_setup();
                                 
                         }
                     };

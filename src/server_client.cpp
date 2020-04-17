@@ -12,7 +12,7 @@ card* into_c::cpp_card(const Card& crd) {
     return make_card(static_cast<unsigned char>(crd.get_colour()),static_cast<unsigned char>(crd.get_value()));
 }
 Deck into_cpp::c_deck(const deck* dck,sf::FloatRect fr) {
-    Deck ret(fr);
+    Deck ret; //tu zmieniłem konstruktor 
     std::stack<const deck*> pointer_depth;
     const deck* curr = dck;
     while(curr->node_below) {

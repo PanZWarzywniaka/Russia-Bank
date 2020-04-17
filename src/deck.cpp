@@ -1,12 +1,14 @@
 #include "deck.hpp"
 #include "game.hpp"
 
-Deck::Deck(sf::FloatRect prostokat)
+Deck::Deck()
 :pile(std::list<Card>())
 {
-    rect=prostokat;
-    frame.setPosition(prostokat.left,prostokat.top);
-    frame.setSize({prostokat.width,prostokat.height});
+    
+}
+
+void Deck::initial_setup()
+{
     frame.setFillColor(sf::Color::Transparent);
     frame.setOutlineColor(sf::Color::Black);
     frame.setOutlineThickness(2);
