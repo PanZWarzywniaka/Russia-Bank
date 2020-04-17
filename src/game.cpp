@@ -361,7 +361,6 @@ void Game::event_handling()
                 }
             case sf::Event::Resized:
                 {   
-                    /*
                     static std::chrono::system_clock::time_point lastresize;
                     static std::mutex lr_mut;
 
@@ -370,7 +369,7 @@ void Game::event_handling()
                     lr_mut.unlock();
 
                     sf::Event::SizeEvent size = event.size;
-                    unsigned int edge = std::min(size.height,size.width);
+                    unsigned int edge = std::min(size.width,size.height);
                     while(edge%32!=0) edge--;
 
                     auto defer_resize = [this](std::chrono::system_clock::time_point& lastresize, std::mutex& lr_mut, unsigned int edge)
@@ -381,14 +380,13 @@ void Game::event_handling()
                         lr_mut.unlock();
 
                         std::this_thread::sleep_for(std::chrono::milliseconds(100)); //the time
-
                         lr_mut.lock();
                         std::chrono::system_clock::time_point final_time = lastresize;
                         lr_mut.unlock();
 
                         if(invoke_time == final_time) //make sure that the last window resize happened 200ms ago in order to prevent the window from not maintaining its' aspect ratio 
-                        {
-                                //OKNO
+                        {                                 
+                            //OKNO
                             //std::lock_guard my_lock(game_mutex); //prevent raid with drawing
                             okno.setSize({edge,edge});
                             sf::View new_view;
@@ -398,14 +396,13 @@ void Game::event_handling()
                                 //GRA
                             set_scale(static_cast<double>(edge)/1000); //ustawienie odpowiedniej skali
                             window_scaling();
-                            
+                                
                         }
-
                     };
 
                     std::thread defer_thread(defer_resize,std::ref(lastresize),std::ref(lr_mut),edge);
-                    defer_thread.detach();
-
+                    defer_thread.detach();    
+                    
                     /*
                     STARY KOD 
 
