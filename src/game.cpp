@@ -74,17 +74,15 @@ bool Game::check_move(const Player* player_pointer, Move& ruch) const //sprawdza
     }
     else if(ruch.get_destination().get()==opponents_pointer->get_trash_pointer().get())//kupa przeciwnika
     {
-        int players_card_val = static_cast<int>(ruch.get_card().get_value()); //jezeli karta ma wartość AS, to card_val będzie równy 0, więc można położyć tylko większą
-        int opponents_card_val = static_cast<int>(opponents_pointer->peek_trash_top().get_value()); // program nie powinein zgłaszać także wyjątków przy królu bo nie ma karty z card_val==13
-
-        if(players_card_val==++opponents_card_val || players_card_val==--opponents_card_val) //jeżeli karta gracza ma wartość jeden mniejszą lub jeden większą od tego co ma przeciwnik w koszu to dopuszczamy taki ruch
+        if(ruch.get_card().get_colour()==opponents_pointer->peek_trash_top().get_colour())
         {
-            return true;
+            const int players_card_val = static_cast<int>(ruch.get_card().get_value()); //jezeli karta ma wartość AS, to card_val będzie równy 0, więc można położyć tylko większą
+            const int opponents_card_val = static_cast<int>(opponents_pointer->peek_trash_top().get_value()); // program nie powinein zgłaszać także wyjątków przy królu bo nie ma karty z card_val==13
+            //jeżeli karta gracza ma wartość jeden mniejszą lub jeden większą od tego co ma przeciwnik w koszu to dopuszczamy taki ruch
+            return (players_card_val+1==opponents_card_val || players_card_val-1==opponents_card_val);
         }
-        else
-        {
-            return false;
-        }
+        else return false;
+        
     }
     else if(ruch.get_destination().get()==player_pointer->get_deck_pointer().get() || ruch.get_destination().get()==opponents_pointer->get_deck_pointer().get())//nasza talia lub talia przeciwnika
     {
