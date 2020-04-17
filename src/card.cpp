@@ -1,8 +1,8 @@
 #include"card.hpp"
 #include"game.hpp"
 
-sf::Vector2f Card::original_single_card_size = sf::Vector2f();
-sf::Vector2f Card::actual_single_card_size = sf::Vector2f();
+sf::Vector2f Card::default_single_card_size = sf::Vector2f(); //przechowuje domyślny rozmiar karty
+float Card::card_scale = 1.f; 
 std::array<sf::Texture, 52> Card::texture_array;
 
 Card::Card(Value wart, Colour kol) // za każdym razem
@@ -14,7 +14,7 @@ Card::Card(Value wart, Colour kol) // za każdym razem
     card_sprite.setTexture(Card::texture_array[get_right_texture_addres()]);
  
     //skalowanie dla skali Game::scale = 1, rozmiar karty y=150
-    card_sprite.setScale(actual_single_card_size.x/original_single_card_size.x,actual_single_card_size.y/original_single_card_size.y); // skala dla x i y taka sama 0.07666
+    card_sprite.setScale(card_scale*Game::get_scale(),card_scale*Game::get_scale()); // skala dla x i y taka sama 0.07666
 }
 
 
@@ -23,11 +23,12 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
     sf::Image card_sheet;
     card_sheet.loadFromFile("resources/card_sheet.png");
 
-    Card::original_single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
-    Card::original_single_card_size.x /=13; //dzielimy rozmiar przez 13 bo tyle jest kart w rzędzie
-    Card::original_single_card_size.y /= 4; //4 kart w kolumnie
+    sf::Vector2f original_single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
+    original_single_card_size.x /=13; //dzielimy rozmiar przez 13 bo tyle jest kart w rzędzie
+    original_single_card_size.y /= 4; //4 kart w kolumnie
 
-    Card::actual_single_card_size = sf::Vector2f(150*(original_single_card_size.x/original_single_card_size.y),150); //x/y ratio
+    default_single_card_size = sf::Vector2f(150*(original_single_card_size.x/original_single_card_size.y),150); //x/y ratio
+    Card::card_scale = default_single_card_size.x/original_single_card_size.x;
 
     //ładowanie wszystkich kart do tablicy
 
@@ -107,12 +108,19 @@ void Card::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(card_sprite,states);
 }
 
+
 void Card::card_scaling(sf::Vector2u position)
 {
     card_sprite.setPosition(position.x*Game::get_scale(),position.y*Game::get_scale());
 
-    auto buf = card_sprite.getScale();
-    card_sprite.setScale(buf.x*Game::get_scale(),buf.y*Game::get_scale());
+    //auto buf = card_sprite.getScale();
+    //card_sprite.setScale(buf.x*Game::get_scale(),buf.y*Game::get_scale());
+    card_sprite.setScale(card_scale*Game::get_scale(),card_scale*Game::get_scale());
+}
+
+sf::Vector2f Card::get_default_single_card_size() 
+{
+    return default_single_card_size;
 }
 
 void Card::setPosition(float x, float y)

@@ -18,7 +18,6 @@ int main()
 
     while(gra.is_running())
     {
-        sf::Event event;
         gra.event_handling();
         gra.clear_and_draw_all(); //rysuje okno d
         std::this_thread::yield();

@@ -40,14 +40,17 @@ class Card: public sf::Drawable
     Value wartosc;
     Colour kolor;
     sf::Sprite card_sprite;
+    static sf::Vector2f default_single_card_size; //przechowuje domyślny rozmiar karty
+    static float card_scale; 
+    static std::array<sf::Texture, 52> texture_array; //ewntualnie rozszerze do 54 gdy będę miał tekstury rewersów kart
     
     friend std::ostream &operator<<(std::ostream&,const Card&);
 
     public:
     //zaraz przerobie na consty
-    static sf::Vector2f original_single_card_size;
-    static sf::Vector2f actual_single_card_size;
-    static std::array<sf::Texture, 52> texture_array; //ewntualnie rozszerze do 54 gdy będę miał tekstury rewersów kart
+    
+    
+    
     
 
 
@@ -65,8 +68,10 @@ class Card: public sf::Drawable
     Value get_value() const;
     bool is_black() const; //poprawne politycznie?
     static void load_texuture();
+    static sf::Vector2f get_default_single_card_size();
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
     void card_scaling(sf::Vector2u position);
+
     void setPosition(float,float);
 
 };

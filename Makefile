@@ -2,7 +2,7 @@ CXX		  := g++
 CC		  := gcc
 COMMON_FLAGS := -ggdb -Wall -Wextra 
 C_FLAGS   := $(COMMON_FLAGS) 
-CXX_FLAGS := $(COMMON_FLAGS) -std=c++17 
+CXX_FLAGS := $(COMMON_FLAGS) -std=c++17
 
 BIN		:= bin
 SRC		:= src

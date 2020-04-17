@@ -305,13 +305,14 @@ void Game::set_scale(double new_scale)
 
 void Game::window_scaling()
 {
+
     //skalowanie blue playera (290,20), (610,20)
     blue_player.get_deck_pointer()->deck_scaling({290,20}); 
-    blue_player.get_deck_pointer()->deck_scaling({610,20});
+    blue_player.get_trash_pointer()->deck_scaling({610,20});
 
     //skalowanie red playera (290,830), (610,830)
     red_player.get_deck_pointer()->deck_scaling({290,830}); 
-    red_player.get_deck_pointer()->deck_scaling({610,830});
+    red_player.get_trash_pointer()->deck_scaling({610,830});
     
     //skalowanie lewa kolumna bakowych {390,180},{390,340},{390,500},{390,660}
     my_board.pola_bank[0]->deck_scaling({390,180});
@@ -353,13 +354,13 @@ void Game::event_handling()
     {
             switch (event.type)
             {
-            case sf::Event::Closed:
+                case sf::Event::Closed:
                 {
                     okno.close();
                     running = false;
                     break;
                 }
-            case sf::Event::Resized:
+                case sf::Event::Resized:
                 {   
                     static std::chrono::system_clock::time_point lastresize;
                     static std::mutex lr_mut;
@@ -417,7 +418,7 @@ void Game::event_handling()
                     //gra.clear_and_draw_all(taken_card); //nie wiem czemu ta linijka powoduje błąd wiec lepiej ją wykomentować jak jest niepotrzebna */
                     break;
                 }
-            case sf::Event::MouseButtonPressed:
+                case sf::Event::MouseButtonPressed:
                 {
                     
                     
@@ -428,7 +429,7 @@ void Game::event_handling()
                         {
                             Card buf = deck->top();
                             deck->pop();
-                            buf.setPosition(event.mouseButton.x-(Card::actual_single_card_size.x/2),event.mouseButton.y-(Card::actual_single_card_size.y/2));
+                            buf.setPosition(event.mouseButton.x-(Card::get_default_single_card_size().x*scale/2),event.mouseButton.y-(Card::get_default_single_card_size().y*scale/2));
                             return buf;
                         };
 
@@ -481,15 +482,15 @@ void Game::event_handling()
 
                     break;
                 }
-            case sf::Event::MouseMoved:
+                case sf::Event::MouseMoved:
 				{
 					if(potential_move.has_value())
 					{
-						potential_move.value().set_cards_position(event.mouseMove.x-(Card::actual_single_card_size.x/2),event.mouseMove.y-(Card::actual_single_card_size.y/2));
+						potential_move.value().set_cards_position(event.mouseMove.x-(Card::get_default_single_card_size().x*scale/2),event.mouseMove.y-(Card::get_default_single_card_size().y*scale/2));
 						break;
 					}
 				}
-            case sf::Event::MouseButtonReleased:
+                case sf::Event::MouseButtonReleased:
                 {
 
                     if(potential_move)

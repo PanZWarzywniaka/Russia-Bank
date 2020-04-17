@@ -76,8 +76,8 @@ void Deck::deck_scaling(sf::Vector2u position)
 {
     rect.left = position.x*Game::get_scale();
     rect.top = position.y*Game::get_scale();
-    rect.width = Card::actual_single_card_size.x*Game::get_scale();
-    rect.height = Card::actual_single_card_size.y*Game::get_scale();
+    rect.width = Card::get_default_single_card_size().x*Game::get_scale();
+    rect.height = Card::get_default_single_card_size().y*Game::get_scale();
 
     frame.setPosition({rect.left, rect.top});
     frame.setSize({rect.width, rect.height});
