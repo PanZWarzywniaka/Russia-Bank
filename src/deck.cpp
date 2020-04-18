@@ -41,16 +41,28 @@ size_t Deck::size() const
     return pile.size();
 }
 
-void Deck::push(const Card& val)
+void Deck::push(const Card& crd)
 {
-    pile.push_back(val);
-    this->top().setPosition(this->rect.left,this->rect.top);
+    pile.push_back(crd);
+    top().setPosition(rect.left,rect.top);
+    if(type==Type::trash) //spinning pile A.K.A kręcąca się kupa
+    {
+        std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
+        std::uniform_real_distribution<float> distributor(0,360);
+        top().setRotation(distributor(generator));
+    }
 }
 
-void Deck::push(Card&& val)
+void Deck::push(Card&& crd)
 {
-    pile.push_back(val);
-    this->top().setPosition(this->rect.left,this->rect.top);
+    pile.push_back(crd);
+    top().setPosition(rect.left,rect.top);
+    if(type==Type::trash) //spinning pile A.K.A kręcąca się kupa
+    {
+        std::default_random_engine generator;
+        std::uniform_real_distribution<float> distributor(0,360);
+        top().setRotation(distributor(generator));
+    }
 }
 
 void Deck::pop()

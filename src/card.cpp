@@ -128,6 +128,16 @@ void Card::setPosition(float x, float y)
     card_sprite.setPosition(x,y);
 }
 
+void Card::setRotation(float angle)
+{
+    auto buf = card_sprite.getOrigin();
+    buf = {Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2};
+    card_sprite.setOrigin(buf);
+    card_sprite.setRotation(angle);
+    card_sprite.setOrigin(0,0);
+}
+
+
 std::ostream &operator<<(std::ostream& strumien,const Card& karta)
 {
     auto pisz = [&](const char* a){

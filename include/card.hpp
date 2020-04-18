@@ -60,6 +60,7 @@ class Card: public sf::Drawable
     Value get_value() const;
     bool is_black() const; //poprawne politycznie?
     void setPosition(float,float);
+    void setRotation(float angle);
 
     static void load_texuture();
     static sf::Vector2f get_default_single_card_size();
