@@ -3,25 +3,25 @@
 Board::Board() //przechowuje pozycje
 //pola bank
 :pola_bank{ 
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck())
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::bank))
         },
 // pola zewnętrzne
 pola_zew{
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck()),
-            std::shared_ptr<Deck>(new Deck())
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer))
         }
 {
 

@@ -2,8 +2,8 @@
 
 
 Player::Player() //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
-:my_deck(new Deck()),
-trash(new Deck())
+:my_deck(new Deck(Deck::Type::players_main)),
+trash(new Deck(Deck::Type::trash))
 {
     std::set<Card> possible_cards;
 

@@ -1,12 +1,13 @@
 #include "deck.hpp"
 #include "game.hpp"
 
-Deck::Deck()
+Deck::Deck(Type typ)
 :pile(std::list<Card>())
 {
-        frame.setFillColor(sf::Color::Transparent);
-        frame.setOutlineColor(sf::Color::Black);
-        frame.setOutlineThickness(2);
+    type = typ;
+    frame.setFillColor(sf::Color::Transparent);
+    frame.setOutlineColor(sf::Color::Black);
+    frame.setOutlineThickness(2);
 }
 bool Deck::empty() const
 {

@@ -8,15 +8,26 @@
 
 class Deck: public sf::Drawable
 {
-    private:
+    public:
 
+    enum class Type
+    {
+        bank,
+        outer,
+        players_main,
+        trash
+    };
+
+    private:
+    
+    Type type;
     std::list<Card> pile;
     sf::FloatRect rect; //Rect<float> pozycja potem rozmiar
     sf::RectangleShape frame;
 
     public:
 
-    Deck();
+    Deck(Type);
 
     bool empty() const;
     Card& top();
