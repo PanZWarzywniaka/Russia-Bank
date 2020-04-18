@@ -130,9 +130,7 @@ void Card::setPosition(float x, float y)
 
 void Card::setRotation(float angle)
 {
-    auto buf = card_sprite.getOrigin();
-    buf = {Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2};
-    card_sprite.setOrigin(buf);
+    card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
     card_sprite.setRotation(angle);
     card_sprite.setOrigin(0,0);
 }
