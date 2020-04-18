@@ -256,11 +256,6 @@ Player const*  Game::get_opponents_pointer() const
     }
 }
 
-Board& Game::get_board()
-{
-    return my_board;
-}
-
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(blue_player,states);

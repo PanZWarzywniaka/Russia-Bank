@@ -21,35 +21,33 @@ class Game: public sf::Drawable
 {
     private:
 
+    sf::RenderWindow okno;
+    std::mutex game_mutex;
+
     Player blue_player, red_player;
     Board my_board;
     Player const* whose_turn;   //wskaźnik do consta
     static double scale;
     bool running;
     std::optional<Move> potential_move;
-    std::optional<server_client> server_conenction;
-
-    bool check_move(const Player* player_pointer, Move& ruch) const; // sprawdza legalność ruchu
+    
     void window_setup();
+    bool check_move(const Player* player_pointer, Move& ruch) const; // sprawdza legalność ruchu
+    void players_move(Move&); //obsługuje ruch
+    
+    Player const* get_players_pointer() const;
+    Player const* get_opponents_pointer() const;
+    static void set_scale(double);
 
+    std::optional<server_client> server_conenction;
 
     public:
 
     Game(); //daje początkowo karty na stół i początkową karte z kosza
-    void players_move(Move&); //obsługuje ruch
 
-    sf::RenderWindow okno;
-    std::mutex game_mutex;
-    //gettery
-
-    void event_handling();
-    Player const* get_players_pointer() const;
-    Player const* get_opponents_pointer() const;
-    Board& get_board();
     static const double get_scale();
-    static void set_scale(double);
     bool is_running() const;
-
+    void event_handling();
     void clear_and_draw_all();
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
