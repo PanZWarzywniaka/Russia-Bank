@@ -13,8 +13,8 @@ class Board: public sf::Drawable
 
     public:
     Board();
-    std::pair<std::array<std::shared_ptr<Deck>,8>,std::array<std::shared_ptr<Deck>,8>> get_decks_arrays() const;
 
+    std::pair<std::array<std::shared_ptr<Deck>,8>,std::array<std::shared_ptr<Deck>,8>> get_decks_arrays() const; //służy do iterowania przez decki
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     friend class Game;

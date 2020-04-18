@@ -10,8 +10,6 @@
 
 class Player: public sf::Drawable
 {
-    
-
     private: //do zmienienia prywatnosc
 
     std::shared_ptr<Deck> my_deck;
@@ -19,7 +17,7 @@ class Player: public sf::Drawable
 
     public:
 
-    Player(); //konstruktor dostaje od game pierwszy dla decku i drugi dla trasha //inicjuje i tasuje talie graczy
+    Player(); //inicjuje i tasuje talie graczy
 
     //gettery potrzebne do Game::player_move()
     std::shared_ptr<Deck> get_deck_pointer() const; //zwraca wskaźnik do talii

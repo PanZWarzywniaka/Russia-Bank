@@ -13,10 +13,11 @@ class Deck: public sf::Drawable
     std::list<Card> pile;
     sf::FloatRect rect; //Rect<float> pozycja potem rozmiar
     sf::RectangleShape frame;
+
     public:
+
     Deck();
 
-    
     bool empty() const;
     Card& top();
     const Card& top() const;

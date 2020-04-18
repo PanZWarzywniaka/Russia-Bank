@@ -8,7 +8,7 @@
 
 class Card: public sf::Drawable
 {
-    public: //do zmiany
+    public: 
     
     enum class Value
     {
@@ -47,14 +47,7 @@ class Card: public sf::Drawable
     friend std::ostream &operator<<(std::ostream&,const Card&);
 
     public:
-    //zaraz przerobie na consty
-    
-    
-    
-    
 
-
-    //funkcje
     Card() = delete;
     Card(Value wart, Colour kol);
     Card(const Card&);
@@ -63,19 +56,15 @@ class Card: public sf::Drawable
     bool operator<(const Card&) const;
     bool operator==(const Card&) const;
     
-
     Colour get_colour() const;
     Value get_value() const;
     bool is_black() const; //poprawne politycznie?
+    void setPosition(float,float);
+
     static void load_texuture();
     static sf::Vector2f get_default_single_card_size();
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
     void card_scaling(sf::Vector2u position);
-
-    void setPosition(float,float);
-
 };
-
-
 
 #endif
