@@ -54,8 +54,7 @@ Card::Card(const Card& karta) //kopiujący
     this->wartosc=karta.wartosc;
     this->kolor=karta.kolor;
     this->card_sprite=karta.card_sprite;
-    //this->card_texture=karta.card_texture;
-    //this->card_sprite.setTexture(this->card_texture);
+
 }
 
 Card::Card(Card&& karta) //przenoszący
@@ -63,8 +62,7 @@ Card::Card(Card&& karta) //przenoszący
     wartosc = std::move(karta.wartosc);
     kolor = std::move(karta.kolor);
     card_sprite = std::move(karta.card_sprite);
-    //card_texture = std::move(karta.card_texture);
-    //card_sprite.setTexture(card_texture);
+
 }
 
 
@@ -112,9 +110,6 @@ void Card::draw(sf::RenderTarget &target, sf::RenderStates states) const
 void Card::card_scaling(sf::Vector2u position)
 {
     card_sprite.setPosition(position.x*Game::get_scale(),position.y*Game::get_scale());
-
-    //auto buf = card_sprite.getScale();
-    //card_sprite.setScale(buf.x*Game::get_scale(),buf.y*Game::get_scale());
     card_sprite.setScale(card_scale*Game::get_scale(),card_scale*Game::get_scale());
 }
 
