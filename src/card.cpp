@@ -15,6 +15,7 @@ Card::Card(Value wart, Colour kol) // za każdym razem
  
     //skalowanie dla skali Game::scale = 1, rozmiar karty y=150
     card_sprite.setScale(card_scale*Game::get_scale(),card_scale*Game::get_scale()); // skala dla x i y taka sama 0.07666
+    card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 }
 
 
@@ -54,6 +55,7 @@ Card::Card(const Card& karta) //kopiujący
     this->wartosc=karta.wartosc;
     this->kolor=karta.kolor;
     this->card_sprite=karta.card_sprite;
+    card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }
 
@@ -62,6 +64,7 @@ Card::Card(Card&& karta) //przenoszący
     wartosc = std::move(karta.wartosc);
     kolor = std::move(karta.kolor);
     card_sprite = std::move(karta.card_sprite);
+    card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }
 
@@ -125,9 +128,7 @@ void Card::setPosition(float x, float y)
 
 void Card::setRotation(float angle)
 {
-    card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
     card_sprite.setRotation(angle);
-    card_sprite.setOrigin(0,0);
 }
 
 
