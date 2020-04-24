@@ -44,24 +44,48 @@ size_t Deck::size() const
 void Deck::push(const Card& crd)
 {
     pile.push_back(crd);
-    top().setPosition(rect.left,rect.top);
-    if(type==Type::trash)
+    switch (type)
     {
-        std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
-        std::uniform_real_distribution<float> distributor(-15,15);
-        top().setRotation(distributor(generator));
+        case Type::trash:
+        {
+            top().setPosition(rect.left,rect.top);
+            std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
+            std::uniform_real_distribution<float> distributor(-15,15);
+            top().setRotation(distributor(generator));
+
+            break;
+        }
+        //case Type::outer:
+    
+        default:
+        {
+            top().setPosition(rect.left,rect.top);
+            break;
+        }
     }
 }
 
 void Deck::push(Card&& crd)
 {
     pile.push_back(crd);
-    top().setPosition(rect.left,rect.top);
-    if(type==Type::trash)
+    switch (type)
     {
-        std::default_random_engine generator;
-        std::uniform_real_distribution<float> distributor(-15,15);
-        top().setRotation(distributor(generator));
+        case Type::trash:
+        {
+            top().setPosition(rect.left,rect.top);
+            std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
+            std::uniform_real_distribution<float> distributor(-15,15);
+            top().setRotation(distributor(generator));
+
+            break;
+        }
+        //case Type::outer:
+    
+        default:
+        {
+            top().setPosition(rect.left,rect.top);
+            break;
+        }
     }
 }
 
