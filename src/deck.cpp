@@ -45,10 +45,10 @@ void Deck::push(const Card& crd)
 {
     pile.push_back(crd);
     top().setPosition(rect.left,rect.top);
-    if(type==Type::trash) //spinning pile A.K.A kręcąca się kupa
+    if(type==Type::trash)
     {
         std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
-        std::uniform_real_distribution<float> distributor(0,360);
+        std::uniform_real_distribution<float> distributor(-15,15);
         top().setRotation(distributor(generator));
     }
 }
@@ -57,10 +57,10 @@ void Deck::push(Card&& crd)
 {
     pile.push_back(crd);
     top().setPosition(rect.left,rect.top);
-    if(type==Type::trash) //spinning pile A.K.A kręcąca się kupa
+    if(type==Type::trash)
     {
         std::default_random_engine generator;
-        std::uniform_real_distribution<float> distributor(0,360);
+        std::uniform_real_distribution<float> distributor(-15,15);
         top().setRotation(distributor(generator));
     }
 }
@@ -101,11 +101,24 @@ void Deck::deck_scaling(sf::Vector2u position)
 void Deck::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     
-    if(!this->empty()) target.draw(this->top(),states);
+    if(!this->empty())
+    {
+        if(type==Deck::Type::trash) // jeżeli rysujemy kosz to rysujemy, to rysujemy wszystkie karty pod spodem
+        {
+            for(auto it = pile.begin(); it!=pile.end(); ++it)
+            {
+                target.draw(*it,states);
+            }
+        }
+        else //jeśli każdy inny deck, to rysujemy  tylko karte z wierzchu
+        {
+            target.draw(top(),states);
+        }
+    } 
     else
+    {
         target.draw(frame);
-    
-    
+    }
 }
 
 void Deck::clear()
