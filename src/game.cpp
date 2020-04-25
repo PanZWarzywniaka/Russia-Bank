@@ -416,6 +416,7 @@ void Game::event_handling()
                             Card buf = deck->top();
                             deck->pop();
                             buf.setPosition(event.mouseButton.x-(Card::get_default_single_card_size().x*scale/2),event.mouseButton.y-(Card::get_default_single_card_size().y*scale/2));
+                            if(deck->get_type()==Deck::Type::trash) buf.setRotation(0); //jeżeli wzieliśmy karte z kosza trzeba ustawić jej rotacje na zero
                             return buf;
                         };
 
