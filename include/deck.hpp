@@ -13,7 +13,7 @@ class Deck: public sf::Drawable
     enum class Type
     {
         bank,
-        outer,
+        outer_left,
         players_main,
         trash
     };

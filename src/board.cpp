@@ -14,14 +14,14 @@ Board::Board() //przechowuje pozycje
         },
 // pola zewnętrzne
 pola_zew{
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer))
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left))
         }
 {
 
