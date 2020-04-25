@@ -54,7 +54,15 @@ void Deck::push(const Card& crd)
 
             break;
         }
-        //case Type::outer:
+        case Type::outer:
+        {
+            if(size()>=2)
+            {
+                float buf = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
+                rect.left = buf;
+            }
+            break;
+        }
     }
 
     top().setPosition(rect.left,rect.top);
