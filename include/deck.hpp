@@ -41,7 +41,8 @@ class Deck: public sf::Drawable
     void pop_front();
     void reverse();
     void clear();
-    sf::FloatRect get_rect() const; //get rekt XD
+    sf::FloatRect get_rect() const; //służy do sprawdzenia czy kursor, kliknął na talię
+    const Type get_type() const;
 
     void deck_scaling(sf::Vector2u);
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override; //ta funkcja ju nie jest wirtualna ale musimy ja nadpisac
