@@ -44,7 +44,6 @@ size_t Deck::size() const
 void Deck::push(const Card& crd)
 {
     pile.push_back(crd);
-    top().setPosition(rect.left,rect.top);
     switch (type)
     {
         case Type::trash:
@@ -56,13 +55,9 @@ void Deck::push(const Card& crd)
             break;
         }
         //case Type::outer:
-    
-        default:
-        {
-            
-            break;
-        }
     }
+
+    top().setPosition(rect.left,rect.top);
 }
 
 void Deck::push(Card&& crd)
@@ -72,7 +67,6 @@ void Deck::push(Card&& crd)
     {
         case Type::trash:
         {
-            top().setPosition(rect.left,rect.top);
             std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
             std::uniform_real_distribution<float> distributor(-15,15);
             top().setRotation(distributor(generator));
@@ -80,13 +74,9 @@ void Deck::push(Card&& crd)
             break;
         }
         //case Type::outer:
-    
-        default:
-        {
-            top().setPosition(rect.left,rect.top);
-            break;
-        }
     }
+    
+    top().setPosition(rect.left,rect.top);
 }
 
 void Deck::pop()
