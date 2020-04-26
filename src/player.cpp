@@ -102,3 +102,8 @@ void Player::empty_trash_handle() //wyciągnięcie karty z pod spodu decku i dod
     trash->push(std::move(buf_card));
     this->my_deck.reset(buf_deck);
 }
+
+void Player::load_texuture()
+{
+    
+}

@@ -286,6 +286,7 @@ const double Game::get_scale()
 
 void Game::load_texuture()
 {
+    Player::load_texuture();
     Card::load_texuture();
 }
 
