@@ -46,6 +46,7 @@ class Game: public sf::Drawable
     Game(); //daje początkowo karty na stół i początkową karte z kosza
 
     static const double get_scale();
+    static void load_texuture();
     bool is_running() const;
     void event_handling();
     void clear_and_draw_all();

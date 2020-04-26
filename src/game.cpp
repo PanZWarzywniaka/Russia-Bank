@@ -284,6 +284,11 @@ const double Game::get_scale()
     return Game::scale;
 }
 
+void Game::load_texuture()
+{
+    Card::load_texuture();
+}
+
 void Game::set_scale(double new_scale)
 {
     Game::scale = new_scale;

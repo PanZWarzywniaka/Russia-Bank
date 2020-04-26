@@ -8,7 +8,7 @@
 int main()
 {
     std::cout<<"Hello from main. Loading textures...\n";
-    Card::load_texuture(); //ładowanie arkusza, dla wszystkich obiektów
+    Game::load_texuture(); //ładowanie arkusza, dla wszystkich obiektów
     std::cout<<"Done.\n";
     std::cout<<"Constructing the Game object...\n";
     Game gra;
