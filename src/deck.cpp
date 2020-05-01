@@ -58,8 +58,7 @@ void Deck::push(const Card& crd)
         {
             if(size()>=2)
             {
-                float buf = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
-                rect.left = buf;
+                rect.left = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck
             }
             break;
         }
@@ -67,8 +66,7 @@ void Deck::push(const Card& crd)
         {
             if(size()>=2)
             {
-                float buf = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
-                rect.left = buf;
+                rect.left = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck
             }
             break;
         }
@@ -94,8 +92,7 @@ void Deck::push(Card&& crd)
         {
             if(size()>=2)
             {
-                float buf = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
-                rect.left = buf;
+                rect.left = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck
             }
             break;
         }
@@ -103,8 +100,7 @@ void Deck::push(Card&& crd)
         {
             if(size()>=2)
             {
-                float buf = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
-                rect.left = buf;
+                rect.left = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck
             }
             break;
         }
@@ -151,7 +147,7 @@ void Deck::draw(sf::RenderTarget &target, sf::RenderStates states) const
     
     if(!this->empty())
     {
-        if(type==Deck::Type::trash || type==Deck::Type::outer_left || type==Deck::Type::outer_right) // jeżeli rysujemy kosz to rysujemy, to rysujemy wszystkie karty pod spodem
+        if(type==Deck::Type::trash || type==Deck::Type::outer_left || type==Deck::Type::outer_right) // jeżeli rysujemy kosz, lub pola zewnętrzne, to rysujemy wszystkie karty decku
         {
             for(auto it = pile.begin(); it!=pile.end(); ++it)
             {
