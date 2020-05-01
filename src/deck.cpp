@@ -54,6 +54,15 @@ void Deck::push(const Card& crd)
 
             break;
         }
+        case Type::outer_left:
+        {
+            if(size()>=2)
+            {
+                float buf = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
+                rect.left = buf;
+            }
+            break;
+        }
         case Type::outer_right:
         {
             if(size()>=2)
@@ -79,6 +88,15 @@ void Deck::push(Card&& crd)
             std::uniform_real_distribution<float> distributor(-15,15);
             top().setRotation(distributor(generator));
 
+            break;
+        }
+        case Type::outer_left:
+        {
+            if(size()>=2)
+            {
+                float buf = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
+                rect.left = buf;
+            }
             break;
         }
         case Type::outer_right:
@@ -133,7 +151,7 @@ void Deck::draw(sf::RenderTarget &target, sf::RenderStates states) const
     
     if(!this->empty())
     {
-        if(type==Deck::Type::trash) // jeżeli rysujemy kosz to rysujemy, to rysujemy wszystkie karty pod spodem
+        if(type==Deck::Type::trash || type==Deck::Type::outer_left || type==Deck::Type::outer_right) // jeżeli rysujemy kosz to rysujemy, to rysujemy wszystkie karty pod spodem
         {
             for(auto it = pile.begin(); it!=pile.end(); ++it)
             {
