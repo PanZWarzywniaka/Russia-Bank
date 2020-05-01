@@ -14,6 +14,7 @@ class Deck: public sf::Drawable
     {
         bank,
         outer_left,
+        outer_right,
         players_main,
         trash
     };

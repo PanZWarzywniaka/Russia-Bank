@@ -18,10 +18,10 @@ pola_zew{
             std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
             std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
             std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left)),
-            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_left))
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_right)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_right)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_right)),
+            std::shared_ptr<Deck>(new Deck(Deck::Type::outer_right))
         }
 {
 
