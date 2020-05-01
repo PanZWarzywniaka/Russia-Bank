@@ -112,7 +112,31 @@ void Deck::push(Card&& crd)
 void Deck::pop()
 {
     pile.pop_back();
-    if(!this->empty()) this->top().setPosition(this->rect.left,this->rect.top); //jeśli coś jest pod spodem to niech, deck da karcie pod spodem swoją pozycje
+
+    if(size()!=0)
+    {
+        switch (type)
+        {
+            case Type::outer_left:
+            {
+                rect.left = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
+                break;
+            }
+            case Type::outer_right:
+            {
+                rect.left = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5);
+                break;
+            }
+        
+        }
+    }
+    
+
+
+    if(!this->empty()) 
+    {
+        //top().setPosition(rect.left,rect.top); //jeśli coś jest pod spodem to niech, deck da karcie pod spodem swoją pozycje
+    }
 }
 
 void Deck::pop_front()
