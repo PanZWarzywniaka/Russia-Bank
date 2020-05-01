@@ -54,7 +54,7 @@ void Deck::push(const Card& crd)
 
             break;
         }
-        case Type::outer_left:
+        case Type::outer_right:
         {
             if(size()>=2)
             {
@@ -81,7 +81,7 @@ void Deck::push(Card&& crd)
 
             break;
         }
-        case Type::outer_left:
+        case Type::outer_right:
         {
             if(size()>=2)
             {
