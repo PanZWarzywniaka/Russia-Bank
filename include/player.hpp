@@ -7,17 +7,11 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "deck.hpp"
+#include "colour.hpp"
 
 class Player: public sf::Drawable
 {
     public:
-
-    enum class Colour
-    {
-        blue,
-        red
-    };
-
 
     private: //do zmienienia prywatnosc
 

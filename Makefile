@@ -9,7 +9,7 @@ SRC		:= src
 INCLUDE	:= include
 LIB		:= lib
 RUST_LIB:= target/release
-#DEPS	:= board.hpp card.hpp common_ffi.h c_server_binding.h c_server_ffi.hpp deck.hpp game.hpp move.hpp player.hpp russian-bank.hpp server_client.hpp texture_generator.hpp 
+#DEPS	:= board.hpp card.hpp common_ffi.h c_server_binding.h c_server_ffi.hpp deck.hpp game.hpp move.hpp player.hpp russian-bank.hpp server_client.hpp texture_generator.hpp colour.hpp
 OBJS 	:= board.o card.o deck.o game.o move.o player.o russian-bank.o server_client.o texture_generator.o c_server_ffi.o c_server_binding.o common_ffi.o
 
 LINK_CXX_LIBRARIES	:= -lsfml-graphics -lsfml-window -lsfml-system
@@ -22,8 +22,8 @@ run: clean_run all
 	clear
 	./$(BIN)/$(EXECUTABLE)
 
-%.o: $(SRC)/%.cpp 
-	$(CXX) -c $(CXX_FLAGS) -I$(INCLUDE) $< -o $@
+%.o: $(SRC)/%.cpp colour.hpp 
+	$(CXX) -c $(CXX_FLAGS) -I$(INCLUDE) $^ -o $@
 
 c_server_ffi.o: $(SRC)/c_server_ffi.c $(INCLUDE)/c_server_ffi.h
 	$(CC) -c $(C_FLAGS) -I$(INCLUDE) $< -o $@ 
