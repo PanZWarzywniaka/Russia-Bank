@@ -65,7 +65,7 @@ bool Game::check_move(const Player* player_pointer, Move& ruch) const //sprawdza
     }
     else if(ruch.get_destination().get()==opponents_pointer->get_trash_pointer().get())//kupa przeciwnika
     {
-        if(ruch.get_card().get_colour()==opponents_pointer->peek_trash_top().get_colour())
+        if(ruch.get_card().get_suit()==opponents_pointer->peek_trash_top().get_suit())
         {
             const int players_card_val = static_cast<int>(ruch.get_card().get_value()); //jezeli karta ma wartość AS, to card_val będzie równy 0, więc można położyć tylko większą
             const int opponents_card_val = static_cast<int>(opponents_pointer->peek_trash_top().get_value()); // program nie powinein zgłaszać także wyjątków przy królu bo nie ma karty z card_val==13
@@ -112,7 +112,7 @@ bool Game::check_move(const Player* player_pointer, Move& ruch) const //sprawdza
                 int players_card_val = static_cast<int>(ruch.get_card().get_value());
 
                 //sprawdzamy czy karta którą chcemy połozyć do banku jest tego samego koloru i plus jeden wartości
-                if(ruch.get_card().get_colour()==my_board.pola_bank[possible_banks_array_addres.value()]->top().get_colour() && --players_card_val==static_cast<int>(my_board.pola_bank[possible_banks_array_addres.value()]->top().get_value()))
+                if(ruch.get_card().get_suit()==my_board.pola_bank[possible_banks_array_addres.value()]->top().get_suit() && --players_card_val==static_cast<int>(my_board.pola_bank[possible_banks_array_addres.value()]->top().get_value()))
                 {
                     //jeśli tak w tedy dajemy karte na to miejsce
                     return true;

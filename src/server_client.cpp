@@ -9,7 +9,7 @@ server_client::~server_client() {
 }
 
 card* into_c::cpp_card(const Card& crd) {
-    return make_card(static_cast<unsigned char>(crd.get_colour()),static_cast<unsigned char>(crd.get_value()));
+    return make_card(static_cast<unsigned char>(crd.get_suit()),static_cast<unsigned char>(crd.get_value()));
 }
 Deck into_cpp::c_deck(const deck* dck,sf::FloatRect fr) {
     Deck ret = Deck(Deck::Type::bank); //tu zmieniłem konstruktor na losowy
@@ -28,5 +28,5 @@ Deck into_cpp::c_deck(const deck* dck,sf::FloatRect fr) {
 }
 
 Card into_cpp::c_card(const card* crd) {
-    return Card(static_cast<Card::Value>(crd->value),static_cast<Card::Colour>(crd->color));
+    return Card(static_cast<Card::Value>(crd->value),static_cast<Card::Suit>(crd->color));
 }

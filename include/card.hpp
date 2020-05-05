@@ -27,7 +27,7 @@ class Card: public sf::Drawable
         K
     };
 
-    enum class Colour
+    enum class Suit
     {
         hearths,
         dimonds,
@@ -38,7 +38,7 @@ class Card: public sf::Drawable
     private:
 
     Value wartosc;
-    Colour kolor;
+    Suit kolor;
     sf::Sprite card_sprite;
     static sf::Vector2f default_single_card_size; //przechowuje domyślny rozmiar karty
     static float card_scale; 
@@ -49,14 +49,14 @@ class Card: public sf::Drawable
     public:
 
     Card() = delete;
-    Card(Value wart, Colour kol);
+    Card(Value wart, Suit kol);
     Card(const Card&);
     Card(Card&&);
     
     bool operator<(const Card&) const;
     bool operator==(const Card&) const;
     
-    Colour get_colour() const;
+    Suit get_suit() const;
     Value get_value() const;
     bool is_black() const; //poprawne politycznie?
     void setPosition(float,float);

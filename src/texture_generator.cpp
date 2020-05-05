@@ -1,5 +1,5 @@
 #include "texture_generator.hpp"
-
+/*
 sf::Image generate_textures()
 {
     sf::RenderTexture ret;
@@ -8,7 +8,7 @@ sf::Image generate_textures()
     {
         for(std::size_t j = 0; j<13 ; j++)
         {
-            sf::Sprite renderowana_karta(generate_card_texture(Card(static_cast<Card::Value>(j),static_cast<Card::Colour>(i))));
+            sf::Sprite renderowana_karta(generate_card_texture(Card(static_cast<Card::Value>(j),static_cast<Card::Suit>(i))));
             renderowana_karta.setPosition(sf::Vector2f(160*i,320*j));
             ret.draw(renderowana_karta);
         }
@@ -34,3 +34,4 @@ sf::Texture generate_card_texture(const Card& karta)
     return sf::Texture(ret.getTexture());
 }
 
+*/

@@ -5,7 +5,7 @@ sf::Vector2f Card::default_single_card_size = sf::Vector2f(); //przechowuje domy
 float Card::card_scale = 1.f; 
 std::array<sf::Texture, 52> Card::texture_array;
 
-Card::Card(Value wart, Colour kol) // za każdym razem
+Card::Card(Value wart, Suit kol) // za każdym razem
 {
     wartosc = wart;
     kolor = kol;
@@ -69,7 +69,7 @@ Card::Card(Card&& karta) //przenoszący
 }
 
 
-Card::Colour Card::get_colour() const
+Card::Suit Card::get_suit() const
 {
     return kolor;
 }
@@ -97,7 +97,7 @@ bool Card::operator==(const Card& card) const
 
 bool Card::is_black() const
 {
-    if(this->kolor==Card::Colour::spades || this->kolor==Card::Colour::clubs)
+    if(this->kolor==Card::Suit::spades || this->kolor==Card::Suit::clubs)
         return true;
     else
         return false;
@@ -138,24 +138,24 @@ std::ostream &operator<<(std::ostream& strumien,const Card& karta)
         strumien<<a<<' ';
     };
 
-    switch (karta.get_colour())
+    switch (karta.get_suit())
     {
-        case Card::Colour::spades:
+        case Card::Suit::spades:
             {
                 pisz("pik");    
             }
             break;
-        case Card::Colour::clubs:
+        case Card::Suit::clubs:
             {
                 pisz("trefl");    
             }
             break;
-        case Card::Colour::hearths:
+        case Card::Suit::hearths:
             {
                 pisz("kier");    
             }
             break;
-        case Card::Colour::dimonds:
+        case Card::Suit::dimonds:
             {
                 pisz("karo");    
             }
