@@ -11,7 +11,7 @@
 class Player: public sf::Drawable
 {
     public:
-    
+
     enum class Colour
     {
         blue,
@@ -27,8 +27,8 @@ class Player: public sf::Drawable
 
     public:
 
-    Player() = delete; //inicjuje i tasuje talie graczy
-    Player(Player::Colour);
+    Player() = delete; 
+    Player(Player::Colour); //inicjuje i tasuje talie graczy
 
     //gettery potrzebne do Game::player_move()
     std::shared_ptr<Deck> get_deck_pointer() const; //zwraca wskaźnik do talii
