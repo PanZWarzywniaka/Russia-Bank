@@ -22,8 +22,8 @@ run: clean_run all
 	clear
 	./$(BIN)/$(EXECUTABLE)
 
-%.o: $(SRC)/%.cpp colour.hpp 
-	$(CXX) -c $(CXX_FLAGS) -I$(INCLUDE) $^ -o $@
+%.o: $(SRC)/%.cpp $(INCLUDE)/colour.hpp 
+	$(CXX) -c $(CXX_FLAGS) -I$(INCLUDE) $< -o $@
 
 c_server_ffi.o: $(SRC)/c_server_ffi.c $(INCLUDE)/c_server_ffi.h
 	$(CC) -c $(C_FLAGS) -I$(INCLUDE) $< -o $@ 

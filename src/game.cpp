@@ -4,8 +4,8 @@ double Game::scale = 1;
 
 Game::Game()
 :okno(sf::VideoMode(1000, 1000), "Garibaldka 0.1"),
-blue_player(Player::Colour::blue),
-red_player(Player::Colour::red),
+blue_player(Colour::blue),
+red_player(Colour::red),
 my_board()
 {
     okno.setFramerateLimit(60); //limit fps 60

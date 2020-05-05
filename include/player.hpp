@@ -22,7 +22,7 @@ class Player: public sf::Drawable
     public:
 
     Player() = delete; 
-    Player(Player::Colour); //inicjuje i tasuje talie graczy
+    Player(Colour); //inicjuje i tasuje talie graczy
 
     //gettery potrzebne do Game::player_move()
     std::shared_ptr<Deck> get_deck_pointer() const; //zwraca wskaźnik do talii

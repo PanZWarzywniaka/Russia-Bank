@@ -5,12 +5,12 @@ sf::Vector2f Card::default_single_card_size = sf::Vector2f(); //przechowuje domy
 float Card::card_scale = 1.f; 
 std::array<sf::Texture, 52> Card::texture_array;
 
-Card::Card(Value wart, Suit kol) // za każdym razem
+Card::Card(Value wart, Suit su) // za każdym razem
 {
-    wartosc = wart;
-    kolor = kol;
+    value = wart;
+    suit = su;
 
-    auto get_right_texture_addres = [wart,kol]() -> size_t{return 13*static_cast<int>(kol)+static_cast<int>(wart);};
+    auto get_right_texture_addres = [wart,su]() -> size_t{return 13*static_cast<int>(su)+static_cast<int>(wart);};
     card_sprite.setTexture(Card::texture_array[get_right_texture_addres()]);
  
     //skalowanie dla skali Game::scale = 1, rozmiar karty y=150
@@ -52,8 +52,8 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
 
 Card::Card(const Card& karta) //kopiujący
 {
-    this->wartosc=karta.wartosc;
-    this->kolor=karta.kolor;
+    this->value=karta.value;
+    this->suit=karta.suit;
     this->card_sprite=karta.card_sprite;
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
@@ -61,8 +61,8 @@ Card::Card(const Card& karta) //kopiujący
 
 Card::Card(Card&& karta) //przenoszący
 {
-    wartosc = std::move(karta.wartosc);
-    kolor = std::move(karta.kolor);
+    value = std::move(karta.value);
+    suit = std::move(karta.suit);
     card_sprite = std::move(karta.card_sprite);
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
@@ -71,33 +71,33 @@ Card::Card(Card&& karta) //przenoszący
 
 Card::Suit Card::get_suit() const
 {
-    return kolor;
+    return suit;
 }
 
 
 Card::Value Card::get_value() const
 {
-    return wartosc;
+    return value;
 }
 
 bool Card::operator<(const Card& cx) const
 {
-    if(this->kolor==cx.kolor) 
+    if(this->suit==cx.suit) 
     {
-        return this->wartosc<cx.wartosc;
+        return this->value<cx.value;
     }
-    else return this->kolor<cx.kolor;
+    else return this->suit<cx.suit;
 }
 
 bool Card::operator==(const Card& card) const
 {
-    if(this->kolor==card.kolor&&this->wartosc==card.wartosc) return true;
+    if(this->suit==card.suit&&this->value==card.value) return true;
         else return false;        
 }
 
 bool Card::is_black() const
 {
-    if(this->kolor==Card::Suit::spades || this->kolor==Card::Suit::clubs)
+    if(this->suit==Card::Suit::spades || this->suit==Card::Suit::clubs)
         return true;
     else
         return false;

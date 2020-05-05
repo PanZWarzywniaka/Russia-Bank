@@ -15,6 +15,7 @@
 #include "move.hpp"
 #include "deck.hpp"
 #include "server_client.hpp"
+#include "colour.hpp"
 
 
 class Game: public sf::Drawable

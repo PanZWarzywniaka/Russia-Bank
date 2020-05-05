@@ -1,7 +1,7 @@
 #include "player.hpp"
 
 
-Player::Player(Player::Colour colour) //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
+Player::Player(Colour colour) //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
 :my_deck(new Deck(Deck::Type::players_main)),
 trash(new Deck(Deck::Type::trash))
 {
