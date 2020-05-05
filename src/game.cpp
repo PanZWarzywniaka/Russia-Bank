@@ -4,8 +4,8 @@ double Game::scale = 1;
 
 Game::Game()
 :okno(sf::VideoMode(1000, 1000), "Garibaldka 0.1"),
-blue_player(), //pierwszy dla decka drugi dla decka drugi dla trasha
-red_player(),
+blue_player(Player::Colour::blue),
+red_player(Player::Colour::red),
 my_board()
 {
     okno.setFramerateLimit(60); //limit fps 60

@@ -10,14 +10,25 @@
 
 class Player: public sf::Drawable
 {
+    public:
+    
+    enum class Colour
+    {
+        blue,
+        red
+    };
+
+
     private: //do zmienienia prywatnosc
 
+    Colour colour;
     std::shared_ptr<Deck> my_deck;
     std::shared_ptr<Deck> trash;
 
     public:
 
-    Player(); //inicjuje i tasuje talie graczy
+    Player() = delete; //inicjuje i tasuje talie graczy
+    Player(Player::Colour);
 
     //gettery potrzebne do Game::player_move()
     std::shared_ptr<Deck> get_deck_pointer() const; //zwraca wskaźnik do talii

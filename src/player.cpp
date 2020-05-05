@@ -1,10 +1,11 @@
 #include "player.hpp"
 
 
-Player::Player() //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
+Player::Player(Player::Colour colour) //inicjuje i tasuje talie graczy //pierwszy wektor pos dla decku drugi dla trasha
 :my_deck(new Deck(Deck::Type::players_main)),
 trash(new Deck(Deck::Type::trash))
 {
+    this->colour = colour;
     std::set<Card> possible_cards;
 
     for(short i=0; i<4; ++i) //4 iteracje dla każdego koloru
