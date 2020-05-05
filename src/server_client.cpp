@@ -28,5 +28,5 @@ Deck into_cpp::c_deck(const deck* dck,sf::FloatRect fr) {
 }
 
 Card into_cpp::c_card(const card* crd) {
-    return Card(static_cast<Card::Value>(crd->value),static_cast<Card::Suit>(crd->color));
+    //return Card(static_cast<Card::Value>(crd->value),static_cast<Card::Suit>(crd->color),); // tu jest zmiana
 }

@@ -2,6 +2,7 @@
 #define CARD_HPP
 
 #include <SFML/Graphics.hpp>
+#include "colour.hpp"
 #include <stack>
 #include <array>
 
@@ -39,6 +40,7 @@ class Card: public sf::Drawable
 
     Value value;
     Suit suit;
+    Colour colour;
     sf::Sprite card_sprite;
     static sf::Vector2f default_single_card_size; //przechowuje domyślny rozmiar karty
     static float card_scale; 
@@ -49,7 +51,7 @@ class Card: public sf::Drawable
     public:
 
     Card() = delete;
-    Card(Value wart, Suit kol);
+    Card(Value, Suit, Colour);
     Card(const Card&);
     Card(Card&&);
     

@@ -5,10 +5,11 @@ sf::Vector2f Card::default_single_card_size = sf::Vector2f(); //przechowuje domy
 float Card::card_scale = 1.f; 
 std::array<sf::Texture, 52> Card::texture_array;
 
-Card::Card(Value wart, Suit su) // za każdym razem
+Card::Card(Value wart, Suit su, Colour col) // za każdym razem
 {
     value = wart;
     suit = su;
+    colour = col;
 
     auto get_right_texture_addres = [wart,su]() -> size_t{return 13*static_cast<int>(su)+static_cast<int>(wart);};
     card_sprite.setTexture(Card::texture_array[get_right_texture_addres()]);
@@ -55,6 +56,7 @@ Card::Card(const Card& karta) //kopiujący
     this->value=karta.value;
     this->suit=karta.suit;
     this->card_sprite=karta.card_sprite;
+    this->colour=karta.colour;
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }
@@ -64,6 +66,7 @@ Card::Card(Card&& karta) //przenoszący
     value = std::move(karta.value);
     suit = std::move(karta.suit);
     card_sprite = std::move(karta.card_sprite);
+    colour = std::move(karta.colour);
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }
