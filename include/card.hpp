@@ -62,6 +62,7 @@ class Card: public sf::Drawable
     
     Suit get_suit() const;
     Value get_value() const;
+    bool get_show_back() const;
     bool is_black() const;
     void rotate();
     void setPosition(float,float);

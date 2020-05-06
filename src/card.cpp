@@ -102,6 +102,11 @@ Card::Value Card::get_value() const
     return value;
 }
 
+bool Card::get_show_back() const
+{
+    return show_back;
+}
+
 void Card::rotate()
 {
     if(show_back) //trzeba pokazać front
