@@ -46,6 +46,11 @@ void Deck::push(const Card& crd)
     pile.push_back(crd);
     switch (type)
     {
+        case Type::players_main:
+        {
+            top().rotate();
+            break;
+        }
         case Type::trash:
         {
             std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
@@ -80,6 +85,11 @@ void Deck::push(Card&& crd)
     pile.push_back(crd);
     switch (type)
     {
+        case Type::players_main:
+        {
+            top().rotate();
+            break;
+        }
         case Type::trash:
         {
             std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());

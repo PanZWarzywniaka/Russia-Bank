@@ -113,6 +113,8 @@ void Card::rotate()
     {
         auto get_right_texture_addres = [this]() -> size_t{return 13*static_cast<int>(suit)+static_cast<int>(value);};
         card_sprite.setTexture(Card::texture_array[get_right_texture_addres()]);
+        card_sprite.setScale(card_scale*Game::get_scale(),card_scale*Game::get_scale()); // skala dla x i y taka sama 0.07666
+
     }
     else //trzeba pokazać rewers
     {
@@ -121,11 +123,13 @@ void Card::rotate()
             case Colour::blue:
                 {
                     card_sprite.setTexture(Card::texture_array[52]);
+                    card_sprite.setScale(card_scale*Game::get_scale(),card_scale*Game::get_scale()); // skala dla x i y taka sama 0.07666
                 }
             break;
             case Colour::red:
                 {
                     card_sprite.setTexture(Card::texture_array[53]);
+                    card_sprite.setScale(card_scale*Game::get_scale(),card_scale*Game::get_scale()); // skala dla x i y taka sama 0.07666
                 }
             break;
         
