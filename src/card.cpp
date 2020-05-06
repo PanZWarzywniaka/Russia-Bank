@@ -51,22 +51,22 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
     }
 }
 
-Card::Card(const Card& karta) //kopiujący
+Card::Card(const Card& crd) //kopiujący
 {
-    this->value=karta.value;
-    this->suit=karta.suit;
-    this->card_sprite=karta.card_sprite;
-    this->colour=karta.colour;
+    value = crd.value;
+    suit = crd.suit;
+    card_sprite = crd.card_sprite;
+    colour = crd.colour;
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }
 
-Card::Card(Card&& karta) //przenoszący
+Card::Card(Card&& crd) //przenoszący
 {
-    value = std::move(karta.value);
-    suit = std::move(karta.suit);
-    card_sprite = std::move(karta.card_sprite);
-    colour = std::move(karta.colour);
+    value = std::move(crd.value);
+    suit = std::move(crd.suit);
+    card_sprite = std::move(crd.card_sprite);
+    colour = std::move(crd.colour);
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }
@@ -135,13 +135,13 @@ void Card::setRotation(float angle)
 }
 
 
-std::ostream &operator<<(std::ostream& strumien,const Card& karta)
+std::ostream &operator<<(std::ostream& strumien,const Card& crd)
 {
     auto pisz = [&](const char* a){
         strumien<<a<<' ';
     };
 
-    switch (karta.get_suit())
+    switch (crd.get_suit())
     {
         case Card::Suit::spades:
             {
@@ -168,7 +168,7 @@ std::ostream &operator<<(std::ostream& strumien,const Card& karta)
             break;
     }
 
-    switch (karta.get_value())
+    switch (crd.get_value())
     {
         case Card::Value::_2:
             pisz("2");
