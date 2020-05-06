@@ -3,7 +3,7 @@
 
 sf::Vector2f Card::default_single_card_size = sf::Vector2f(); //przechowuje domyślny rozmiar karty
 float Card::card_scale = 1.f; 
-std::array<sf::Texture, 52> Card::texture_array;
+std::array<sf::Texture, 54> Card::texture_array;
 
 Card::Card(Value val, Suit su, Colour col) // za każdym razem
 {
