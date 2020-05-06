@@ -33,8 +33,8 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
     default_single_card_size = sf::Vector2f(150*(original_single_card_size.x/original_single_card_size.y),150); //x/y ratio
     Card::card_scale = default_single_card_size.x/original_single_card_size.x;
 
-    //ładowanie wszystkich kart do tablicy
 
+    //ładowanie wszystkich kart do tablicy
     size_t array_counter = 0;
 
     for(short kolor=0; kolor<4; ++kolor) //4 iteracje dla każdego koloru, każdy kolor to wiersz
@@ -48,8 +48,8 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
             texture_array[array_counter] = card_texture;
             ++array_counter;
         }
-
     }
+    
 }
 
 Card::Card(const Card& crd) //kopiujący
@@ -86,6 +86,37 @@ Card::Suit Card::get_suit() const
 Card::Value Card::get_value() const
 {
     return value;
+}
+
+void Card::rotate()
+{
+    if(show_back) //trzeba pokazać front
+    {
+        auto get_right_texture_addres = [this]() -> size_t{return 13*static_cast<int>(suit)+static_cast<int>(value);};
+        card_sprite.setTexture(Card::texture_array[get_right_texture_addres()]);
+    }
+    else //trzeba pokazać rewers
+    {
+        switch (colour)
+        {
+            case Colour::blue:
+                {
+                    card_sprite.setTexture(Card::texture_array[52]);
+                }
+            break;
+            case Colour::red:
+                {
+                    card_sprite.setTexture(Card::texture_array[53]);
+                }
+            break;
+        
+        default:
+            throw std::runtime_error("Karta nie ma koloru");
+            break;
+        }
+    }
+    
+    show_back = !show_back; //switching sides
 }
 
 bool Card::operator<(const Card& cx) const

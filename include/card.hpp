@@ -46,7 +46,7 @@ class Card: public sf::Drawable
     sf::Sprite card_sprite;
     static sf::Vector2f default_single_card_size; //przechowuje domyślny rozmiar karty
     static float card_scale; 
-    static std::array<sf::Texture, 52> texture_array; //ewntualnie rozszerze do 54 gdy będę miał tekstury rewersów kart
+    static std::array<sf::Texture, 52> texture_array; //ewntualnie rozszerze do 54 gdy będę miał tekstury rewersów kart; [52] będzie niebieski [53] będzie czewony
     
     friend std::ostream &operator<<(std::ostream&,const Card&);
 
@@ -62,7 +62,8 @@ class Card: public sf::Drawable
     
     Suit get_suit() const;
     Value get_value() const;
-    bool is_black() const; //poprawne politycznie?
+    bool is_black() const;
+    void rotate();
     void setPosition(float,float);
     void setRotation(float angle);
 
