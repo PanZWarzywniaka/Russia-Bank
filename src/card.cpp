@@ -49,7 +49,21 @@ void Card::load_texuture() //wykona się raz dla całej klasy przed utworzeniem 
             ++array_counter;
         }
     }
-    
+
+    card_sheet.loadFromFile("resources/cards_back_sheet.png");
+    original_single_card_size = static_cast<sf::Vector2f>(card_sheet.getSize());
+    original_single_card_size.x /=2; // tutaj są dwie karty w rzędzie
+
+    for(short i=0; i<2; ++i)
+    {
+        const sf::Vector2i rect_positon = sf::Vector2i{original_single_card_size.x*i,0};
+        sf::Texture card_texture;
+        card_texture.loadFromImage(card_sheet,sf::IntRect(rect_positon,static_cast<sf::Vector2i>(original_single_card_size)));
+        card_texture.setSmooth(true);
+        texture_array[array_counter] = card_texture;
+        ++array_counter;
+    }
+
 }
 
 Card::Card(const Card& crd) //kopiujący
