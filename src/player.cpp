@@ -68,7 +68,7 @@ Card Player::draw_deck()
 {
     if(my_deck->empty()) throw std::runtime_error("Player's deck is empty! Unable to draw");
     auto ret = my_deck->top();
-    ret.rotate();
+    ret.reverse();
     my_deck->pop();
     return ret;
 }

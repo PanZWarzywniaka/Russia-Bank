@@ -107,7 +107,7 @@ bool Card::get_show_back() const
     return show_back;
 }
 
-void Card::rotate()
+void Card::reverse()
 {
     if(show_back) //trzeba pokazać front
     {

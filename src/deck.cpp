@@ -48,12 +48,12 @@ void Deck::push(const Card& crd)
     {
         case Type::players_main:
         {
-            top().rotate();
+            top().reverse();
             break;
         }
         case Type::trash:
         {
-            if(top().get_show_back()==true) top().rotate();
+            if(top().get_show_back()==true) top().reverse();
             std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
             std::uniform_real_distribution<float> distributor(-15,15);
             top().setRotation(distributor(generator));
@@ -62,7 +62,7 @@ void Deck::push(const Card& crd)
         }
         case Type::outer_left:
         {
-            if(top().get_show_back()==true) top().rotate();
+            if(top().get_show_back()==true) top().reverse();
             if(size()>=2)
             {
                 rect.left = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck
@@ -71,7 +71,7 @@ void Deck::push(const Card& crd)
         }
         case Type::outer_right:
         {
-            if(top().get_show_back()==true) top().rotate();
+            if(top().get_show_back()==true) top().reverse();
             if(size()>=2)
             {
                 rect.left = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck
@@ -90,12 +90,12 @@ void Deck::push(Card&& crd)
     {
         case Type::players_main:
         {
-            top().rotate();
+            top().reverse();
             break;
         }
         case Type::trash:
         {
-            if(top().get_show_back()==true) top().rotate();
+            if(top().get_show_back()==true) top().reverse();
             std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
             std::uniform_real_distribution<float> distributor(-15,15);
             top().setRotation(distributor(generator));
@@ -104,7 +104,7 @@ void Deck::push(Card&& crd)
         }
         case Type::outer_left:
         {
-            if(top().get_show_back()==true) top().rotate();
+            if(top().get_show_back()==true) top().reverse();
             if(size()>=2)
             {
                 rect.left = rect.left-(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck
@@ -113,7 +113,7 @@ void Deck::push(Card&& crd)
         }
         case Type::outer_right:
         {
-            if(top().get_show_back()==true) top().rotate();
+            if(top().get_show_back()==true) top().reverse();
             if(size()>=2)
             {
                 rect.left = rect.left+(Card::get_default_single_card_size().x*Game::get_scale()*2/5); //jeżeli karta którą kładziemy na pola zewnętrzne jest druga, przesuwamy deck

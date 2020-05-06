@@ -64,7 +64,7 @@ class Card: public sf::Drawable
     Value get_value() const;
     bool get_show_back() const;
     bool is_black() const;
-    void rotate();
+    void reverse();
     void setPosition(float,float);
     void setRotation(float angle);
 

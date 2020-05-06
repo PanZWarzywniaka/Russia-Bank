@@ -415,7 +415,7 @@ void Game::event_handling()
                         auto get_card_and_set_its_pos = [&](const std::shared_ptr<Deck> deck) -> Card 
                         {
                             Card buf = deck->top();
-                            if(buf.get_show_back()==true) buf.rotate();
+                            if(buf.get_show_back()==true) buf.reverse();
                             deck->pop();
                             buf.setPosition(event.mouseButton.x-(Card::get_default_single_card_size().x*scale/2),event.mouseButton.y-(Card::get_default_single_card_size().y*scale/2));
                             if(deck->get_type()==Deck::Type::trash) buf.setRotation(0); //jeżeli wzieliśmy karte z kosza trzeba ustawić jej rotacje na zero
