@@ -13,7 +13,7 @@ int main()
     std::cout<<"Constructing the Game object...\n";
     Game gra;
     std::cout<<"Done.\n";
-    server_client client; //test bindingu, siema elo, to nic nie robi w kodzie, ale se tym testuję binding
+    //server_client client; //test bindingu, siema elo, to nic nie robi w kodzie, ale se tym testuję binding
     std::cout<<"Starting event loop.\n";
 
     while(gra.is_running())

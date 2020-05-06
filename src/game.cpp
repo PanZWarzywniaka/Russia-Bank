@@ -161,16 +161,11 @@ bool Game::check_move(const Player* player_pointer, Move& ruch) const //sprawdza
                 
             }
         }
-        else
-        {
-            //gracz nie klikną na żadne konkretne pole a i tak funkcja zostala wykonana
-            throw std::runtime_error("Nie ma takiego ruchu, wszystkie możliwości zostały wyczerpane");
-            return false; //czy to jest konieczne?
-        }
         
-        
+        //gracz nie klikną na żadne konkretne pole a i tak funkcja zostala wykonana
+        throw std::runtime_error("Nie ma takiego ruchu, wszystkie możliwości zostały wyczerpane");
+        return false;
     }
-    
 }
 
 void Game::players_move(Move& ruch)
