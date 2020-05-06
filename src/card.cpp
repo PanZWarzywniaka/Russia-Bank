@@ -10,6 +10,7 @@ Card::Card(Value val, Suit su, Colour col) // za każdym razem
     value = val;
     suit = su;
     colour = col;
+    show_back = false;
 
     auto get_right_texture_addres = [val,su]() -> size_t{return 13*static_cast<int>(su)+static_cast<int>(val);};
     card_sprite.setTexture(Card::texture_array[get_right_texture_addres()]);
@@ -57,6 +58,8 @@ Card::Card(const Card& crd) //kopiujący
     suit = crd.suit;
     card_sprite = crd.card_sprite;
     colour = crd.colour;
+    show_back = crd.show_back;
+
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }
@@ -67,6 +70,8 @@ Card::Card(Card&& crd) //przenoszący
     suit = std::move(crd.suit);
     card_sprite = std::move(crd.card_sprite);
     colour = std::move(crd.colour);
+    show_back = std::move(crd.show_back);
+
     card_sprite.setOrigin(Card::get_default_single_card_size().x*Game::get_scale()/2,Card::get_default_single_card_size().y*Game::get_scale()/2);
 
 }

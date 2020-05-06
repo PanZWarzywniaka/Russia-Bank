@@ -41,6 +41,8 @@ class Card: public sf::Drawable
     Value value;
     Suit suit;
     Colour colour;
+    bool show_back;
+
     sf::Sprite card_sprite;
     static sf::Vector2f default_single_card_size; //przechowuje domyślny rozmiar karty
     static float card_scale; 
